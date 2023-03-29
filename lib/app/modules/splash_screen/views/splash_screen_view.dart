@@ -18,7 +18,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
               SizedBox(
                 height: 200,
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  "assets/images/haimedlogo.png",
                   scale: 1,
                 ),
               ),

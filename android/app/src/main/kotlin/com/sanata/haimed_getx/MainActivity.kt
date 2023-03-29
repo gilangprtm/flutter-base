@@ -1,4 +1,4 @@
-package com.sanata.haimed_getx
+package com.sanata.haimed.cendana
 
 import io.flutter.embedding.android.FlutterActivity
 

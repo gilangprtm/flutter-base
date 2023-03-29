@@ -1,14 +1,11 @@
 import 'package:get/get.dart';
 
-import 'package:haimed_getx/app/modules/reservasi/bindings/reservasi_binding.dart';
-import 'package:haimed_getx/app/modules/reservasi/views/reservasi_view.dart';
-import 'package:haimed_getx/app/modules/reservasi_setup/bindings/reservasi_setup_binding.dart';
-import 'package:haimed_getx/app/modules/reservasi_setup/views/reservasi_setup_view.dart';
-
 import '../modules/artikel_detail/bindings/artikel_detail_binding.dart';
 import '../modules/artikel_detail/views/artikel_detail_view.dart';
 import '../modules/daftar_rawat_jalan/bindings/daftar_rawat_jalan_binding.dart';
 import '../modules/daftar_rawat_jalan/views/daftar_rawat_jalan_view.dart';
+import '../modules/detail_reservasi/bindings/detail_reservasi_binding.dart';
+import '../modules/detail_reservasi/views/detail_reservasi_view.dart';
 import '../modules/dokter_detail_tab/bindings/dokter_detail_tab_binding.dart';
 import '../modules/dokter_detail_tab/views/dokter_detail_tab_view.dart';
 import '../modules/dokter_favorite/bindings/dokter_favorite_binding.dart';
@@ -27,10 +24,18 @@ import '../modules/pasien/bindings/pasien_binding.dart';
 import '../modules/pasien/views/pasien_view.dart';
 import '../modules/pasien_setup/bindings/pasien_setup_binding.dart';
 import '../modules/pasien_setup/views/pasien_setup_view.dart';
+import '../modules/phone_login/bindings/phone_login_binding.dart';
+import '../modules/phone_login/views/phone_login_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/profile_setup/bindings/profile_setup_binding.dart';
+import '../modules/profile_setup/views/profile_setup_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/reservasi/bindings/reservasi_binding.dart';
+import '../modules/reservasi/views/reservasi_view.dart';
+import '../modules/reservasi_setup/bindings/reservasi_setup_binding.dart';
+import '../modules/reservasi_setup/views/reservasi_setup_view.dart';
 import '../modules/spesialisasi_detail_tab/bindings/spesialisasi_detail_tab_binding.dart';
 import '../modules/spesialisasi_detail_tab/views/spesialisasi_detail_tab_view.dart';
 import '../modules/spesialisasi_tab/bindings/spesialisasi_tab_binding.dart';
@@ -184,6 +189,21 @@ class AppPages {
       name: _Paths.RESERVASI_SETUP,
       page: () => ReservasiSetupView(),
       binding: ReservasiSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_RESERVASI,
+      page: () => const DetailReservasiView(),
+      binding: DetailReservasiBinding(),
+    ),
+    GetPage(
+      name: _Paths.PHONE_LOGIN,
+      page: () => const PhoneLoginView(),
+      binding: PhoneLoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_SETUP,
+      page: () => const ProfileSetupView(),
+      binding: ProfileSetupBinding(),
     ),
   ];
 }

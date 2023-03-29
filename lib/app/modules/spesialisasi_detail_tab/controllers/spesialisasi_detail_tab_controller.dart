@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../mahas/components/others/list_component.dart';
 import '../../../models/jadwal_praktek_model.dart';
+import '../../../routes/app_pages.dart';
 
 class SpesialisasiDetailTabController extends GetxController {
   late ListComponentController<JadwalpraktekModel> listCon;
@@ -21,8 +22,17 @@ class SpesialisasiDetailTabController extends GetxController {
     super.onInit();
   }
 
-  void itemOnTab() {
-    print("Works!");
+  void toDokterKonfirmasi(
+      String dokterID, String tanggal, String sectionID, String waktuID) {
+    Get.toNamed(
+      Routes.DOKTER_KONFIRMASI_TAB,
+      parameters: {
+        'dokterID': dokterID,
+        'tanggal': tanggal,
+        'sectionID': sectionID,
+        'waktuID': waktuID,
+      },
+    );
   }
 
   ListComponentController<JadwalpraktekModel> getJadwal() {

@@ -18,7 +18,7 @@ class LocalNotificationService {
     final didNotificationLaunchApp =
         notificationAppLaunchDetails?.didNotificationLaunchApp ?? false;
     if (didNotificationLaunchApp) {
-          notificationAppLaunchDetails!.notificationResponse!;
+      notificationAppLaunchDetails!.notificationResponse!;
     } else {
       _notificationsPlugin.initialize(
         initializationSettings,
@@ -29,7 +29,7 @@ class LocalNotificationService {
   static void showNotificatiOnForeground(RemoteMessage message) {
     const notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
-            "com.sanata.haimed_getx", "hr_portal",
+            "com.sanata.haimed.cendana", "hr_portal",
             importance: Importance.max, priority: Priority.high));
     _notificationsPlugin.show(
         DateTime.now().microsecond,

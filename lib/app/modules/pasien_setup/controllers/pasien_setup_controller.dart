@@ -1,11 +1,16 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
+import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 
 import '../../../mahas/components/inputs/input_datetime_component.dart';
 import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
+import '../../../models/pasien_model.dart';
 
 class PasienSetupController extends GetxController {
   late SetupPageController formCon;
@@ -15,7 +20,6 @@ class PasienSetupController extends GetxController {
   );
   final tempatLahirCon = InputTextController();
   final dariTglCon = InputDatetimeController();
-
   final radioCon = InputRadioController(
     items: [
       RadioButtonItem.simple("Laki-Laki"),
@@ -23,73 +27,64 @@ class PasienSetupController extends GetxController {
     ],
   );
   final alamatCon = InputTextController();
+  var pasienIdHaimed;
+  var jenisKelamin;
 
   @override
   void onInit() {
     // cekApproval();
     formCon = SetupPageController(
-      urlApiGet: (id) => '/api/PermintaanJadwal/CutiHamil/$id',
-      urlApiPost: () => '/api/PermintaanJadwal/CutiHamil',
-      urlApiPut: (id) => '/api/PermintaanJadwal/CutiHamil/$id',
-      // urlApiDelete: (id) => '/api/PermintaanJadwal/CutiHamil/$id',
-      // allowDelete: allowED,
+      urlApiGet: (id) => '/api/PasienHaiMed/$id',
+      urlApiPost: () => '/api/PasienHaiMed',
+      urlApiPut: (id) => '/api/PasienHaiMed',
+      urlApiDelete: (id) => '/api/PasienHaiMed',
+      allowDelete: false,
       // allowEdit: allowED,
       bodyApi: (id) => {
-        // "Id_Divisi": MahasConfig.selectedDivisi,
-        // "AkakKe": anakCon.value,
-        // "DariTanggal": MahasFormat.dateToString(dariTglCon.value),
-        // "SampaiTanggal": MahasFormat.dateToString(sampaiTanggal),
+        "PasienIdHaiMed": pasienIdHaimed,
+        "UserIdHaiMed": MahasConfig.profile!.userIdHaimed,
+        // "NRM": "string",
+        "Nama": namaCon.value,
+        "Alamat": alamatCon.value,
+        "NIK": nikCon.value,
+        "TanggalLahir": MahasFormat.dateToString(dariTglCon.value),
+        "TempatLahir": tempatLahirCon.value,
+        "DibuatTanggal": MahasFormat.dateToString(DateTime.now()),
+        "AkunPemilik": false,
+        "JenisKelamin": jenisKelamin,
       },
       itemKey: (e) => e['id'],
-      itemIdAfterSubmit: (e) => json.decode(e)['id'],
+      itemIdAfterSubmit: (e) => json.decode(e)['PasienIdHaiMed'],
       onBeforeSubmit: () {
-        // if (!anakCon.isValid) return false;
-        // if (!dariTglCon.isValid) return false;
-        // if (!radioCon.isValid) return false;
-        // if (anakCon.value < 1) {
-        //   Helper.dialogWarning("Cuti Hamil Minimal Kuota \nAnak Ke-1!");
-        //   return false;
-        // } else if (anakCon.value > 3) {
-        //   Helper.dialogWarning("Cuti Hamil Melebihi Kuota \nAnak Ke-3");
-        //   return false;
-        // }
-        // if (radioCon.value == "1 Bulan") {
-        //   var today = dariTglCon.value;
-        //   sampaiTanggal = today.add(const Duration(days: 30));
-        // } else {
-        //   var today = dariTglCon.value;
-        //   sampaiTanggal = today.add(const Duration(days: 60));
-        // }
+        if (radioCon.value == "Laki-Laki") {
+          jenisKelamin = "M";
+        } else {
+          jenisKelamin = "F";
+        }
+        if (!namaCon.isValid) return false;
+        if (!dariTglCon.isValid) return false;
+        if (!radioCon.isValid) return false;
+        if (!nikCon.isValid) return false;
+        if (!tempatLahirCon.isValid) return false;
+        if (!alamatCon.isValid) return false;
+
         return true;
       },
       apiToView: (json) {
-        // model = CutihamilModel.fromJson(json);
-        // anakCon.value = model.akakke;
-        // dariTglCon.value = model.daritanggal;
-        // sampaiTglCon.value = model.sampaitanggal;
-
-        // accManager = model.approvemanager;
-        // accKadiv = model.approvekadiv;
-        // pegawaiKadiv.value = model.pegawaikadiv!;
-        // pegawaiManager.value = model.pegawaimanager!;
-
-        // Duration diff = model.sampaitanggal!.difference(model.daritanggal!);
-        // if (diff.inDays == 30) {
-        //   radioCon.value = "1 Bulan";
-        // } else {
-        //   radioCon.value = "2 Bulan";
-        // }
-
-        // // approval
-        // if (allowED == false) {
-        //   if ((model.approvekadiv == null &&
-        //           model.idPegawaiKadiv == MahasConfig.profile!.id) ||
-        //       (model.approvekadiv == true &&
-        //           model.approvemanager == null &&
-        //           model.idPegawaiManager == MahasConfig.profile!.id)) {
-        //     isVisible.value = true;
-        //   }
-        // }
+        PasienModel model = PasienModel.fromJson(json);
+        namaCon.value = model.nama;
+        dariTglCon.value = model.tanggallahir;
+        nikCon.value = model.nik;
+        tempatLahirCon.value = model.tempatlahir;
+        alamatCon.value = model.alamat!;
+        if (model.jeniskelamin == "M") {
+          radioCon.value = "Laki-Laki";
+        } else {
+          radioCon.value = "Perempuan";
+        }
+        if (model.pasienidhaimed!.isNotEmpty) {
+          pasienIdHaimed = model.pasienidhaimed;
+        }
       },
     );
 

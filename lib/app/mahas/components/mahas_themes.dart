@@ -89,6 +89,6 @@ class MahasThemes {
 
   static TextStyle link = const TextStyle(
     color: MahasColors.link,
-    fontSize: 11,
+    fontSize: 12,
   );
 }

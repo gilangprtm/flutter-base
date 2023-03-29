@@ -18,10 +18,8 @@ import '../../../models/dokter_detail_model.dart';
 
 class DokterDetailTabController extends GetxController {
   late List<PraktekExpand> praktekExpand;
-  // Rx<DateTime> focusDate = DateTime.now().obs;
-  // Rx<DateTime> selectedDate = DateTime.now().obs;
-  Rx<DateTime> focusDate = DateTime(2020, 2, 1).obs;
-  Rx<DateTime> selectedDate = DateTime(2020, 2, 27).obs;
+  Rx<DateTime> focusDate = DateTime.now().obs;
+  Rx<DateTime> selectedDate = DateTime.now().obs;
 
   RxString dokterID = "".obs;
   RxBool noData = false.obs;
@@ -36,7 +34,7 @@ class DokterDetailTabController extends GetxController {
     dokterID.value = Get.parameters['id']!;
     await getDataDokter(dokterID.value).then(
       (value) async =>
-          await getJadwalPraktek(dokterID.value, DateTime(2020, 02, 27)),
+          await getJadwalPraktek(dokterID.value, DateTime.now()),
     );
     super.onInit();
   }
@@ -124,11 +122,18 @@ class DokterDetailTabController extends GetxController {
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     selectedDate.value = selectedDay;
     focusDate.value = focusedDay;
-    if (eventCard.isNotEmpty) {
+    
+    if (selectedDate.value.isBefore(DateTime.now().subtract(Duration(days: 1)))) {
       eventCard.clear();
+    } else {
+      if (eventCard.isNotEmpty) {
+        eventCard.clear();
+      }
+      eventCard.value =
+          eventData.where((e) => e.tanggal!.day == selectedDay.day).toList();
     }
-    eventCard.value =
-        eventData.where((e) => e.tanggal!.day == selectedDay.day).toList();
+     print(selectedDate.value);
+      print(DateTime.now());
   }
 
   Widget calendarView() {
@@ -232,15 +237,15 @@ class DokterDetailTabController extends GetxController {
                   thickness: 0,
                 ),
                 itemCount: eventCard.length,
-                itemBuilder: (context, index) =>
-                    // eventCard[index].tanggal.isBefore(DateTime.now)
-                    InkWell(
-                  onTap: () => toDokterKonfirmasi(
-                    eventCard[index].dokterid!,
-                    eventCard[index].tanggal!.toString(),
-                    eventCard[index].sectionid!,
-                    eventCard[index].waktuid!.toString(),
-                  ),
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    toDokterKonfirmasi(
+                      eventCard[index].dokterid!,
+                      eventCard[index].tanggal!.toString(),
+                      eventCard[index].sectionid!,
+                      eventCard[index].waktuid!.toString(),
+                    );
+                  },
                   child: Material(
                     elevation: 3,
                     color: MahasColors.light,
@@ -309,7 +314,7 @@ class DokterDetailTabController extends GetxController {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "RS. Bhayangkara Denpasar",
+                                        "RS. Cendana Premiere",
                                         style: MahasThemes.muted,
                                         overflow: TextOverflow.visible,
                                         maxLines: 2,
@@ -347,7 +352,7 @@ class DokterDetailTabController extends GetxController {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Antrian saat ini nomor ${eventCard[index].noantriansaatini} dari nomor ${eventCard[index].nomaxpasienterdaftar}",
+                                        "Antrian saat ini nomor ${eventCard[index].noantriansaatini} dari nomor ${eventCard[index].jmlantrian}",
                                         style: MahasThemes.muted,
                                         overflow: TextOverflow.visible,
                                         maxLines: 2,

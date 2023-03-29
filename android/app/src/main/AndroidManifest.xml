@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sanata.haimed_getx">
+    package="com.sanata.haimed.cendana">
    <application
         android:label="haimed_getx"
         android:name="${applicationName}"

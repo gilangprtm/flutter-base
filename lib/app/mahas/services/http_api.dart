@@ -13,7 +13,7 @@ class HttpApi {
     _apiToken = null;
   }
 
-  static Future<String?> _token() async {
+  static Future<String?> token() async {
     var now = DateTime.now();
     if (_apiToken == null || _apiTokenExpired.isBefore(now)) {
       _apiTokenExpired = DateTime(
@@ -36,6 +36,7 @@ class HttpApi {
     // print(r.body);
     // print(r.statusCode);
     // print(r.request!.url);
+    // print(r.request!.method);
     return ApiResultModel(r.statusCode, r.body);
   }
 
@@ -63,13 +64,13 @@ class HttpApi {
 
   static Future<ApiResultModel> post(String url, {Object? body}) async {
     try {
-      final token = await _token();
+      // final token = await _token();
       final urlX = Uri.parse(getUrl(url));
       var r = await http.post(
         urlX,
         headers: {
           'Content-type': 'application/json',
-          'Authorization': token != null ? 'Bearer $token' : '',
+          // 'Authorization': token != null ? 'Bearer $token' : '',
         },
         body: json.encode(body),
       );
@@ -81,13 +82,13 @@ class HttpApi {
 
   static Future<ApiResultModel> put(String url, {Object? body}) async {
     try {
-      final token = await _token();
+      // final token = await _token();
       final urlX = Uri.parse(getUrl(url));
       var r = await http.put(
         urlX,
         headers: {
           'Content-type': 'application/json',
-          'Authorization': token != null ? 'Bearer $token' : '',
+          // 'Authorization': token != null ? 'Bearer $token' : '',
         },
         body: json.encode(body),
       );
@@ -99,12 +100,13 @@ class HttpApi {
 
   static Future<ApiResultModel> delete(String url, {Object? body}) async {
     try {
-      final token = await _token();
+      // final token = await _token();
       final urlX = Uri.parse(getUrl(url));
       var r = await http.delete(
         urlX,
         headers: {
-          'Authorization': token != null ? 'Bearer $token' : '',
+          'Content-type': 'application/json',
+          // 'Authorization': token != null ? 'Bearer $token' : '',
         },
         body: json.encode(body),
       );

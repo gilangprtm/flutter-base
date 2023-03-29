@@ -49,7 +49,14 @@ class SpesialisasiDetailTabView
               physics: ScrollPhysics(),
               children: [
                 InkWell(
-                  onTap: () => controller.itemOnTab(),
+                  onTap: () {
+                    controller.toDokterKonfirmasi(
+                      e.dokterid!,
+                      e.tanggal!.toString(),
+                      e.sectionid!,
+                      e.waktuid!.toString(),
+                    );
+                  },
                   child: Padding(
                     padding:
                         const EdgeInsets.only(left: 10, right: 10, top: 10),
@@ -181,11 +188,11 @@ class SpesialisasiDetailTabView
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    e.jmlpasienreservasi.toString(),
+                                    e.jmlantrian.toString(),
                                     style: MahasThemes.h1,
                                   ),
                                   Text(
-                                    "Pasien",
+                                    "Antrian",
                                     style: MahasThemes.mutedH3,
                                   ),
                                 ],

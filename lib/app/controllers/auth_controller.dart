@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../mahas/mahas_config.dart';
-import '../mahas/services/helper.dart';
+// import '../mahas/services/helper.dart';
 import '../mahas/services/http_api.dart';
 import '../mahas/mahas_service.dart';
 import '../models/profile_model.dart';
@@ -29,8 +29,7 @@ class AuthController extends GetxController {
 
   void _setInitialScreen(User? user) {
     if (user == null) {
-      // _toLigin();
-      _toHome();
+      _toLigin();
     } else {
       _toHome();
     }
@@ -38,32 +37,20 @@ class AuthController extends GetxController {
 
   void _toLigin() {
     Get.offAllNamed(Routes.LOGIN);
-    MahasConfig.profile = null;
-    if (EasyLoading.isShow) {
-      EasyLoading.dismiss();
-    }
   }
 
   void _toHome() async {
-    var r = await HttpApi.get('/api/Profile');
+    await Future.delayed(const Duration(seconds: 1));
+    var r = await HttpApi.put('/api/User', body: {
+      "UserIdHaimed": auth.currentUser!.uid.toString(),
+      "Email": auth.currentUser!.email.toString(),
+      "Nama": auth.currentUser!.displayName.toString(),
+    });
     if (r.success) {
       MahasConfig.profile = ProfileModel.fromJson(r.body);
-      final divisi = MahasConfig.profile!.divisi!;
-      if (divisi.isEmpty) {
-        // Get.offAllNamed(
-        //   Routes.UNAUTHORIZED,
-        //   parameters: {
-        //     'noDivisi': 'YES',
-        //   },
-        // );
-        print('salah');
-      } else {
-        if (Get.currentRoute != Routes.home) {
-          Get.offAllNamed(Routes.home);
-        }
-      }
+      Get.offAllNamed(Routes.home);
     } else {
-      print('salah');
+      // print('salah');
     }
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();
@@ -181,24 +168,26 @@ class AuthController extends GetxController {
   Future signOut() async {
     if (EasyLoading.isShow) return;
     EasyLoading.show();
-    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    String? token = await messaging.getToken();
-    if (token != null) {
-      var r = await HttpApi.put(
-        '/api/Notifikasi/Token',
-        body: {"Token": token},
-      );
-      if (!r.success) {
-        EasyLoading.dismiss();
-        Helper.dialogWarning(r.message!);
-      } else {
-        await auth.signOut();
-        HttpApi.clearToken();
-      }
-    } else {
-      await auth.signOut();
-      HttpApi.clearToken();
-    }
+    // late final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    // String? token = await messaging.getToken();
+    // if (token != null) {
+    //   var r = await HttpApi.put(
+    //     '/api/Notifikasi/Token',
+    //     body: {"Token": token},
+    //   );
+    //   if (!r.success) {
+    //     EasyLoading.dismiss();
+    //     Helper.dialogWarning(r.message!);
+    //   } else {
+    //     await auth.signOut();
+    //     HttpApi.clearToken();
+    //   }
+    // } else {
+    //   await auth.signOut();
+    //   HttpApi.clearToken();
+    // }
+    await auth.signOut();
+    EasyLoading.dismiss();
   }
 
   Future<void> deleteAccount() async {

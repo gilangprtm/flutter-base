@@ -18,9 +18,9 @@ import 'mahas_config.dart';
 final authController = AuthController.instance;
 final remoteConfig = FirebaseRemoteConfig.instance;
 final auth = FirebaseAuth.instance;
-final Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+// final Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp(
+//   options: DefaultFirebaseOptions.currentPlatform,
+// );
 
 class MahasService {
   static PackageInfo? packageInfo;
@@ -34,10 +34,30 @@ class MahasService {
       statusBarColor: Colors.transparent,
     ));
 
-    // auth controller
-    await firebaseInitialization.then((value) {
+    try {
+      Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+
+      // init firebase
+      await firebaseInitialization.then(
+        (value) => // open auth controlller
+            Get.put(AuthController()),
+      );
+
+      // remote config
+      await remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: const Duration(minutes: 1),
+        minimumFetchInterval: const Duration(minutes: 5),
+      ));
+      await remoteConfig.fetchAndActivate();
+      // get api from remote config
+      MahasConfig.urlApi = remoteConfig.getString('api');
+
+      // MahasConfig.hasInternet = true;
+    } catch (e) {
       Get.put(AuthController());
-    });
+    }
 
     // notif
     // FirebaseMessaging.onBackgroundMessage(backgroundHandler);
@@ -53,18 +73,6 @@ class MahasService {
 
     // packageInfo
     packageInfo = await PackageInfo.fromPlatform();
-
-    // remote config
-    await remoteConfig.setConfigSettings(
-      RemoteConfigSettings(
-        fetchTimeout: const Duration(hours: 1),
-        minimumFetchInterval: const Duration(minutes: 2),
-      ),
-    );
-    await remoteConfig.fetchAndActivate();
-    if (MahasConfig.urlApi.isEmpty) {
-      MahasConfig.urlApi = remoteConfig.getString('api');
-    }
 
     // getstorange
     await GetStorage.init();

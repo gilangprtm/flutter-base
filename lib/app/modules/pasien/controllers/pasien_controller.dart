@@ -1,14 +1,15 @@
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
 
 import '../../../mahas/components/others/list_component.dart';
-import '../../../models/cuti_hamil_model.dart';
+import '../../../models/pasien_model.dart';
 import '../../../routes/app_pages.dart';
 
 class PasienController extends GetxController {
-  final listCon = ListComponentController<CutihamilModel>(
+  final listCon = ListComponentController<PasienModel>(
     urlApi: (index, filter) =>
-        '/api/PermintaanJadwal/CutiHamil/List?pageIndex=$index',
-    fromDynamic: CutihamilModel.fromDynamic,
+        '/api/PasienHaiMed?userId=${MahasConfig.profile!.userIdHaimed}',
+    fromDynamic: PasienModel.fromDynamic,
     allowSearch: false,
   );
 
@@ -20,7 +21,7 @@ class PasienController extends GetxController {
     });
   }
 
-  void itemOnTab(int id) {
+  void itemOnTab(String id) {
     Get.toNamed(
       Routes.PASIEN_SETUP,
       parameters: {
@@ -33,7 +34,12 @@ class PasienController extends GetxController {
     });
   }
 
-  void toReservasi() {
-    Get.toNamed(Routes.RESERVASI);
+  void toReservasi(String id) {
+    Get.toNamed(
+      Routes.RESERVASI,
+      parameters: {
+        'pasienId': id.toString(),
+      },
+    );
   }
 }

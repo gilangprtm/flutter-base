@@ -40,17 +40,17 @@ class LoginView extends GetView<LoginController> {
                     textAlign: TextAlign.center,
                     maxLines: 5,
                   ),
-                  const SizedBox(height: 10),
-                  Container(
-                    height: 46,
-                    width: 300,
-                    child: ButtonWithIcon(
-                      label: "Login menggunakan Email",
-                      onTap: () {
-                        controller.toLogin();
-                      },
-                    ),
-                  ),
+                  // const SizedBox(height: 10),
+                  // Container(
+                  //   height: 46,
+                  //   width: 300,
+                  //   child: ButtonWithIcon(
+                  //     label: "Login menggunakan Email",
+                  //     onTap: () {
+                  //       controller.toLogin();
+                  //     },
+                  //   ),
+                  // ),
                   const SizedBox(height: 10),
                   Container(
                     height: 46,
@@ -58,9 +58,9 @@ class LoginView extends GetView<LoginController> {
                     child: ButtonWithIcon(
                       label: "Login menggunakan Google",
                       icon: Icon(FontAwesomeIcons.google),
-                      color: Colors.grey[800],
+                      // color: Colors.grey[800],
                       onTap: () {
-                        print("object");
+                        controller.googleLoginOnPress();
                       },
                     ),
                   ),

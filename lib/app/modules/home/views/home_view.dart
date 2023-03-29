@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
@@ -41,10 +42,7 @@ class HomeView extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              // width: 50,
-                              // color: Colors.amber,
                               child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Spacer(),
                                   InkWell(
@@ -65,8 +63,6 @@ class HomeView extends GetView<HomeController> {
                                       controller.toNotif();
                                     },
                                     child: SizedBox(
-                                      // width: 50,
-                                      // height: 35,
                                       child: Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -81,7 +77,8 @@ class HomeView extends GetView<HomeController> {
                                                 size: 20,
                                               ),
                                               Visibility(
-                                                visible: true,
+                                                visible:
+                                                    controller.notifikasi.value,
                                                 child: const Icon(
                                                   Icons.circle,
                                                   size: 10,
@@ -113,7 +110,7 @@ class HomeView extends GetView<HomeController> {
                             Container(
                               // color: Colors.red,
                               child: Text(
-                                "Selamat Pagi ",
+                                "Selamat Datang ",
                                 style: TextStyle(
                                   // fontSize: 12,
                                   color: Colors.white,
@@ -123,7 +120,7 @@ class HomeView extends GetView<HomeController> {
                             Container(
                               // color: Colors.red,
                               child: Text(
-                                "Gilang Pratama",
+                                MahasConfig.profile!.nama!,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -263,7 +260,7 @@ class HomeView extends GetView<HomeController> {
                                               child: Column(
                                                 children: [
                                                   Image.asset(
-                                                    'assets/images/logo.png',
+                                                    'assets/images/haimedlogo.png',
                                                     height: 50,
                                                     width: double.infinity,
                                                     fit: BoxFit.fitHeight,
