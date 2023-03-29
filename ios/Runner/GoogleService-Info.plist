@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1076064079745-dnjcn76kfhv01e265oorv4q8hp4favnr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1076064079745-dnjcn76kfhv01e265oorv4q8hp4favnr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1076064079745-rjc31321okfbbk9jqu8j0olgf861i36r.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDFVR0I6r9-qSEws94NzY8m7Lv5_HV6Vv8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1076064079745</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>id.haimed.reservasi</string>
+	<key>PROJECT_ID</key>
+	<string>faskes-all</string>
+	<key>STORAGE_BUCKET</key>
+	<string>faskes-all.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1076064079745:ios:d7b3c85c2262f4d8a06280</string>
+</dict>
+</plist>

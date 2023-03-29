@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1076064079745",
+    "project_id": "faskes-all",
+    "storage_bucket": "faskes-all.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076064079745:android:cd6543bba1748928a06280",
+        "android_client_info": {
+          "package_name": "id.haimed.reservasi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076064079745-rjc31321okfbbk9jqu8j0olgf861i36r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.haimed.reservasi",
+            "certificate_hash": "08284361b5d5369acc057f00bd7f1208f2c07edc"
+          }
+        },
+        {
+          "client_id": "1076064079745-jm7img9vh3to30p6a8cvm8i20eptpu7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhC93QQCCogIpSUNu1IiaXkVNK3Y5EnRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076064079745-jm7img9vh3to30p6a8cvm8i20eptpu7v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076064079745-dnjcn76kfhv01e265oorv4q8hp4favnr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "id.haimed.reservasi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
