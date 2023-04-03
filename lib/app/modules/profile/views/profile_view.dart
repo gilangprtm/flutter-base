@@ -191,7 +191,7 @@ class ListMenu extends StatelessWidget {
                   visible: detail!,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.amber,
+                      color: MahasColors.primary,
                       borderRadius:
                           BorderRadius.circular(MahasThemes.borderRadius),
                     ),
