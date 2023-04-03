@@ -227,7 +227,7 @@ class HomeView extends GetView<HomeController> {
                                               child: Column(
                                                 children: [
                                                   Image.asset(
-                                                    'assets/images/plus.png',
+                                                    'assets/images/daftar_rawat_jalan.png',
                                                     height: 50,
                                                     width: double.infinity,
                                                     fit: BoxFit.fitHeight,
@@ -260,7 +260,7 @@ class HomeView extends GetView<HomeController> {
                                               child: Column(
                                                 children: [
                                                   Image.asset(
-                                                    'assets/images/haimedlogo.png',
+                                                    'assets/images/ulasan.png',
                                                     height: 50,
                                                     width: double.infinity,
                                                     fit: BoxFit.fitHeight,
@@ -293,7 +293,7 @@ class HomeView extends GetView<HomeController> {
                                               child: Column(
                                                 children: [
                                                   Image.asset(
-                                                    'assets/images/list.png',
+                                                    'assets/images/riwayat_pendaftaran.png',
                                                     height: 50,
                                                     width: double.infinity,
                                                     fit: BoxFit.fitHeight,

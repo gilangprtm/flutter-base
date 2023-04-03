@@ -15,7 +15,7 @@ class DaftarRawatJalanView extends GetView<DaftarRawatJalanController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('RS. Bayangkara Denpasar'),
+        title: const Text('Daftar Dokter'),
         centerTitle: false,
       ),
       body: TabBarView(

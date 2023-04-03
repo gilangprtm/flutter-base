@@ -15,10 +15,10 @@ class HomeController extends GetxController {
   final CarouselController imageController = CarouselController();
 
   final List<String> imgList = [
-    'assets/images/ilustrasi.jpeg',
-    'assets/images/ilustrasi.jpeg',
-    'assets/images/ilustrasi.jpeg',
-    'assets/images/ilustrasi.jpeg',
+    'assets/images/slider1.jpg',
+    'assets/images/slider2.jpg',
+    'assets/images/slider1.jpg',
+    'assets/images/slider2.jpg',
   ];
 
   @override
