@@ -35,25 +35,26 @@ class MahasService {
     ));
 
     try {
-      Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp(
+      final Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp(
+        // name: 'haimed-cendana',
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
-      // init firebase
-      await firebaseInitialization.then(
-        (value) => // open auth controlller
-            Get.put(AuthController()),
-      );
+      // auth controller
+      await firebaseInitialization.then((value) {
+        Get.put(AuthController());
+      });
 
       // remote config
-      await remoteConfig.setConfigSettings(RemoteConfigSettings(
-        fetchTimeout: const Duration(minutes: 1),
-        minimumFetchInterval: const Duration(minutes: 5),
-      ));
+      await remoteConfig.setConfigSettings(
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(hours: 1),
+          minimumFetchInterval: const Duration(minutes: 2),
+        ),
+      );
       await remoteConfig.fetchAndActivate();
       // get api from remote config
       MahasConfig.urlApi = remoteConfig.getString('api');
-
       // MahasConfig.hasInternet = true;
     } catch (e) {
       Get.put(AuthController());
