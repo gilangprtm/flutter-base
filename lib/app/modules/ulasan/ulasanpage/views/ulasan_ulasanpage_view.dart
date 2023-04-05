@@ -14,7 +14,7 @@ class UlasanUlasanpageView extends GetView<UlasanUlasanpageController> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('RS Bhayangkara Denpasar'),
+          title: Text('RS Cendana Premier'),
           centerTitle: true,
         ),
         bottomNavigationBar: Material(

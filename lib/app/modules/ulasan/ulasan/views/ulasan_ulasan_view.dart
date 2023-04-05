@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/components/others/empty_component.dart';
 import 'package:haimed_getx/app/mahas/components/others/shimmer_component.dart';
 import 'package:haimed_getx/app/mahas/mahas_colors.dart';
 import 'package:intl/intl.dart';
@@ -26,15 +28,46 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                   color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
                 ),
-                child: RatingSummary(
-                  counter: c.model.value!.jumlahvoter ?? 0,
-                  average: c.model.value!.bintang!,
-                  counterFiveStars: c.model.value!.bintang5!,
-                  counterFourStars: c.model.value!.bintang4!,
-                  counterThreeStars: c.model.value!.bintang3!,
-                  counterTwoStars: c.model.value!.bintang2!,
-                  counterOneStars: c.model.value!.bintang1!,
-                ),
+                child: c.model.value!.jumlahvoter != 0
+                    ? Column(
+                        children: [
+                          RatingSummary(
+                            counter: c.model.value!.jumlahvoter!,
+                            average: c.model.value!.bintang!,
+                            counterFiveStars: c.model.value!.bintang5!,
+                            counterFourStars: c.model.value!.bintang4!,
+                            counterThreeStars: c.model.value!.bintang3!,
+                            counterTwoStars: c.model.value!.bintang2!,
+                            counterOneStars: c.model.value!.bintang1!,
+                            color: MahasColors.primary,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: SizedBox(),
+                              ),
+                              TextButton.icon(
+                                onPressed: () => controller.tambahUlasanOnTap(),
+                                icon: Icon(FontAwesomeIcons.penToSquare),
+                                label: Text("Tambah Ulasan"),
+                              )
+                            ],
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          EmptyComponent(),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextButton.icon(
+                            onPressed: () => controller.tambahUlasanOnTap(),
+                            icon: Icon(FontAwesomeIcons.penToSquare),
+                            label: Text("Tambah Ulasan"),
+                          )
+                        ],
+                      ),
               ),
               SizedBox(
                 height: 15,
@@ -48,16 +81,13 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                           shrinkWrap: true,
                           physics: const ScrollPhysics(),
                           separatorBuilder: (BuildContext context, int index) {
-                            return Container(
-                              height: 4.0,
+                            return Divider(
+                              thickness: 1,
                             );
                           },
                           itemBuilder: (BuildContext context, int index) {
                             var item = c.models[index];
                             return Container(
-                              decoration: const BoxDecoration(
-                                  // color: Colors.blue,
-                                  ),
                               child: SizedBox(
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +96,7 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                       padding: EdgeInsets.only(right: 10),
                                       child: Image.asset(
                                         "assets/images/Doctor.png",
-                                        height: 50.0,
+                                        height: 40,
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -82,19 +112,23 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Container(
-                                                    // height: 30,
-                                                    width: 150,
-                                                    child: Text(
-                                                      item.namauser ?? "Anonim",
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
+                                                  Expanded(
+                                                    child: Container(
+                                                      width: 150,
+                                                      child: Text(
+                                                        item.namauser ??
+                                                            "Anonim",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
                                                       ),
-                                                      // maxLines: 2,
                                                     ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
                                                   ),
                                                   Container(
                                                     child: Column(
@@ -136,9 +170,6 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                           Container(
                                             child: Text(item.review ?? ""),
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
                                           Visibility(
                                             visible: item.balasan != null,
                                             child: Container(
@@ -151,6 +182,9 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
                                                   Container(
                                                     child: Text(
                                                       "Admin",
