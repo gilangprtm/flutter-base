@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sanata.haimed.cendana">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="haimed_getx"
+        android:label="HaiMed RS Cendana"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

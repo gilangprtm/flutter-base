@@ -14,7 +14,39 @@
       },
       "oauth_client": [
         {
-          "client_id": "1026284748792-99ae1j1c2ak2iql1tpfo3bo7tmep9f57.apps.googleusercontent.com",
+          "client_id": "1026284748792-blu8rqnbsmlaubn83plvku1dlf93sfco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.cendana",
+            "certificate_hash": "d3a82e3a3b61abffad880df6cef8e3b9e537c4d6"
+          }
+        },
+        {
+          "client_id": "1026284748792-k52pdiobe26etqfoa7kgkp4dllj5t9hu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.cendana",
+            "certificate_hash": "0b493fc0ca2b0c2dc45a8786c0e82240ffb5963e"
+          }
+        },
+        {
+          "client_id": "1026284748792-qjis86b4ukecti23c4gegtkmoviss5bi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.cendana",
+            "certificate_hash": "08284361b5d5369acc057f00bd7f1208f2c07edc"
+          }
+        },
+        {
+          "client_id": "1026284748792-vpe2b768qgf7dti8atdkrmt99osml6pv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.cendana",
+            "certificate_hash": "ffad9ea0a45ef2ff20fdf1b4c980ff1a2c2bb2bb"
+          }
+        },
+        {
+          "client_id": "1026284748792-lt88r9jh5sq0enr39o1afef9tlk6p3ta.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +61,13 @@
             {
               "client_id": "1026284748792-99ae1j1c2ak2iql1tpfo3bo7tmep9f57.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1026284748792-ojjf6k6cjek3jlvupfcibk4bp7vlchb3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sanata.haimedGetx"
+              }
             }
           ]
         }

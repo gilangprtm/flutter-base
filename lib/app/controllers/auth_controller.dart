@@ -20,11 +20,20 @@ class AuthController extends GetxController {
   late Rx<User?> firebaseUser;
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
     firebaseUser = Rx<User?>(auth.currentUser);
     firebaseUser.bindStream(auth.authStateChanges());
     ever(firebaseUser, _setInitialScreen);
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    // print("on ready");
+    // super.onReady();
+    // firebaseUser = Rx<User?>(auth.currentUser);
+    // firebaseUser.bindStream(auth.authStateChanges());
+    // ever(firebaseUser, _setInitialScreen);
   }
 
   void _setInitialScreen(User? user) {
@@ -40,13 +49,14 @@ class AuthController extends GetxController {
   }
 
   void _toHome() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     var r = await HttpApi.put('/api/User', body: {
       "UserIdHaimed": auth.currentUser!.uid.toString(),
       "Email": auth.currentUser!.email.toString(),
       "Nama": auth.currentUser!.displayName.toString(),
     });
     if (r.success) {
+      print("succes home");
       MahasConfig.profile = ProfileModel.fromJson(r.body);
       Get.offAllNamed(Routes.home);
     } else {

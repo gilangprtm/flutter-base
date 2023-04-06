@@ -16,8 +16,7 @@ import '../../../mahas/services/http_api.dart';
 class DokterKonfirmasiTabController extends GetxController {
   final namaPasienCon = InputDropdownController();
   late InputRadioController tipePasienCon;
-  final InputTextController nrmCon =
-      InputTextController(type: InputTextType.number);
+  final InputTextController nrmCon = InputTextController();
   final InputTextController noHPCon =
       InputTextController(type: InputTextType.number);
 
@@ -26,6 +25,7 @@ class DokterKonfirmasiTabController extends GetxController {
   RxString tanggal = "".obs;
   RxString sectionID = "".obs;
   RxString waktuID = "".obs;
+  RxString namaSection = "".obs;
   var pasienList = RxList<PasienModel>();
   var jadwalPraktekModel = JadwalpraktekModel().obs;
   late Rx<PasienModel?> selectedPasien;
@@ -36,6 +36,7 @@ class DokterKonfirmasiTabController extends GetxController {
     tanggal.value = Get.parameters['tanggal']!;
     sectionID.value = Get.parameters['sectionID']!;
     waktuID.value = Get.parameters['waktuID']!;
+    namaSection.value = Get.parameters['namaSection']!;
     tipePasienCon = InputRadioController(
         items: [
           RadioButtonItem(text: "Pasien Baru", value: false),
@@ -63,7 +64,10 @@ class DokterKonfirmasiTabController extends GetxController {
   }
 
   void goToTambahPasien() {
-    Get.toNamed(Routes.PASIEN_SETUP, parameters: {"getData": true.toString()});
+    Get.toNamed(Routes.PASIEN_SETUP, parameters: {"getData": true.toString()})!
+        .then((value) => {
+              getDataPasien(),
+            });
   }
 
   Future<JadwalpraktekModel> getDataDokter() async {
@@ -132,6 +136,10 @@ class DokterKonfirmasiTabController extends GetxController {
           "UntukTanggal": jadwalPraktekModel.value.tanggal!.toString(),
           "MobileKeteranganPasienBaru": tipePasienCon.value,
           "NRM": nrmCon.value ?? "",
+          "DokterID": dokterID.value,
+          "SectionID": sectionID.value,
+          "NamaSection": namaSection.value,
+          "WaktuID": waktuID.value,
           "MobileKeteranganNRM": nrmCon.value ?? "",
           "NIK": selectedPasien.value!.nik ?? "",
           "MobileNotifikasiAktif": false,

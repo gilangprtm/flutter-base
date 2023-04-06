@@ -33,8 +33,7 @@ class DokterDetailTabController extends GetxController {
     praktekExpand = generateItems(2);
     dokterID.value = Get.parameters['id']!;
     await getDataDokter(dokterID.value).then(
-      (value) async =>
-          await getJadwalPraktek(dokterID.value, DateTime.now()),
+      (value) async => await getJadwalPraktek(dokterID.value, DateTime.now()),
     );
     super.onInit();
   }
@@ -106,8 +105,8 @@ class DokterDetailTabController extends GetxController {
     );
   }
 
-  void toDokterKonfirmasi(
-      String dokterID, String tanggal, String sectionID, String waktuID) {
+  void toDokterKonfirmasi(String dokterID, String tanggal, String sectionID,
+      String waktuID, String namaSection) {
     Get.toNamed(
       Routes.DOKTER_KONFIRMASI_TAB,
       parameters: {
@@ -115,6 +114,7 @@ class DokterDetailTabController extends GetxController {
         'tanggal': tanggal,
         'sectionID': sectionID,
         'waktuID': waktuID,
+        'namaSection': namaSection
       },
     );
   }
@@ -122,8 +122,9 @@ class DokterDetailTabController extends GetxController {
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     selectedDate.value = selectedDay;
     focusDate.value = focusedDay;
-    
-    if (selectedDate.value.isBefore(DateTime.now().subtract(Duration(days: 1)))) {
+
+    if (selectedDate.value
+        .isBefore(DateTime.now().subtract(Duration(days: 1)))) {
       eventCard.clear();
     } else {
       if (eventCard.isNotEmpty) {
@@ -132,8 +133,6 @@ class DokterDetailTabController extends GetxController {
       eventCard.value =
           eventData.where((e) => e.tanggal!.day == selectedDay.day).toList();
     }
-     print(selectedDate.value);
-      print(DateTime.now());
   }
 
   Widget calendarView() {
@@ -244,6 +243,7 @@ class DokterDetailTabController extends GetxController {
                       eventCard[index].tanggal!.toString(),
                       eventCard[index].sectionid!,
                       eventCard[index].waktuid!.toString(),
+                      eventCard[index].namasection!.toString(),
                     );
                   },
                   child: Material(

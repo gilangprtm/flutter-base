@@ -20,6 +20,7 @@ dependencies:
   firebase_auth: ^4.2.0
   firebase_messaging: ^14.1.4
   firebase_remote_config: ^3.0.7
+  firebase_analytics: ^10.0.4
   get_storage: ^2.0.3
   overlay_support: ^2.1.0
   package_info_plus: ^3.0.2
@@ -43,12 +44,18 @@ dependencies:
   flutter_otp_text_field: 1.1.1
   image_picker: ^0.8.7+1
   firebase_storage: 11.0.16
+  flutter_launcher_icons: ^0.12.0
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
   lints: 2.0.1
   flutter_test: 
     sdk: flutter
+
+flutter_icons:
+  image_path: "assets/images/logo.png"
+  android: true
+  ios: true
 
 flutter: 
   uses-material-design: true
