@@ -133,7 +133,7 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
                                 SizedBox(
                                   width: Get.width,
                                   child: Text(
-                                    "RS Cendana Premiere",
+                                    "RS Cendana Premier",
                                     style: MahasThemes.h2,
                                     textAlign: TextAlign.center,
                                   ),

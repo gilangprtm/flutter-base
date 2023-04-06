@@ -29,31 +29,35 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                   borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
                 ),
                 child: c.model.value!.jumlahvoter != 0
-                    ? Column(
-                        children: [
-                          RatingSummary(
-                            counter: c.model.value!.jumlahvoter!,
-                            average: c.model.value!.bintang!,
-                            counterFiveStars: c.model.value!.bintang5!,
-                            counterFourStars: c.model.value!.bintang4!,
-                            counterThreeStars: c.model.value!.bintang3!,
-                            counterTwoStars: c.model.value!.bintang2!,
-                            counterOneStars: c.model.value!.bintang1!,
-                            color: MahasColors.primary,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: SizedBox(),
-                              ),
-                              TextButton.icon(
-                                onPressed: () => controller.tambahUlasanOnTap(),
-                                icon: Icon(FontAwesomeIcons.penToSquare),
-                                label: Text("Tambah Ulasan"),
-                              )
-                            ],
-                          ),
-                        ],
+                    ? GetBuilder<UlasanUlasanController>(
+                        builder: (c) => Column(
+                          children: [
+                            RatingSummary(
+                              counter: c.model.value!.jumlahvoter!,
+                              average:
+                                  controller.getAverageReview(c.countStars()),
+                              counterFiveStars: c.model.value!.bintang5!,
+                              counterFourStars: c.model.value!.bintang4!,
+                              counterThreeStars: c.model.value!.bintang3!,
+                              counterTwoStars: c.model.value!.bintang2!,
+                              counterOneStars: c.model.value!.bintang1!,
+                              color: MahasColors.primary,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: SizedBox(),
+                                ),
+                                TextButton.icon(
+                                  onPressed: () =>
+                                      controller.tambahUlasanOnTap(),
+                                  icon: Icon(FontAwesomeIcons.penToSquare),
+                                  label: Text("Tambah Ulasan"),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       )
                     : Column(
                         children: [
@@ -95,7 +99,7 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                     Container(
                                       padding: EdgeInsets.only(right: 10),
                                       child: Image.asset(
-                                        "assets/images/Doctor.png",
+                                        "assets/images/person.png",
                                         height: 40,
                                         fit: BoxFit.fill,
                                       ),
@@ -148,8 +152,9 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                                                     index) {
                                                               return Icon(
                                                                 Icons.star,
-                                                                color: Colors
-                                                                    .amber,
+                                                                color:
+                                                                    MahasColors
+                                                                        .primary,
                                                               );
                                                             },
                                                           ),
@@ -172,8 +177,14 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                           ),
                                           Visibility(
                                             visible: item.balasan != null,
+                                            child: SizedBox(
+                                              height: 10,
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: item.balasan != null,
                                             child: Container(
-                                              padding: EdgeInsets.all(10),
+                                              padding: EdgeInsets.all(8),
                                               width: double.infinity,
                                               decoration: BoxDecoration(
                                                 color: Colors.grey[100],
@@ -182,9 +193,6 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
                                                   Container(
                                                     child: Text(
                                                       "Admin",
@@ -196,11 +204,13 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                                       ),
                                                     ),
                                                   ),
+                                                  SizedBox(
+                                                    height: 8,
+                                                  ),
                                                   Container(
                                                     child: Text(
                                                       item.balasan ?? "text",
                                                       style: TextStyle(
-                                                        // fontWeight: FontWeight.bold,
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                       ),

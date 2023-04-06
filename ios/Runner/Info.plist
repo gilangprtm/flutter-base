@@ -55,5 +55,12 @@
 	<string>This app require permission for accessing camera</string>
 	<key>NSMicrophoneUsageDescription  </key>
 	<string>This app require permission for accessing microphone</string>
+
+	//url launcher
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	<string>sms</string>
+	<string>tel</string>
+	</array>
 </dict>
 </plist>

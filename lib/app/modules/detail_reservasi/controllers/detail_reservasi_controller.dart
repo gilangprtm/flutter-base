@@ -56,7 +56,7 @@ class DetailReservasiController extends GetxController {
               box.remove("endDate");
             }
             await box.write("endDate",
-                DateTime.now().add(const Duration(days: 1)).toString());
+                DateTime.now().add(const Duration(days: 6)).toString());
           },
         );
       } else if (date == null) {
@@ -67,7 +67,7 @@ class DetailReservasiController extends GetxController {
               box.remove("endDate");
             }
             await box.write("endDate",
-                DateTime.now().add(const Duration(days: 1)).toString());
+                DateTime.now().add(const Duration(days: 6)).toString());
           },
         );
         Get.back(result: false);
@@ -97,7 +97,11 @@ class DetailReservasiController extends GetxController {
   }
 
   Future<bool> backOnPressed() async {
-    Get.offAllNamed(Routes.home);
+    if (reservasi != null) {
+      Get.offAllNamed(Routes.home);
+    } else if (reservasiList != null) {
+      Get.back();
+    }
     return true;
   }
 }

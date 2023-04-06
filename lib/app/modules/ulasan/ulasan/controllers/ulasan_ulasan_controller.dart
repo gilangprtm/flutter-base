@@ -56,7 +56,46 @@ class UlasanUlasanController extends GetxController {
     EasyLoading.dismiss();
   }
 
+  List<int> countStars() {
+    List<int> bintang1 = [];
+    List<int> bintang2 = [];
+    List<int> bintang3 = [];
+    List<int> bintang4 = [];
+    List<int> bintang5 = [];
+    List<int> allStars = [];
+    for (var i = 0; i < model.value!.bintang1!; i++) {
+      bintang1.add(1);
+    }
+    for (var i = 0; i < model.value!.bintang2!; i++) {
+      bintang2.add(2);
+    }
+    for (var i = 0; i < model.value!.bintang3!; i++) {
+      bintang3.add(3);
+    }
+    for (var i = 0; i < model.value!.bintang4!; i++) {
+      bintang4.add(4);
+    }
+    for (var i = 0; i < model.value!.bintang5!; i++) {
+      bintang5.add(5);
+    }
+
+    List<List<int>> datas = [bintang1, bintang2, bintang3, bintang4, bintang5];
+    for (var e in datas) {
+      allStars.addAll(e);
+    }
+    return allStars;
+  }
+
+  double getAverageReview(List<int> reviewScores) {
+    double sum = 0.0;
+    for (int i = 0; i < reviewScores.length; i++) {
+      sum += reviewScores[i];
+    }
+    return sum / reviewScores.length;
+  }
+
   void tambahUlasanOnTap() async {
+    ratingCon.value = null;
     await dialogRating(controller: ratingCon);
   }
 
@@ -143,6 +182,7 @@ class UlasanUlasanController extends GetxController {
               await postRating(controller.value, ratingStars.value.toInt());
               await summary();
               await reviewPasien();
+              update();
               Get.back(result: true);
             },
           ),
@@ -175,5 +215,6 @@ class UlasanUlasanController extends GetxController {
     super.onInit();
     await summary();
     await reviewPasien();
+    countStars();
   }
 }

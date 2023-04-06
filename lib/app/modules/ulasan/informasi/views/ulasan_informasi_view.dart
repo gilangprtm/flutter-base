@@ -39,7 +39,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "RS. Bhayangkara Denpasar",
+                          "RS. Cendana Premier",
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               // width: 240,
                               width: MediaQuery.of(context).size.width - 180,
                               child: Text(
-                                "2F, Jl. Trijata No.32, Sumerta Kelod, Kec. Denpasar Utara, Kota Denpasar, Bali 80233",
+                                "Jl. Cok Rai Pudak, Peliatan, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571",
                                 style: TextStyle(),
                                 maxLines: 6,
                                 overflow: TextOverflow.ellipsis,
@@ -120,6 +120,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               ),
                               child: const Icon(
                                 FontAwesomeIcons.plus,
+                                color: MahasColors.light,
                                 size: 18.0,
                               ),
                             ),
@@ -241,7 +242,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  print("object");
+                                  controller.launchEmail("rstrijata@gmail.com");
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
@@ -280,7 +281,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  print("object");
+                                  controller.lauchPhoneCall("+6281999032470");
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
@@ -319,7 +320,8 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  print("object");
+                                  controller.launchWebsite(
+                                      Uri.https('rstrijata.com'));
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
