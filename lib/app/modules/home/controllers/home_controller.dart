@@ -83,7 +83,7 @@ class HomeController extends GetxController {
   }
 
   void toUlasan() {
-    // Get.toNamed(Routes.ULASAN_ULASANPAGE);
+    Get.toNamed(Routes.ULASAN_ULASANPAGE);
   }
 
   void toSupport() {

@@ -50,7 +50,7 @@ class ReservasiView extends GetView<ReservasiController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "RS. Cendana Premiere",
+                                    "RS. Cendana Premier",
                                     style: MahasThemes.h2,
                                     overflow: TextOverflow.visible,
                                     maxLines: 4,

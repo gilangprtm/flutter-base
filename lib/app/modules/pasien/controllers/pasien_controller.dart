@@ -14,11 +14,7 @@ class PasienController extends GetxController {
   );
 
   void addOnPress() {
-    Get.toNamed(Routes.PASIEN_SETUP)?.then((value) {
-      if (value) {
-        listCon.refresh();
-      }
-    });
+    Get.toNamed(Routes.PASIEN_SETUP);
   }
 
   void itemOnTab(String id) {
