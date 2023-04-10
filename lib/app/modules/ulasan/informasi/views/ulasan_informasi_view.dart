@@ -169,7 +169,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               Container(
                                 width: MediaQuery.of(context).size.width - 60,
                                 child: Text(
-                                  "Nama rumah sakit ini adalah Rumah Sakit Bhayangkara Denpasar, milik kepolisian Negara Republik Indonesia",
+                                  "Nama rumah sakit ini adalah Rumah Sakit Cendana Premier",
                                   style: TextStyle(),
                                   maxLines: 6,
                                   overflow: TextOverflow.ellipsis,
@@ -186,15 +186,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                                     children: [
                                       TextSpan(
                                         text:
-                                            "Visi, Misi, Falsafah dan Tujuan Rumah Sakit Bhayangkara Denpasar mengacu kepada Keputusan Karumkit",
-                                      ),
-                                      TextSpan(
-                                        text: " No: Kep/110/XXI/2019",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      TextSpan(
-                                        text: " tanggal 31 Desember 2019",
+                                            "Visi, Misi, Falsafah dan Tujuan Rumah Sakit Cendana Premier",
                                       ),
                                     ],
                                   ),
@@ -242,7 +234,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  controller.launchEmail("rstrijata@gmail.com");
+                                  controller.launchEmail("example@example.com");
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
@@ -255,7 +247,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text("Email"),
-                                          Text("rstrijata@gmail.com"),
+                                          Text("example@example.com"),
                                         ],
                                       ),
                                       const Icon(
@@ -281,7 +273,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  controller.lauchPhoneCall("+6281999032470");
+                                  controller.lauchPhoneCall("+6280000000000");
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
@@ -294,7 +286,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text("Telephone"),
-                                          Text("(0361) 234670"),
+                                          Text("+62 80000000000"),
                                         ],
                                       ),
                                       const Icon(
@@ -320,8 +312,8 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  controller.launchWebsite(
-                                      Uri.https('rstrijata.com'));
+                                  controller
+                                      .launchWebsite(Uri.https('example.com'));
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
@@ -334,7 +326,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text("Website"),
-                                          Text("https://rstrijata.com/"),
+                                          Text("https://example.com/"),
                                         ],
                                       ),
                                       const Icon(
