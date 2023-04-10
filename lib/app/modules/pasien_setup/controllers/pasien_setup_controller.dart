@@ -31,10 +31,15 @@ class PasienSetupController extends GetxController {
   final alamatCon = InputTextController();
   var pasienIdHaimed;
   var jenisKelamin;
-  final pasienList = Get.find<PasienController>();
+  late PasienController pasienList;
+  RxString getData = ''.obs;
 
   @override
   void onInit() {
+    pasienList = Get.isRegistered<PasienController>()
+        ? Get.find<PasienController>()
+        : Get.put(PasienController());
+    getData.value = Get.parameters['getData'] ?? '';
     formCon = SetupPageController(
       urlApiGet: (id) => '/api/PasienHaiMed/$id',
       urlApiPost: () => '/api/PasienHaiMed',
@@ -96,8 +101,10 @@ class PasienSetupController extends GetxController {
       message: 'Anda yakin ingin kembali ?',
       textConfirm: 'Ya',
     );
-    if (r == true) {
+    if (r == true && getData.value == '') {
       await pasienList.listCon.refresh().then((value) => Get.back());
+    } else {
+      Get.back();
     }
     return false;
   }
