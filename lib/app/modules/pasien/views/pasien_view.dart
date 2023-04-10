@@ -28,70 +28,127 @@ class PasienView extends GetView<PasienController> {
       ),
       body: ListComponent(
         controller: controller.listCon,
+        separatorBuilder: (context, index, length) => Divider(
+          height: 0,
+          thickness: 0,
+        ),
         itemBuilder: (PasienModel e) {
           return InkWell(
             onTap: () {
               controller.itemOnTab(e.pasienidhaimed!);
             },
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    height: 131,
-                    decoration: BoxDecoration(
-                      // color: Colors.grey[100],
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(MahasThemes.borderRadius)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(e.nama!),
-                        Row(
-                          children: [
-                            Container(
-                              width: 60,
-                              child: Text("NIK"),
+            child: Container(
+              padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+              child: Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    e.nama!,
+                                    style: MahasThemes.h2,
+                                  ),
+                                ],
+                              ),
                             ),
-                            Row(
+                          ),
+                          TextButton.icon(
+                            onPressed: () {
+                              controller.toPasienSetup(e.pasienidhaimed!);
+                            },
+                            icon: Icon(
+                              Icons.person,
+                            ),
+                            label: Text(
+                              "Ubah Data",
+                              style: MahasThemes.link,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      height: 0,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        child: Text("NIK"),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(" : "),
+                                          Text(e.nik!),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        child: Text("Tgl Lahir"),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(" : "),
+                                          Text(MahasFormat.displayDate(
+                                              e.tanggallahir)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              controller.toReservasi(e.pasienidhaimed!);
+                            },
+                            child: Row(
                               children: [
-                                Text(" : "),
-                                Text(e.nik!),
+                                Icon(
+                                  Icons.history,
+                                  size: 30,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "Riwayat\nReservasi",
+                                  style: MahasThemes.normalWhite
+                                      .copyWith(height: 1),
+                                ),
                               ],
                             ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 60,
-                              child: Text("Tgl Lahir"),
-                            ),
-                            Row(
-                              children: [
-                                Text(" : "),
-                                Text(MahasFormat.displayDate(e.tanggallahir)),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                controller.toReservasi(e.pasienidhaimed!);
-                              },
-                              child: Text("Reservasi"),
-                            ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

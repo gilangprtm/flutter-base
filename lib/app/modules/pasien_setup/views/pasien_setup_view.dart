@@ -11,50 +11,53 @@ import '../controllers/pasien_setup_controller.dart';
 class PasienSetupView extends GetView<PasienSetupController> {
   @override
   Widget build(BuildContext context) {
-    return SetupPageComponent(
-      controller: controller.formCon,
-      title: 'Pasien',
-      children: () => [
-        InputTextComponent(
-          label: 'Nama Lengkap',
-          controller: controller.namaCon,
-          required: true,
-          editable: controller.formCon.editable,
-        ),
-        InputTextComponent(
-          label: 'NIK',
-          controller: controller.nikCon,
-          required: true,
-          editable: controller.formCon.editable,
-        ),
-        InputTextComponent(
-          label: 'Tempat Lahir',
-          controller: controller.tempatLahirCon,
-          required: true,
-          editable: controller.formCon.editable,
-        ),
-        InputDatetimeComponent(
-          controller: controller.dariTglCon,
-          label: 'Tanggal Lahir',
-          required: true,
-          editable: controller.formCon.editable,
-        ),
-        InputRadioComponent(
-          controller: controller.radioCon,
-          editable: controller.formCon.editable,
-          required: true,
-          label: 'Jenis Kelamin',
-        ),
-        InputTextComponent(
-          label: 'Alamat Lengkap',
-          controller: controller.alamatCon,
-          required: true,
-          editable: controller.formCon.editable,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-      ],
+    return WillPopScope(
+      onWillPop: () => controller.backOnPressed(),
+      child: SetupPageComponent(
+        controller: controller.formCon,
+        title: 'Pasien',
+        children: () => [
+          InputTextComponent(
+            label: 'Nama Lengkap',
+            controller: controller.namaCon,
+            required: true,
+            editable: controller.formCon.editable,
+          ),
+          InputTextComponent(
+            label: 'NIK',
+            controller: controller.nikCon,
+            required: true,
+            editable: controller.formCon.editable,
+          ),
+          InputTextComponent(
+            label: 'Tempat Lahir',
+            controller: controller.tempatLahirCon,
+            required: true,
+            editable: controller.formCon.editable,
+          ),
+          InputDatetimeComponent(
+            controller: controller.dariTglCon,
+            label: 'Tanggal Lahir',
+            required: true,
+            editable: controller.formCon.editable,
+          ),
+          InputRadioComponent(
+            controller: controller.radioCon,
+            editable: controller.formCon.editable,
+            required: true,
+            label: 'Jenis Kelamin',
+          ),
+          InputTextComponent(
+            label: 'Alamat Lengkap',
+            controller: controller.alamatCon,
+            required: true,
+            editable: controller.formCon.editable,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
     );
   }
 }
