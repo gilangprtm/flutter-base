@@ -34,6 +34,15 @@ class PasienController extends GetxController {
     });
   }
 
+  void toPasienSetup(String id) {
+    Get.toNamed(
+      Routes.PASIEN_SETUP,
+      parameters: {
+        'id': id.toString(),
+      },
+    );
+  }
+
   void toReservasi(String id) {
     Get.toNamed(
       Routes.RESERVASI,

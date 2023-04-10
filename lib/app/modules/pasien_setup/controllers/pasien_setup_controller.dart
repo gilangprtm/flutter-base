@@ -10,7 +10,9 @@ import '../../../mahas/components/inputs/input_datetime_component.dart';
 import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
+import '../../../mahas/services/helper.dart';
 import '../../../models/pasien_model.dart';
+import '../../pasien/controllers/pasien_controller.dart';
 
 class PasienSetupController extends GetxController {
   late SetupPageController formCon;
@@ -29,17 +31,16 @@ class PasienSetupController extends GetxController {
   final alamatCon = InputTextController();
   var pasienIdHaimed;
   var jenisKelamin;
+  final pasienList = Get.find<PasienController>();
 
   @override
   void onInit() {
-    // cekApproval();
     formCon = SetupPageController(
       urlApiGet: (id) => '/api/PasienHaiMed/$id',
       urlApiPost: () => '/api/PasienHaiMed',
       urlApiPut: (id) => '/api/PasienHaiMed',
       urlApiDelete: (id) => '/api/PasienHaiMed',
       allowDelete: false,
-      // allowEdit: allowED,
       bodyApi: (id) => {
         "PasienIdHaiMed": pasienIdHaimed,
         "UserIdHaiMed": MahasConfig.profile!.userIdHaimed,
@@ -87,7 +88,17 @@ class PasienSetupController extends GetxController {
         }
       },
     );
-
     super.onInit();
+  }
+
+  Future<bool> backOnPressed() async {
+    var r = await Helper.dialogQuestion(
+      message: 'Anda yakin ingin kembali ?',
+      textConfirm: 'Ya',
+    );
+    if (r == true) {
+      await pasienList.listCon.refresh().then((value) => Get.back());
+    }
+    return false;
   }
 }
