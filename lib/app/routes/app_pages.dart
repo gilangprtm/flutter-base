@@ -20,6 +20,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notifikasi/bindings/notifikasi_binding.dart';
 import '../modules/notifikasi/views/notifikasi_view.dart';
+import '../modules/notifikasi_detail/bindings/notifikasi_detail_binding.dart';
+import '../modules/notifikasi_detail/views/notifikasi_detail_view.dart';
 import '../modules/pasien/bindings/pasien_binding.dart';
 import '../modules/pasien/views/pasien_view.dart';
 import '../modules/pasien_setup/bindings/pasien_setup_binding.dart';
@@ -204,6 +206,11 @@ class AppPages {
       name: _Paths.PROFILE_SETUP,
       page: () => const ProfileSetupView(),
       binding: ProfileSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFIKASI_DETAIL,
+      page: () => const NotifikasiDetailView(),
+      binding: NotifikasiDetailBinding(),
     ),
   ];
 }

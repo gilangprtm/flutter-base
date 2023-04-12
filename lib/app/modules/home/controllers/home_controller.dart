@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
@@ -67,11 +66,15 @@ class HomeController extends GetxController {
   }
 
   void toProfile() {
-    Get.toNamed(Routes.PROFILE);
+    Get.toNamed(Routes.PROFILE)!.then((value) => {
+          getNotifikasi(),
+        });
   }
 
   void toDaftarRawatJalan() {
-    Get.toNamed(Routes.DAFTAR_RAWAT_JALAN);
+    Get.toNamed(Routes.DAFTAR_RAWAT_JALAN)!.then((value) => {
+          getNotifikasi(),
+        });
   }
 
   void goToArticleDetail() {
@@ -79,7 +82,9 @@ class HomeController extends GetxController {
   }
 
   void toNotif() {
-    Get.toNamed(Routes.NOTIFIKASI);
+    Get.toNamed(Routes.NOTIFIKASI)!.then((value) => {
+          getNotifikasi(),
+        });
   }
 
   void toUlasan() {
@@ -95,11 +100,6 @@ class HomeController extends GetxController {
   }
 
   Future getNotifikasi() async {
-    if (EasyLoading.isShow) {
-      EasyLoading.dismiss();
-    }
-    await EasyLoading.show();
-
     try {
       var r =
           await HttpApi.get('/api/Notifikasi?userId=${auth.currentUser!.uid}');
@@ -121,7 +121,5 @@ class HomeController extends GetxController {
     } catch (e) {
       Helper.dialogWarning(e.toString());
     }
-
-    EasyLoading.dismiss();
   }
 }
