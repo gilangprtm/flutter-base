@@ -35,6 +35,7 @@ class DokterDetailTabController extends GetxController {
     await getDataDokter(dokterID.value).then(
       (value) async => await getJadwalPraktek(dokterID.value, DateTime.now()),
     );
+    onDaySelected(DateTime.now(), DateTime.now());
     super.onInit();
   }
 
