@@ -33,6 +33,7 @@ abstract class Routes {
   static const DETAIL_RESERVASI = _Paths.DETAIL_RESERVASI;
   static const PHONE_LOGIN = _Paths.PHONE_LOGIN;
   static const PROFILE_SETUP = _Paths.PROFILE_SETUP;
+  static const NOTIFIKASI_DETAIL = _Paths.NOTIFIKASI_DETAIL;
 }
 
 abstract class _Paths {
@@ -65,4 +66,5 @@ abstract class _Paths {
   static const DETAIL_RESERVASI = '/detail-reservasi';
   static const PHONE_LOGIN = '/phone-login';
   static const PROFILE_SETUP = '/profile-setup';
+  static const NOTIFIKASI_DETAIL = '/notifikasi-detail';
 }
