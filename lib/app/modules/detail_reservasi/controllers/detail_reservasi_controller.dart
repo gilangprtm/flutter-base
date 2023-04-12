@@ -57,6 +57,7 @@ class DetailReservasiController extends GetxController {
             }
             await box.write("endDate",
                 DateTime.now().add(const Duration(days: 6)).toString());
+            Get.back(result: false);
           },
         );
       } else if (date == null) {
@@ -68,9 +69,9 @@ class DetailReservasiController extends GetxController {
             }
             await box.write("endDate",
                 DateTime.now().add(const Duration(days: 6)).toString());
+            Get.back(result: false);
           },
         );
-        Get.back(result: false);
       }
     }
     super.onReady();

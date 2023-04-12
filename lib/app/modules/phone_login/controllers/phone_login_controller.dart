@@ -238,7 +238,7 @@ class PhoneLoginController extends GetxController {
               },
             );
             if (res.success) {
-              konfirmasi!.noHPCon.value ??= auth.currentUser!.phoneNumber;
+              konfirmasi!.noHPCon.value = phoneCon.value;
               Get.back();
               Get.back();
             }
@@ -246,7 +246,7 @@ class PhoneLoginController extends GetxController {
             Helper.dialogWarning(e.toString());
           }
         } else {
-          konfirmasi!.noHPCon.value ??= auth.currentUser!.phoneNumber;
+          konfirmasi!.noHPCon.value = phoneCon.value;
           Get.back();
           Get.back();
         }
