@@ -79,7 +79,9 @@ class DokterDetailTabController extends GetxController {
         if (eventData.isNotEmpty) {
           eventData.clear();
         }
-        eventData.addAll(jadwalPraktekCon.where((e) => e.tanggal != null));
+        eventData.addAll(jadwalPraktekCon.where((e) =>
+            e.tanggal != null &&
+            e.tanggal!.isAfter(DateTime.now().subtract(Duration(days: 1)))));
         if (eventData.isEmpty) {
           noData.value = true;
         }
