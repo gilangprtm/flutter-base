@@ -98,6 +98,24 @@ class HttpApi {
     }
   }
 
+  static Future<ApiResultModel> patch(String url, {Object? body}) async {
+    try {
+      // final token = await _token();
+      final urlX = Uri.parse(getUrl(url));
+      var r = await http.patch(
+        urlX,
+        headers: {
+          'Content-type': 'application/json',
+          // 'Authorization': token != null ? 'Bearer $token' : '',
+        },
+        body: json.encode(body),
+      );
+      return _getResult(r);
+    } catch (ex) {
+      return _getErrorResult(ex);
+    }
+  }
+
   static Future<ApiResultModel> delete(String url, {Object? body}) async {
     try {
       // final token = await _token();

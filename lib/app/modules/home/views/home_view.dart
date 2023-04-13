@@ -76,15 +76,15 @@ class HomeView extends GetView<HomeController> {
                                                 color: Colors.white,
                                                 size: 20,
                                               ),
-                                              Visibility(
-                                                visible:
-                                                    controller.notifikasi.value,
-                                                child: const Icon(
-                                                  Icons.circle,
-                                                  size: 10,
-                                                  color: Colors.red,
-                                                ),
-                                              ),
+                                              Obx(() => Visibility(
+                                                    visible: controller
+                                                        .notifikasi.value,
+                                                    child: const Icon(
+                                                      Icons.circle,
+                                                      size: 10,
+                                                      color: Colors.red,
+                                                    ),
+                                                  )),
                                             ],
                                           ),
                                         ],
