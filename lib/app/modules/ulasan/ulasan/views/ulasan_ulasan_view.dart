@@ -52,7 +52,7 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                   onPressed: () =>
                                       controller.tambahUlasanOnTap(),
                                   icon: Icon(FontAwesomeIcons.penToSquare),
-                                  label: Text("Tambah Ulasan"),
+                                  label: Text("Buat Ulasan"),
                                 )
                               ],
                             ),
