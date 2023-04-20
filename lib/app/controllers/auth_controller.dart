@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -18,9 +18,12 @@ import '../routes/app_pages.dart';
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
+  String? token;
 
   @override
-  void onInit() {
+  void onInit() async {
+    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    token = await messaging.getToken();
     firebaseUser = Rx<User?>(auth.currentUser);
     firebaseUser.bindStream(auth.authStateChanges());
     ever(firebaseUser, _setInitialScreen);
@@ -54,13 +57,13 @@ class AuthController extends GetxController {
       "UserIdHaimed": auth.currentUser!.uid.toString(),
       "Email": auth.currentUser!.email.toString(),
       "Nama": auth.currentUser!.displayName.toString(),
+      "Fcm": token.toString(),
     });
     if (r.success) {
-      print("succes home");
       MahasConfig.profile = ProfileModel.fromJson(r.body);
       Get.offAllNamed(Routes.home);
     } else {
-      // print('salah');
+      print(r.message);
     }
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();

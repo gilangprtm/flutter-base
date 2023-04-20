@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -45,6 +46,18 @@ class MahasService {
         Get.put(AuthController());
       });
 
+      // notif
+      FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+      if (!kIsWeb) {
+        if (Platform.isAndroid || Platform.isIOS) {
+          if (Platform.isAndroid) {
+            androidNotification();
+          } else {
+            appleNotification();
+          }
+        }
+      }
+
       // remote config
       await remoteConfig.setConfigSettings(
         RemoteConfigSettings(
@@ -59,18 +72,6 @@ class MahasService {
     } catch (e) {
       Get.put(AuthController());
     }
-
-    // notif
-    // FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-    // if (!kIsWeb) {
-    //   if (Platform.isAndroid || Platform.isIOS) {
-    //     if (Platform.isAndroid) {
-    //       androidNotification();
-    //     } else {
-    //       appleNotification();
-    //     }
-    //   }
-    // }
 
     // packageInfo
     packageInfo = await PackageInfo.fromPlatform();
