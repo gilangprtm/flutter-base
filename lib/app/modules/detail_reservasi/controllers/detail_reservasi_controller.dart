@@ -6,6 +6,7 @@ import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../mahas/services/http_api.dart';
+import '../../../models/biaya_sementara_model.dart';
 import '../../../models/reservasi_model.dart';
 import '../../../routes/app_pages.dart';
 import '../../ulasan/ulasan/controllers/ulasan_ulasan_controller.dart';
@@ -14,6 +15,9 @@ class DetailReservasiController extends GetxController {
   late String? reservasi;
   late String? reservasiList;
   late ReservasiModel reservasiModel;
+  late BiayasementaraModel biayaSementara;
+  late double biayasementara;
+  late double deposit;
   RxBool isLoad = false.obs;
   late UlasanUlasanController ulasan;
   final box = GetStorage();
@@ -87,6 +91,14 @@ class DetailReservasiController extends GetxController {
 
       if (r.success) {
         reservasiModel = ReservasiModel.fromJson(r.body);
+        if (reservasiModel.noreg != null) {
+          await getBiayaSementara(reservasiModel.noreg!);
+          deposit = biayaSementara.deposit!;
+          biayasementara = biayaSementara.biayasementara!;
+        } else {
+          deposit = 0;
+          biayasementara = 0;
+        }
         isLoad.value = true;
       } else {
         Helper.dialogWarning(r.message);
@@ -95,6 +107,20 @@ class DetailReservasiController extends GetxController {
       Helper.dialogWarning(e.toString());
     }
     EasyLoading.dismiss();
+  }
+
+  Future getBiayaSementara(String noreg) async {
+    try {
+      var r = await HttpApi.get("/api/BiayaPasien/RekapSementara/$noreg");
+
+      if (r.success) {
+        biayaSementara = BiayasementaraModel.fromJson(r.body);
+      } else {
+        Helper.dialogWarning(r.message);
+      }
+    } catch (e) {
+      Helper.dialogWarning(e.toString());
+    }
   }
 
   Future<bool> backOnPressed() async {

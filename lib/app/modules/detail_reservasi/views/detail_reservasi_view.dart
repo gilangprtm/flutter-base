@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/mahas_colors.dart';
-import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:haimed_getx/app/modules/detail_reservasi/views/biaya_view.dart';
+import 'package:haimed_getx/app/modules/detail_reservasi/views/pembayaran_view.dart';
+import 'package:haimed_getx/app/modules/detail_reservasi/views/registrasi_view.dart';
+import 'package:haimed_getx/app/modules/detail_reservasi/views/reservasi_view.dart';
 import 'package:timeline_tile/timeline_tile.dart';
-
 import '../controllers/detail_reservasi_controller.dart';
 
 class DetailReservasiView extends GetView<DetailReservasiController> {
@@ -65,283 +66,21 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 150,
-                                      height: 150,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            MahasThemes.borderRadius),
-                                      ),
-                                      child: QrImage(
-                                        data: controller
-                                                .reservasiModel.noreservasi ??
-                                            "-",
-                                        version: QrVersions.auto,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "No Reservasi",
-                                              style: MahasThemes.h3,
-                                            ),
-                                            Text(
-                                              controller.reservasiModel
-                                                      .noreservasi ??
-                                                  "-",
-                                              style: MahasThemes.h3,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.date_range_outlined,
-                                                  size: 15,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  MahasFormat.displayDate(
-                                                      controller.reservasiModel
-                                                          .tanggal),
-                                                  style: MahasThemes.normal,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "Silahkan registrasi menuju petugas registrasi untuk melakukan pendaftaran pasien baru / sinkronisasi pasien lama",
-                                              style: MahasThemes.normal,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                SizedBox(
-                                  width: Get.width,
-                                  child: Text(
-                                    "RS Cendana Premier",
-                                    style: MahasThemes.h2,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: Get.width,
-                                  child: Text(
-                                    controller.reservasiModel.nourut.toString(),
-                                    style: MahasThemes.muted.copyWith(
-                                        fontSize: 45,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: Get.width,
-                                  child: Text(
-                                    "Sisa Antrian : ${controller.reservasiModel.nourut ?? 0 - controller.reservasiModel.noantriansaatini!}",
-                                    style: MahasThemes.h1
-                                        .copyWith(color: MahasColors.green),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 85,
-                                      child: Text(
-                                        "No.RM",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                      child: Text(
-                                        ":",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        width: 10,
-                                        child: Text(
-                                          controller.reservasiModel.nrm ?? "-",
-                                          style: MahasThemes.normal,
-                                          textAlign: TextAlign.start,
-                                          overflow: TextOverflow.visible,
-                                          maxLines: 3,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 85,
-                                      child: Text(
-                                        "Section",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                      child: Text(
-                                        ":",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        width: 10,
-                                        child: Text(
-                                          controller
-                                                  .reservasiModel.sectionname ??
-                                              "-",
-                                          style: MahasThemes.normal,
-                                          textAlign: TextAlign.start,
-                                          overflow: TextOverflow.visible,
-                                          maxLines: 3,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 85,
-                                      child: Text(
-                                        "Status",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                      child: Text(
-                                        ":",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        width: 10,
-                                        child: Text(
-                                          controller.reservasiModel
-                                                  .statusreservasi ??
-                                              "-",
-                                          style: MahasThemes.normal,
-                                          textAlign: TextAlign.start,
-                                          overflow: TextOverflow.visible,
-                                          maxLines: 3,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 85,
-                                      child: Text(
-                                        "Keterangan",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                      child: Text(
-                                        ":",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        width: 10,
-                                        child: Text(
-                                          controller
-                                                  .reservasiModel.keterangan ??
-                                              "-",
-                                          style: MahasThemes.normal,
-                                          textAlign: TextAlign.start,
-                                          overflow: TextOverflow.visible,
-                                          maxLines: 3,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 85,
-                                      child: Text(
-                                        "Pemeriksaan",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                      child: Text(
-                                        ":",
-                                        style: MahasThemes.normal,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        width: 10,
-                                        child: Text(
-                                          controller.reservasiModel.memo ?? "-",
-                                          style: MahasThemes.normal,
-                                          textAlign: TextAlign.start,
-                                          overflow: TextOverflow.visible,
-                                          maxLines: 3,
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                                ReservasiView(
+                                  noReservasi:
+                                      controller.reservasiModel.noreservasi!,
+                                  nrm: controller.reservasiModel.nrm,
+                                  tanggal: controller.reservasiModel.tanggal,
+                                  memo: controller.reservasiModel.memo,
+                                  statusReservasi:
+                                      controller.reservasiModel.statusreservasi,
+                                  sectionName:
+                                      controller.reservasiModel.sectionname,
+                                  noAntrian: controller
+                                      .reservasiModel.noantriansaatini,
+                                  noUrut: controller.reservasiModel.nourut,
+                                  keterangan:
+                                      controller.reservasiModel.keterangan,
                                 ),
                                 SizedBox(
                                   height: 40,
@@ -384,7 +123,26 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
                                   style: MahasThemes.h2,
                                 ),
                                 SizedBox(
-                                  height: 40,
+                                  height: 20,
+                                ),
+                                Visibility(
+                                  visible:
+                                      controller.reservasiModel.noreg != null,
+                                  child: Column(
+                                    children: [
+                                      RegistrasiView(
+                                        nama: controller.reservasiModel.nama,
+                                        noreg: controller.reservasiModel.noreg,
+                                        statusPeriksa: controller
+                                            .reservasiModel.statusperiksa,
+                                        statusResep: controller
+                                            .reservasiModel.statusresep,
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -424,7 +182,23 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
                                   style: MahasThemes.h2,
                                 ),
                                 SizedBox(
-                                  height: 40,
+                                  height: 20,
+                                ),
+                                Visibility(
+                                  visible:
+                                      controller.reservasiModel.noreg != null,
+                                  child: Column(
+                                    children: [
+                                      BiayaView(
+                                        deposit: controller.deposit,
+                                        biayaSementara:
+                                            controller.biayasementara,
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -465,7 +239,27 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
                                   style: MahasThemes.h2,
                                 ),
                                 SizedBox(
-                                  height: 40,
+                                  height: 20,
+                                ),
+                                Visibility(
+                                  visible: controller
+                                          .reservasiModel.nobuktipembayaran !=
+                                      "-",
+                                  child: Column(
+                                    children: [
+                                      PembayaranView(
+                                        noReservasi: controller
+                                            .reservasiModel.noreservasi,
+                                        noPembayaran: controller
+                                            .reservasiModel.nobuktipembayaran,
+                                        jumlahBayar: controller
+                                            .reservasiModel.nilaibayar,
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
