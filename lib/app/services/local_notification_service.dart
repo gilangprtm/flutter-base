@@ -29,7 +29,7 @@ class LocalNotificationService {
   static void showNotificatiOnForeground(RemoteMessage message) {
     const notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
-            "com.sanata.haimed.cendana", "hr_portal",
+            "com.sanata.haimed.cendana", "haimed",
             importance: Importance.max, priority: Priority.high));
     _notificationsPlugin.show(
         DateTime.now().microsecond,
