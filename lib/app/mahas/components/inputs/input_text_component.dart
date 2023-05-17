@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import '../../mahas_colors.dart';
 import '../../services/currency_input_formater.dart';
 import '../../services/mahas_format.dart';
+import '../../services/nrm_input_formater.dart';
 import '../mahas_themes.dart';
 import 'input_box_component.dart';
 
-enum InputTextType { text, email, password, number, paragraf, money }
+enum InputTextType { text, email, password, number, paragraf, money, nrm }
 
 class InputTextController extends ChangeNotifier {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -199,7 +200,14 @@ class _InputTextState extends State<InputTextComponent> {
                   CurrencyInputFormatter(),
                   ...(widget.inputFormatters ?? []),
                 ]
-              : widget.inputFormatters,
+              : widget.controller.type == InputTextType.nrm
+                  ? [
+                      FilteringTextInputFormatter.digitsOnly,
+                      NRMInputFormatter(),
+                      LengthLimitingTextInputFormatter(8),
+                      ...(widget.inputFormatters ?? []),
+                    ]
+                  : widget.inputFormatters,
       controller: widget.controller._con,
       validator: (v) =>
           widget.controller._validator(v, otherValidator: widget.validator),
