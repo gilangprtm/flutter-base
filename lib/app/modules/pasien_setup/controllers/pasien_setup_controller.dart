@@ -46,6 +46,7 @@ class PasienSetupController extends GetxController {
       urlApiPut: (id) => '/api/PasienHaiMed',
       urlApiDelete: (id) => '/api/PasienHaiMed',
       allowDelete: false,
+      autoBack: true,
       bodyApi: (id) => {
         "PasienIdHaiMed": pasienIdHaimed,
         "UserIdHaiMed": MahasConfig.profile!.userIdHaimed,

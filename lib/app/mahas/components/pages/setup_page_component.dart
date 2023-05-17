@@ -25,6 +25,7 @@ class SetupPageController<T> extends ChangeNotifier {
   final bool withQuestionBack;
   bool allowDelete;
   bool allowEdit;
+  bool autoBack;
   final bool isFormData;
   final dynamic pageBackParametes;
   bool editable = false;
@@ -53,6 +54,7 @@ class SetupPageController<T> extends ChangeNotifier {
     required this.itemKey,
     this.allowDelete = true,
     this.allowEdit = true,
+    this.autoBack = false,
     this.withQuestionBack = true,
     this.pageBackParametes,
     required this.itemIdAfterSubmit,
@@ -179,6 +181,9 @@ class SetupPageController<T> extends ChangeNotifier {
                 body: model,
               );
         if (r.success) {
+          if (autoBack == true && _id == null) {
+            Get.back();
+          }
           if (onSuccessSubmit != null) {
             onSuccessSubmit!(r);
           } else {
