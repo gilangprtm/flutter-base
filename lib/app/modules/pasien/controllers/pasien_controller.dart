@@ -14,7 +14,9 @@ class PasienController extends GetxController {
   );
 
   void addOnPress() {
-    Get.toNamed(Routes.PASIEN_SETUP);
+    Get.toNamed(Routes.PASIEN_SETUP)!.then((value) => {
+          listCon.refresh(),
+        });
   }
 
   void itemOnTab(String id) {
@@ -23,11 +25,10 @@ class PasienController extends GetxController {
       parameters: {
         'id': id.toString(),
       },
-    )?.then((value) {
-      if (value) {
-        listCon.refresh();
-      }
-    });
+    )!
+        .then((value) => {
+              listCon.refresh(),
+            });
   }
 
   void toPasienSetup(String id) {
@@ -36,7 +37,10 @@ class PasienController extends GetxController {
       parameters: {
         'id': id.toString(),
       },
-    );
+    )!
+        .then((value) => {
+              listCon.refresh(),
+            });
   }
 
   void toReservasi(String id) {
