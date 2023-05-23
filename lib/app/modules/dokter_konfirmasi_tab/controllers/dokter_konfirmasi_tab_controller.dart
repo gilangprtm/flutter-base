@@ -47,12 +47,7 @@ class DokterKonfirmasiTabController extends GetxController {
           pilihPasien.value = item.value;
         });
     tipePasienCon.value = pilihPasien.value;
-    if (auth.currentUser!.phoneNumber != null) {
-      noHPCon.value = auth.currentUser!.phoneNumber;
-      noHPCon.onChanged = (value) => telpOnTap();
-    } else {
-      noHPCon.onTap = () => telpOnTap();
-    }
+    getPhone();
     super.onInit();
   }
 
@@ -60,8 +55,19 @@ class DokterKonfirmasiTabController extends GetxController {
     selectedPasien.value = val!;
   }
 
+  void getPhone() {
+    if (auth.currentUser!.phoneNumber != null) {
+      noHPCon.value = auth.currentUser!.phoneNumber;
+      noHPCon.onChanged = (value) => telpOnTap();
+    } else {
+      noHPCon.onTap = () => telpOnTap();
+    }
+  }
+
   void telpOnTap() {
-    Get.toNamed(Routes.PHONE_LOGIN);
+    Get.toNamed(Routes.PHONE_LOGIN)!.then((value) => {
+          getPhone(),
+        });
   }
 
   void goToTambahPasien() {
