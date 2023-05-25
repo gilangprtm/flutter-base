@@ -70,7 +70,8 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
                                   noReservasi:
                                       controller.reservasiModel.noreservasi!,
                                   nrm: controller.reservasiModel.nrm,
-                                  tanggal: controller.reservasiModel.tanggal,
+                                  tanggal:
+                                      controller.reservasiModel.untuktanggal,
                                   memo: controller.reservasiModel.memo,
                                   statusReservasi:
                                       controller.reservasiModel.statusreservasi,
