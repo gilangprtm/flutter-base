@@ -45,6 +45,7 @@ class DokterKonfirmasiTabController extends GetxController {
         ],
         onChanged: (item) {
           pilihPasien.value = item.value;
+          nrmCon.value = "";
         });
     tipePasienCon.value = pilihPasien.value;
     getPhone();

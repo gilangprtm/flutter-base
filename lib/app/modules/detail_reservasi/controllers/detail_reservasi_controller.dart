@@ -33,6 +33,8 @@ class DetailReservasiController extends GetxController {
         : Get.put(UlasanUlasanController());
     if (reservasi != null) {
       reservasiModel = ReservasiModel.fromJson(reservasi!);
+      biayasementara = 0;
+      deposit = 0;
       isLoad.value = true;
     } else {
       reservasiList = Get.parameters['reservasiList']!;
