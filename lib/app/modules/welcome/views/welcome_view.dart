@@ -32,7 +32,7 @@ class WelcomeView extends GetView<WelcomeController> {
             textAlign: TextAlign.center,
           ),
           bodyWidget: Text(
-            "Dapat melihat jadwal praktek dokter dengan mudah dan cepat",
+            "Dapat melihat jadwal praktek dokter \ndengan mudah dan cepat",
             style: MahasThemes.welcomeBody,
             textAlign: TextAlign.center,
           ),
@@ -48,7 +48,7 @@ class WelcomeView extends GetView<WelcomeController> {
             textAlign: TextAlign.center,
           ),
           bodyWidget: Text(
-            "Dapat melakukan reservasi dan mendapat nomor antrian",
+            "Dapat melakukan reservasi dan \nmendapat nomor antrian",
             style: MahasThemes.welcomeBody,
             textAlign: TextAlign.center,
           ),
