@@ -30,11 +30,27 @@
           }
         },
         {
+          "client_id": "1026284748792-oheuhfjvd6merd5ma4ipqa68kljq2fpr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.cendana",
+            "certificate_hash": "5785a3ff042b47392efd3800052ca6c07b733b81"
+          }
+        },
+        {
           "client_id": "1026284748792-qjis86b4ukecti23c4gegtkmoviss5bi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sanata.haimed.cendana",
             "certificate_hash": "08284361b5d5369acc057f00bd7f1208f2c07edc"
+          }
+        },
+        {
+          "client_id": "1026284748792-uirl58lcl24u1k7vfk21bd860j1lpel7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.cendana",
+            "certificate_hash": "8b5d2a581ca3cf97a5c68c954be5a000d583d7ae"
           }
         },
         {
