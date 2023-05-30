@@ -1,3 +1,4 @@
+import 'package:coachmaker/coachmaker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -28,7 +29,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Image.asset(
-                      'assets/images/logo.png',
+                      'assets/images/logo-nobg.png',
                       width: 80.0,
                       fit: BoxFit.fill,
                     ),
@@ -111,17 +112,20 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                             onTap: () {
                               c.toReservasi();
                             },
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: MahasColors.primary,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: const Icon(
-                                FontAwesomeIcons.plus,
-                                color: MahasColors.light,
-                                size: 18.0,
+                            child: CoachPoint(
+                              initial: '1',
+                              child: Container(
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: MahasColors.primary,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: const Icon(
+                                  FontAwesomeIcons.plus,
+                                  color: MahasColors.light,
+                                  size: 18.0,
+                                ),
                               ),
                             ),
                           ),

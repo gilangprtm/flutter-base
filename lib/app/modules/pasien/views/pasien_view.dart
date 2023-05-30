@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:coachmaker/coachmaker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -19,12 +20,15 @@ class PasienView extends GetView<PasienController> {
         title: const Text('Pasien'),
         centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: MahasColors.primary,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          controller.addOnPress();
-        },
+      floatingActionButton: CoachPoint(
+        initial: '1',
+        child: FloatingActionButton(
+          backgroundColor: MahasColors.primary,
+          child: const Icon(Icons.add),
+          onPressed: () {
+            controller.addOnPress();
+          },
+        ),
       ),
       body: ListComponent(
         controller: controller.listCon,
