@@ -24,7 +24,7 @@ class UlasanUlasanController extends GetxController {
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();
     }
-    await EasyLoading.show();
+    // await EasyLoading.show();
     isLoading.value = true;
     var r = await HttpApi.get('/api/ReviewFaskes');
     if (r.success) {
@@ -45,7 +45,7 @@ class UlasanUlasanController extends GetxController {
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();
     }
-    await EasyLoading.show();
+    // await EasyLoading.show();
     var r = await HttpApi.get('/api/ReviewFaskes/Summary');
     if (r.success) {
       var data = r.body;
