@@ -1,38 +1,60 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import '../../../mahas/mahas_colors.dart';
 import '../controllers/welcome_controller.dart';
 
 class WelcomeView extends GetView<WelcomeController> {
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
-      globalBackgroundColor: Colors.white,
+      globalBackgroundColor: MahasColors.primary,
       pages: [
         PageViewModel(
-          title: "HaiMed RS Bhayangkara",
-          body: "Selamat datang di Aplikasi HaiMed RS Bhayangkara",
+          bodyWidget: Text(
+            "Selamat datang di Aplikasi HaiMed \nRS Cendana Premier",
+            style: MahasThemes.welcomeTitle.copyWith(fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
+          title: "",
           image: Image.asset(
-            "assets/images/logo.png",
-            width: 100.0,
+            "assets/images/logo-nobg.png",
+            width: 250,
           ),
         ),
         PageViewModel(
-          title: "Jadwal Dokter",
-          body: "Dapat melihat jadwal praktek dokter dengan mudah dan cepat",
+          titleWidget: Text(
+            "Jadwal Dokter",
+            style: MahasThemes.welcomeTitle,
+            textAlign: TextAlign.center,
+          ),
+          bodyWidget: Text(
+            "Dapat melihat jadwal praktek dokter \ndengan mudah dan cepat",
+            style: MahasThemes.welcomeBody,
+            textAlign: TextAlign.center,
+          ),
           image: Image.asset(
-            "assets/images/logo.png",
-            width: 100.0,
+            "assets/images/logo-nobg.png",
+            width: 200,
           ),
         ),
         PageViewModel(
-          title: "Reservasi",
-          body: "Dapat melakukan reservasi dan mendapat nomor antrian",
+          titleWidget: Text(
+            "Reservasi",
+            style: MahasThemes.welcomeTitle,
+            textAlign: TextAlign.center,
+          ),
+          bodyWidget: Text(
+            "Dapat melakukan reservasi dan \nmendapat nomor antrian",
+            style: MahasThemes.welcomeBody,
+            textAlign: TextAlign.center,
+          ),
           image: Image.asset(
-            "assets/images/logo.png",
-            width: 100.0,
+            "assets/images/logo-nobg.png",
+            width: 200,
           ),
         ),
       ],
@@ -40,7 +62,7 @@ class WelcomeView extends GetView<WelcomeController> {
         controller.onStarted();
       },
       onSkip: () {
-        controller.onSkip();
+        controller.onStarted();
       },
       showSkipButton: true,
       showBackButton: false,
@@ -49,22 +71,22 @@ class WelcomeView extends GetView<WelcomeController> {
       dotsFlex: 3,
       back: Icon(
         Icons.arrow_back,
-        color: Colors.amber,
+        color: MahasColors.light,
       ),
       skip: Text(
         "Lewati",
         style: const TextStyle(
-          color: Colors.amber,
+          color: MahasColors.light,
         ),
       ),
       next: Icon(
         Icons.arrow_forward,
-        color: Colors.amber,
+        color: MahasColors.light,
       ),
       done: Text(
         "Mulai",
         style: const TextStyle(
-          color: Colors.amber,
+          color: MahasColors.light,
         ),
       ),
       dotsDecorator: DotsDecorator(
@@ -76,7 +98,7 @@ class WelcomeView extends GetView<WelcomeController> {
             Radius.circular(25),
           ),
         ),
-        activeColor: Colors.amber,
+        activeColor: MahasColors.light,
       ),
     );
   }

@@ -29,6 +29,16 @@ class MahasThemes {
     ),
   );
 
+  static TextStyle welcomeTitle = const TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    color: MahasColors.light,
+  );
+  static TextStyle welcomeBody = const TextStyle(
+    fontSize: 16,
+    color: MahasColors.light,
+  );
+
   static TextStyle h1 = const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,

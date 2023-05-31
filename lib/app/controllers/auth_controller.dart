@@ -9,7 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../mahas/mahas_config.dart';
-// import '../mahas/services/helper.dart';
+import '../mahas/services/helper.dart';
 import '../mahas/services/http_api.dart';
 import '../mahas/mahas_service.dart';
 import '../models/profile_model.dart';
@@ -19,9 +19,12 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
   String? token;
+  final box = GetStorage();
+  RxBool firstOpenApp = false.obs;
 
   @override
   void onInit() async {
+    await GetStorage.init();
     late final FirebaseMessaging messaging = FirebaseMessaging.instance;
     token = await messaging.getToken();
     firebaseUser = Rx<User?>(auth.currentUser);
@@ -32,16 +35,21 @@ class AuthController extends GetxController {
 
   @override
   void onReady() {
-    // print("on ready");
-    // super.onReady();
     // firebaseUser = Rx<User?>(auth.currentUser);
     // firebaseUser.bindStream(auth.authStateChanges());
     // ever(firebaseUser, _setInitialScreen);
   }
 
-  void _setInitialScreen(User? user) {
+  void _setInitialScreen(User? user) async {
+    if (await box.read("new_install") != false) {
+      firstOpenApp.value = true;
+    }
     if (user == null) {
-      _toLigin();
+      if (firstOpenApp.value == true) {
+        _toWelcomePage();
+      } else {
+        _toLigin();
+      }
     } else {
       _toHome();
     }
@@ -49,6 +57,10 @@ class AuthController extends GetxController {
 
   void _toLigin() {
     Get.offAllNamed(Routes.LOGIN);
+  }
+
+  void _toWelcomePage() {
+    Get.offAllNamed(Routes.WELCOME);
   }
 
   void _toHome() async {
@@ -63,7 +75,7 @@ class AuthController extends GetxController {
       MahasConfig.profile = ProfileModel.fromJson(r.body);
       Get.offAllNamed(Routes.home);
     } else {
-      print(r.message);
+      Helper.dialogWarning(r.message);
     }
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();
@@ -113,7 +125,6 @@ class AuthController extends GetxController {
     await EasyLoading.show();
     try {
       var r = await _signInWithCredentialGoogle();
-      final box = GetStorage();
       box.write('apple_login', null);
       if (r == null) {
         await EasyLoading.dismiss();
@@ -164,7 +175,6 @@ class AuthController extends GetxController {
     await EasyLoading.show();
     try {
       await _signInWithCredentialApple();
-      final box = GetStorage();
       box.write('apple_login', true);
     } on SignInWithAppleAuthorizationException catch (e) {
       if (e.code != AuthorizationErrorCode.canceled) {
@@ -204,7 +214,6 @@ class AuthController extends GetxController {
   }
 
   Future<void> deleteAccount() async {
-    final box = GetStorage();
     UserCredential? userCredential;
     try {
       if (box.read('apple_login') == true) {
