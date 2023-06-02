@@ -105,6 +105,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  coachmaker:
+    dependency: "direct main"
+    description:
+      name: coachmaker
+      sha256: a7dc2b1386fe108d3829728f7c8cce7a01e1a02e9c29a13a7b6add1a64da2e6f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   collection:
     dependency: transitive
     description:
