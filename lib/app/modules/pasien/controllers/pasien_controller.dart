@@ -1,14 +1,50 @@
-import 'package:coachmaker/coachmaker.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haimed_getx/app/mahas/mahas_config.dart';
 
 import '../../../mahas/components/others/list_component.dart';
+import '../../../mahas/mahas_colors.dart';
+import '../../../mahas_complement/coachmaker/coachmaker.dart';
 import '../../../models/pasien_model.dart';
 import '../../../routes/app_pages.dart';
 
 class PasienController extends GetxController {
   final box = GetStorage();
+
+  CoachMaker cMaker = CoachMaker(
+    Get.context!,
+    initialList: [
+      CoachModel(
+        initial: '1',
+        title: 'Tambah Pasien',
+        maxWidth: 400,
+        subtitle: [
+          'Tombol untuk melakukan penambahan pasien baru',
+        ],
+      ),
+    ],
+    customNavigator: (onSkip, onNext) {
+      return Row(
+        children: [
+          SizedBox(),
+          TextButton(
+            onPressed: () {
+              final box = GetStorage();
+              box.write("cm_pasien", true);
+              onNext();
+            },
+            child: const Text(
+              "Lanjut",
+              style: TextStyle(
+                color: MahasColors.primary,
+              ),
+            ),
+          ),
+        ],
+      );
+    },
+  );
 
   final listCon = ListComponentController<PasienModel>(
     urlApi: (index, filter) =>
@@ -49,7 +85,7 @@ class PasienController extends GetxController {
 
   @override
   void onReady() {
-    initial();
+    coachMaker();
     super.onReady();
   }
 
@@ -62,28 +98,17 @@ class PasienController extends GetxController {
     );
   }
 
-  void initial() async {
+  void coachMaker() async {
     var result = await box.read("cm_pasien");
     if (result == true) {
     } else {
-      coachMaker();
+      cMaker.show();
     }
   }
 
-  void coachMaker() async {
-    CoachMaker(
-      Get.context!,
-      initialList: [
-        CoachModel(
-          initial: '1',
-          title: 'Tambah Pasien',
-          maxWidth: 400,
-          subtitle: [
-            'Tombol untuk melakukan penambahan pasien baru',
-          ],
-        ),
-      ],
-    ).show();
-    await box.write("cm_pasien", true);
+  @override
+  void onClose() {
+    cMaker.removeOverlay();
+    super.onClose();
   }
 }

@@ -1,4 +1,3 @@
-import 'package:coachmaker/coachmaker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -6,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/mahas_colors.dart';
 
+import '../../../../mahas_complement/coachmaker/coachmaker.dart';
 import '../controllers/ulasan_informasi_controller.dart';
 
 class UlasanInformasiView extends GetView<UlasanInformasiController> {
