@@ -1,6 +1,5 @@
 // ignore_for_file: unused_import
 
-import 'package:coachmaker/coachmaker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -9,6 +8,7 @@ import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import '../../../mahas/components/others/list_component.dart';
 import '../../../mahas/mahas_colors.dart';
 import '../../../mahas/services/mahas_format.dart';
+import '../../../mahas_complement/coachmaker/coachmaker.dart';
 import '../../../models/pasien_model.dart';
 import '../controllers/pasien_controller.dart';
 
