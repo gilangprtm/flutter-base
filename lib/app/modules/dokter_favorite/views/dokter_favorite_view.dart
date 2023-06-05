@@ -15,38 +15,89 @@ class DokterFavoriteView extends GetView<DokterFavoriteController> {
         title: Text('Dokter Favorite'),
         centerTitle: true,
       ),
-      body: ListComponent(
-        controller: controller.listCon,
-        itemBuilder: (DokterfavModel e) {
-          return ListTile(
-            onTap: () => controller.itemOnTab(e.dokterid!),
-            leading: ClipOval(
-              child: Image.asset(
-                "assets/images/Doctor.png",
-                // width: 60,
-                height: 50,
+      body: Container(
+        margin: EdgeInsets.only(top: 10),
+        child: ListComponent(
+          controller: controller.listCon,
+          separatorBuilder: (context, index, length) => SizedBox(),
+          itemBuilder: (DokterfavModel e) {
+            return InkWell(
+              onTap: () => controller.itemOnTab(e.dokterid!),
+              child: Container(
+                padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                child: Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
+                  child: Container(
+                    width: Get.width,
+                    height: 100,
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ClipOval(
+                          child: e.photourl != null
+                              ? Image.network(
+                                  e.photourl ?? "assets/images/Doctor.png",
+                                  width: 50,
+                                  height: 50,
+                                )
+                              : Image.asset(
+                                  "assets/images/Doctor.png",
+                                  width: 50,
+                                  height: 50,
+                                ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                width: Get.width - 100,
+                                child: Text(
+                                  e.namadokter ?? "-",
+                                  style: MahasThemes.h2,
+                                  overflow: TextOverflow.visible,
+                                  maxLines: 2,
+                                )),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/Doctor.png",
+                                  width: 15,
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                SizedBox(
+                                  width: Get.width - 120,
+                                  child: Text(
+                                    e.spesialisname ?? "-",
+                                    style: MahasThemes.muted,
+                                    overflow: TextOverflow.visible,
+                                    maxLines: 2,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-            title: Text(
-              e.namadokter!,
-              style: MahasThemes.h3,
-            ),
-            subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  e.kategoriName!,
-                  style: MahasThemes.link,
-                  overflow: TextOverflow.visible,
-                  maxLines: 2,
-                ),
-                Text(
-                  e.spesialisname!,
-                ),
-              ],
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
