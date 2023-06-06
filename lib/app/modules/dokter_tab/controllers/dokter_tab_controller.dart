@@ -1,6 +1,7 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/mahas_service.dart';
+import 'package:haimed_getx/app/mahas/models/api_result_model.dart';
 import 'package:haimed_getx/app/routes/app_pages.dart';
 
 import '../../../mahas/components/others/list_component.dart';
@@ -16,27 +17,24 @@ class DokterTabController extends GetxController {
     allowSearch: true,
   );
 
-  void onSelected(String index, bool? favorite) async {
+  void onSelected(String index, bool favorite) async {
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();
     }
     await EasyLoading.show();
-    late Object bodyData;
-    if (favorite == true) {
-      bodyData = {
-        "UserIdHaiMed": auth.currentUser!.uid,
-        "DokterId": index,
-        "dokterFavorit": false
-      };
-    } else if (favorite == false || favorite == null) {
-      bodyData = {
-        "UserIdHaiMed": auth.currentUser!.uid,
-        "DokterId": index,
-        "dokterFavorit": true
-      };
-    }
+
+    final Object bodyData = {
+      "UserIdHaiMed": auth.currentUser!.uid,
+      "DokterId": index,
+    };
+    late ApiResultModel r;
     try {
-      var r = await HttpApi.put("/api/DokterFavorit", body: bodyData);
+      if (favorite == false) {
+        r = await HttpApi.put("/api/DokterFavorit", body: bodyData);
+      } else {
+        r = await HttpApi.delete("/api/DokterFavorit", body: bodyData);
+      }
+
       if (r.success) {
         listCon.refresh();
       } else {
@@ -45,6 +43,7 @@ class DokterTabController extends GetxController {
     } catch (e) {
       Helper.dialogWarning(e.toString());
     }
+
     EasyLoading.dismiss();
   }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/mahas_colors.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/components/others/list_component.dart';
@@ -57,10 +59,10 @@ class DokterFavoriteView extends GetView<DokterFavoriteController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                                width: Get.width - 100,
+                                width: Get.width - 145,
                                 child: Text(
                                   e.namadokter ?? "-",
-                                  style: MahasThemes.h2,
+                                  style: MahasThemes.h3,
                                   overflow: TextOverflow.visible,
                                   maxLines: 2,
                                 )),
@@ -78,7 +80,7 @@ class DokterFavoriteView extends GetView<DokterFavoriteController> {
                                   width: 5,
                                 ),
                                 SizedBox(
-                                  width: Get.width - 120,
+                                  width: Get.width - 165,
                                   child: Text(
                                     e.spesialisname ?? "-",
                                     style: MahasThemes.muted,
@@ -90,6 +92,20 @@ class DokterFavoriteView extends GetView<DokterFavoriteController> {
                             ),
                           ],
                         ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        InkWell(
+                          onTap: () => controller.deleteOnTap(e.dokterid!),
+                          child: SizedBox(
+                            height: Get.height,
+                            width: 40,
+                            child: Icon(
+                              FontAwesomeIcons.trash,
+                              color: MahasColors.danger,
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),

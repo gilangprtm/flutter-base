@@ -57,24 +57,21 @@ class DokterTabView extends GetView<DokterTabController> {
                     )),
               ],
             ),
-            trailing: GestureDetector(
+            trailing: InkWell(
               onTap: () {
-                controller.onSelected(e.dokterid!, e.favorit);
+                controller.onSelected(e.dokterid!, e.favorit!);
               },
               child: Container(
-                padding: const EdgeInsets.only(right: 10),
                 width: 40,
                 height: Get.height,
                 child: e.favorit == true
                     ? Icon(
                         Icons.favorite,
                         color: MahasColors.red,
-                        size: 20,
                       )
                     : Icon(
                         Icons.favorite_border_rounded,
                         color: MahasColors.red,
-                        size: 20,
                       ),
               ),
             ),
