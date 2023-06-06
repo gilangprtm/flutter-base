@@ -11,7 +11,7 @@ import '../../../models/dokter_fav_model.dart';
 class DokterTabController extends GetxController {
   final listCon = ListComponentController<DokterfavModel>(
     urlApi: (index, filter) =>
-        '/api/DokterFavorit?userId=${auth.currentUser!.uid}&filter.pageIndex=$index',
+        '/api/DokterFavorit?userId=${auth.currentUser!.uid}&filter.pageIndex=$index&namaDokter=$filter',
     fromDynamic: DokterfavModel.fromDynamic,
     allowSearch: true,
   );
