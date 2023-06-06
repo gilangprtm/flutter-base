@@ -12,7 +12,8 @@ import '../../../models/spesialisasi_model.dart';
 
 class SpesialisasiTabController extends GetxController {
   final listCon = ListComponentController<GetSpesialisasiModel>(
-    urlApi: (index, filter) => '/api/Spesialisasi?filter.pageIndex=$index',
+    urlApi: (index, filter) =>
+        '/api/Spesialisasi?filter.pageIndex=$index&namaSpesialisasi=$filter',
     fromDynamic: GetSpesialisasiModel.fromDynamic,
     allowSearch: true,
   );
