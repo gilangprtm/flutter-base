@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/components/others/list_component.dart';
 import 'package:haimed_getx/app/mahas/mahas_colors.dart';
+import 'package:haimed_getx/app/models/dokter_fav_model.dart';
 
-import '../../../models/dokter_list_model.dart';
 import '../controllers/dokter_tab_controller.dart';
 
 class DokterTabView extends GetView<DokterTabController> {
@@ -16,7 +16,7 @@ class DokterTabView extends GetView<DokterTabController> {
       resizeToAvoidBottomInset: false,
       body: ListComponent(
         controller: controller.listCon,
-        itemBuilder: (DokterlistModel e) {
+        itemBuilder: (DokterfavModel e) {
           return ListTile(
             contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             onTap: () => controller.goToDokterDetail(e.dokterid!),
@@ -57,27 +57,22 @@ class DokterTabView extends GetView<DokterTabController> {
                     )),
               ],
             ),
-            trailing: GestureDetector(
+            trailing: InkWell(
               onTap: () {
-                controller.favourite.toggle();
+                controller.onSelected(e.dokterid!, e.favorit!);
               },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: Obx(
-                  () =>
-                      // controller.favourite.contains(i)
-                      controller.favourite.isTrue
-                          ? Icon(
-                              Icons.favorite,
-                              color: MahasColors.red,
-                              size: 20,
-                            )
-                          : Icon(
-                              Icons.favorite_border_rounded,
-                              color: MahasColors.red,
-                              size: 20,
-                            ),
-                ),
+              child: Container(
+                width: 40,
+                height: Get.height,
+                child: e.favorit == true
+                    ? Icon(
+                        Icons.favorite,
+                        color: MahasColors.red,
+                      )
+                    : Icon(
+                        Icons.favorite_border_rounded,
+                        color: MahasColors.red,
+                      ),
               ),
             ),
           );
