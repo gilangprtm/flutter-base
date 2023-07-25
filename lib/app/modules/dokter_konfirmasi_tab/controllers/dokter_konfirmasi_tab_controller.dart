@@ -15,7 +15,12 @@ import '../../../mahas/services/http_api.dart';
 
 class DokterKonfirmasiTabController extends GetxController {
   final namaPasienCon = InputDropdownController();
-  late InputRadioController tipePasienCon;
+  final InputRadioController tipePasienCon = InputRadioController(
+    items: [
+      RadioButtonItem(text: "Pasien Baru", value: false),
+      RadioButtonItem(text: "Pasien Lama", value: true),
+    ],
+  );
   final InputTextController nrmCon =
       InputTextController(type: InputTextType.nrm);
   final InputTextController noHPCon =
@@ -37,16 +42,11 @@ class DokterKonfirmasiTabController extends GetxController {
     tanggal.value = Get.parameters['tanggal']!;
     sectionID.value = Get.parameters['sectionID']!;
     waktuID.value = Get.parameters['waktuID']!;
-    namaSection.value = Get.parameters['namaSection']!;
-    tipePasienCon = InputRadioController(
-        items: [
-          RadioButtonItem(text: "Pasien Baru", value: false),
-          RadioButtonItem(text: "Pasien Lama", value: true),
-        ],
-        onChanged: (item) {
-          pilihPasien.value = item.value;
-          nrmCon.value = "";
-        });
+    namaSection.value = Get.parameters['namaSection'] ?? "";
+    tipePasienCon.onChanged = (item) {
+      pilihPasien.value = item.value;
+      nrmCon.value = "";
+    };
     tipePasienCon.value = pilihPasien.value;
     getPhone();
     super.onInit();
@@ -134,7 +134,7 @@ class DokterKonfirmasiTabController extends GetxController {
     }
     await EasyLoading.show();
 
-    if (noHPCon.value != null) {
+    if (noHPCon.value != null && selectedPasien.value != null) {
       try {
         var res = await HttpApi.post('/api/Reservasi', body: {
           "Alamat": selectedPasien.value!.alamat ?? "",
@@ -150,7 +150,7 @@ class DokterKonfirmasiTabController extends GetxController {
           "WaktuID": waktuID.value,
           "MobileKeteranganNRM": nrmCon.value ?? "",
           "NIK": selectedPasien.value!.nik ?? "",
-          "MobileNotifikasiAktif": false,
+          "MobileNotifikasiAktif": true,
           "MobileTglLahirPasien": selectedPasien.value!.tanggallahir.toString(),
           "TanggalLahir": selectedPasien.value!.tanggallahir.toString(),
           "NoUrut": 0,
@@ -175,6 +175,8 @@ class DokterKonfirmasiTabController extends GetxController {
       } catch (e) {
         Helper.dialogWarning(e.toString());
       }
+    } else if (selectedPasien.value == null) {
+      Helper.dialogWarning("Nama Pasien harus diisi!");
     } else {
       telpOnTap();
     }
