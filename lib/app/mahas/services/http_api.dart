@@ -33,10 +33,10 @@ class HttpApi {
   }
 
   static ApiResultModel _getResult(http.Response r) {
-    print(r.body);
-    print(r.statusCode);
-    print(r.request!.url);
-    print(r.request!.method);
+    // print(r.body);
+    // print(r.statusCode);
+    // print(r.request!.url);
+    // print(r.request!.method);
     return ApiResultModel(r.statusCode, r.body);
   }
 
