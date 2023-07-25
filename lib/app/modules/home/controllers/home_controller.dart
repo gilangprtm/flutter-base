@@ -1,8 +1,12 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/models/profile_model.dart';
+import '../../../mahas/mahas_config.dart';
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../mahas/services/http_api.dart';
@@ -12,6 +16,7 @@ class HomeController extends GetxController {
   RxInt current = 0.obs;
   RxBool notifikasi = false.obs;
   final CarouselController imageController = CarouselController();
+  String? token;
 
   final List<String> imgList = [
     'assets/images/slider1.jpg',
@@ -22,6 +27,9 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
+    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    token = await messaging.getToken();
+    await putUser();
     await getNotifikasi();
     super.onInit();
   }
@@ -121,5 +129,25 @@ class HomeController extends GetxController {
     } catch (e) {
       Helper.dialogWarning(e.toString());
     }
+  }
+
+  Future putUser() async {
+    if (EasyLoading.isShow) {
+      EasyLoading.dismiss();
+    }
+    await EasyLoading.show();
+
+    var r = await HttpApi.put('/api/User', body: {
+      "UserIdHaimed": auth.currentUser!.uid.toString(),
+      "Email": auth.currentUser!.email.toString(),
+      "Nama": auth.currentUser!.displayName.toString(),
+      "Fcm": token.toString(),
+    });
+    if (r.success) {
+      MahasConfig.profile = ProfileModel.fromJson(r.body);
+    } else {
+      Helper.dialogWarning(r.message);
+    }
+    EasyLoading.dismiss();
   }
 }
