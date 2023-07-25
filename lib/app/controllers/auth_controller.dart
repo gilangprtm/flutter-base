@@ -8,11 +8,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import '../mahas/mahas_config.dart';
-import '../mahas/services/helper.dart';
 import '../mahas/services/http_api.dart';
 import '../mahas/mahas_service.dart';
-import '../models/profile_model.dart';
 import '../routes/app_pages.dart';
 
 class AuthController extends GetxController {
@@ -64,22 +61,7 @@ class AuthController extends GetxController {
   }
 
   void _toHome() async {
-    await Future.delayed(const Duration(seconds: 2));
-    var r = await HttpApi.put('/api/User', body: {
-      "UserIdHaimed": auth.currentUser!.uid.toString(),
-      "Email": auth.currentUser!.email.toString(),
-      "Nama": auth.currentUser!.displayName.toString(),
-      "Fcm": token.toString(),
-    });
-    if (r.success) {
-      MahasConfig.profile = ProfileModel.fromJson(r.body);
-      Get.offAllNamed(Routes.home);
-    } else {
-      Helper.dialogWarning(r.message);
-    }
-    if (EasyLoading.isShow) {
-      EasyLoading.dismiss();
-    }
+    Get.offAllNamed(Routes.home);
   }
 
   Future<UserCredential?> _signInWithCredentialGoogle() async {
