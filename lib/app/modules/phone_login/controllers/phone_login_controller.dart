@@ -21,10 +21,8 @@ class PhoneLoginController extends GetxController {
   RxString fromProfile = ''.obs;
   RxInt count = 0.obs;
   var auth = FirebaseAuth.instance;
-  // var konfirmasi = Get.find<DokterKonfirmasiTabController>();
   late DokterKonfirmasiTabController? konfirmasi;
   late ProfileSetupController? profile;
-  // var profile = Get.find<ProfileSetupController>();
 
   @override
   void onInit() async {
@@ -225,7 +223,16 @@ class PhoneLoginController extends GetxController {
       } else {
         if (auth.currentUser!.phoneNumber == null ||
             phoneCon.value != auth.currentUser!.phoneNumber) {
-          auth.currentUser!.linkWithCredential(authCredential);
+          // ignore: body_might_complete_normally_catch_error
+          auth.currentUser!.linkWithCredential(authCredential).catchError((r) {
+            if (r.toString().contains(RegExp('credential-already-in-use'))) {
+              Helper.dialogWarning(
+                  "Nomor telepon ${phoneCon.value} sudah terdaftar!\n Gunakan nomor telepon lain");
+            } else {
+              Helper.dialogWarning(r.toString());
+            }
+            phoneCon.value = "";
+          });
           try {
             var res = await HttpApi.put(
               '/api/User?user=${auth.currentUser!.uid}',
