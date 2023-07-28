@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/components/others/list_component.dart';
 
+import '../../../mahas/mahas_colors.dart';
 import '../../../models/spesialisasi_model.dart';
 import '../controllers/spesialisasi_tab_controller.dart';
 
@@ -26,6 +27,19 @@ class SpesialisasiTabView extends GetView<SpesialisasiTabController> {
                       e.spesialisasiURL!,
                       width: 50,
                       height: 50,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            color: MahasColors.primary,
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
                     )
                   : Image.asset(
                       "assets/images/ic_poli_default.PNG",
