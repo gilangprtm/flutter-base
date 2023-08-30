@@ -1,11 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haimed_getx/app/models/profile_model.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../mahas/mahas_config.dart';
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
@@ -17,6 +23,7 @@ class HomeController extends GetxController {
   RxBool notifikasi = false.obs;
   final CarouselController imageController = CarouselController();
   String? token;
+  static final storage = GetStorage();
 
   final List<String> imgList = [
     'assets/images/slider1.jpg',
@@ -31,6 +38,7 @@ class HomeController extends GetxController {
     token = await messaging.getToken();
     await putUser();
     await getNotifikasi();
+    await versionCheck();
     super.onInit();
   }
 
@@ -149,5 +157,34 @@ class HomeController extends GetxController {
       Helper.dialogWarning(r.message);
     }
     EasyLoading.dismiss();
+  }
+
+  Future<void> versionCheck() async {
+    final updateLater = storage.read('update_later');
+    final now = DateTime.now();
+    final updateLaterDate =
+        updateLater == null ? null : DateTime.parse(updateLater);
+    final bool mustUpdate = remoteConfig.getBool('must_update');
+    final String version = remoteConfig.getString('version');
+    final String updateUrl = remoteConfig.getString('update_url');
+    final int updateDuration = remoteConfig.getInt('update_duration');
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    if (!kIsWeb) {
+      if ((!kIsWeb && updateLaterDate?.isAfter(now) == false) ||
+          updateLater == null) {
+        if (Platform.isIOS || Platform.isAndroid) {
+          if (packageInfo.version != version) {
+            final r = await Helper.dialogUpdate(
+                harusUpdate: mustUpdate, versiTerbaru: version);
+            if (r == true) {
+              await launchUrl(Uri.parse(updateUrl));
+            } else {
+              storage.write('update_later',
+                  now.add(Duration(days: updateDuration)).toString());
+            }
+          }
+        }
+      }
+    }
   }
 }
