@@ -67,7 +67,7 @@ class DokterDetailTabController extends GetxController {
         DateTime.utc(date.year, date.month + 1).subtract(Duration(days: 1));
     try {
       var r = await HttpApi.get(
-          "/api/JadwalPraktek?dariTanggal=$firstDayCurrentMonth&sampaiTanggal=$lastDayCurrentMonth&dokterId=$id");
+          "/api/JadwalPraktek?dariTanggal=$firstDayCurrentMonth&sampaiTanggal=$lastDayCurrentMonth&dokterId=$id&filter.pageSize=31");
 
       if (r.success) {
         final datas = json.decode(r.body);
