@@ -177,7 +177,18 @@ class HomeController extends GetxController {
             final r = await Helper.dialogUpdate(
                 harusUpdate: mustUpdate, versiTerbaru: version);
             if (r == true) {
-              await launchUrl(Uri.parse(updateUrl));
+              await launchUrl(Uri.parse(updateUrl),
+                      mode: LaunchMode.externalApplication)
+                  .then((value) => {
+                        if (Platform.isAndroid)
+                          {
+                            SystemNavigator.pop(),
+                          }
+                        else if (Platform.isIOS)
+                          {
+                            exit(0),
+                          }
+                      });
             } else {
               storage.write('update_later',
                   now.add(Duration(days: updateDuration)).toString());
