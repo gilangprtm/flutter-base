@@ -136,7 +136,9 @@ class HomeController extends GetxController {
             },
             message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
       } else if (r.message!
-          .contains(RegExp('connection failed', caseSensitive: false))) {
+              .contains(RegExp('connection failed', caseSensitive: false)) ||
+          r.message!
+              .contains(RegExp('failed host lookup', caseSensitive: false))) {
         Helper.dialogConnection(
             action: () async {
               await homeProcedure();
@@ -174,7 +176,9 @@ class HomeController extends GetxController {
           },
           message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
     } else if (r.message!
-        .contains(RegExp('connection failed', caseSensitive: false))) {
+            .contains(RegExp('connection failed', caseSensitive: false)) ||
+        r.message!
+            .contains(RegExp('failed host lookup', caseSensitive: false))) {
       Helper.dialogConnection(
           action: () async {
             await homeProcedure();
