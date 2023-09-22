@@ -154,7 +154,7 @@ class DokterKonfirmasiTabController extends GetxController {
           "MobileTglLahirPasien": selectedPasien.value!.tanggallahir.toString(),
           "TanggalLahir": selectedPasien.value!.tanggallahir.toString(),
           "NoUrut": 0,
-          "Tanggal": DateTime.now().toString(),
+          "Tanggal": jadwalPraktekModel.value.tanggal!.toString(),
           "HaiMedUserId": auth.currentUser!.uid,
           "HaiMedRelasiId": selectedPasien.value!.pasienidhaimed ?? "",
           "Phone": auth.currentUser!.phoneNumber!,
