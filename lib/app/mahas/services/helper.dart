@@ -160,6 +160,49 @@ class Helper {
     );
   }
 
+  static Future dialogConnection({
+    String? message,
+    required dynamic action,
+  }) async {
+    await Get.dialog(
+        AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                FontAwesomeIcons.triangleExclamation,
+                color: MahasColors.warning,
+                size: 40,
+              ),
+              const Padding(padding: EdgeInsets.all(7)),
+              Text(
+                textAlign: TextAlign.center,
+                message ?? "-",
+                style: const TextStyle(
+                  color: MahasColors.warning,
+                ),
+              ),
+            ],
+          ),
+          contentPadding:
+              const EdgeInsets.only(bottom: 0, top: 20, right: 20, left: 20),
+          actionsPadding:
+              const EdgeInsets.only(top: 10, bottom: 5, left: 20, right: 20),
+          actions: [
+            TextButton(
+              child: Text(
+                "OK",
+                style: TextStyle(
+                  color: MahasColors.primary,
+                ),
+              ),
+              onPressed: () => action(),
+            ),
+          ],
+        ),
+        barrierDismissible: false);
+  }
+
   static Future dialogSuccess(String? message) async {
     await Get.dialog(
       AlertDialog(
