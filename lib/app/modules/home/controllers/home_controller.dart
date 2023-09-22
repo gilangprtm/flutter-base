@@ -34,11 +34,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    token = await messaging.getToken();
-    await putUser();
-    await getNotifikasi();
-    await versionCheck();
+    await homeProcedure();
     super.onInit();
   }
 
@@ -131,6 +127,22 @@ class HomeController extends GetxController {
             notifikasi.value = false;
           }
         }
+      } else if (r.message!
+          .contains(RegExp('No host specified in URI', caseSensitive: false))) {
+        Helper.dialogConnection(
+            action: () async {
+              await homeProcedure();
+              Get.back(result: false);
+            },
+            message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
+      } else if (r.message!
+          .contains(RegExp('connection failed', caseSensitive: false))) {
+        Helper.dialogConnection(
+            action: () async {
+              await homeProcedure();
+              Get.back(result: false);
+            },
+            message: "Tidak ada koneksi internet, silahkan coba lagi");
       } else {
         Helper.dialogWarning(r.message);
       }
@@ -153,6 +165,22 @@ class HomeController extends GetxController {
     });
     if (r.success) {
       MahasConfig.profile = ProfileModel.fromJson(r.body);
+    } else if (r.message!
+        .contains(RegExp('No host specified in URI', caseSensitive: false))) {
+      Helper.dialogConnection(
+          action: () async {
+            await homeProcedure();
+            Get.back(result: false);
+          },
+          message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
+    } else if (r.message!
+        .contains(RegExp('connection failed', caseSensitive: false))) {
+      Helper.dialogConnection(
+          action: () async {
+            await homeProcedure();
+            Get.back(result: false);
+          },
+          message: "Tidak ada koneksi internet, silahkan coba lagi");
     } else {
       Helper.dialogWarning(r.message);
     }
@@ -197,5 +225,17 @@ class HomeController extends GetxController {
         }
       }
     }
+  }
+
+  Future homeProcedure() async {
+    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    token = await messaging.getToken();
+    if (MahasConfig.urlApi == "") {
+      await EasyLoading.show();
+      MahasConfig.urlApi = remoteConfig.getString('api');
+    }
+    await putUser();
+    await getNotifikasi();
+    await versionCheck();
   }
 }
