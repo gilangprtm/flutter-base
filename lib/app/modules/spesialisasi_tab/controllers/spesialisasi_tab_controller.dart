@@ -16,6 +16,7 @@ class SpesialisasiTabController extends GetxController {
     Get.toNamed(
       Routes.SPESIALISASI_DETAIL_TAB,
       parameters: {"id": id, "judul": judul},
-    );
+    )!
+        .then((value) => {listCon.refresh()});
   }
 }

@@ -48,6 +48,7 @@ class DokterTabController extends GetxController {
   }
 
   void goToDokterDetail(String id) {
-    Get.toNamed(Routes.DOKTER_DETAIL_TAB, parameters: ({"id": id}));
+    Get.toNamed(Routes.DOKTER_DETAIL_TAB, parameters: ({"id": id}))!
+        .then((value) => {listCon.refresh()});
   }
 }

@@ -32,7 +32,8 @@ class SpesialisasiDetailTabController extends GetxController {
         'sectionID': sectionID,
         'waktuID': waktuID,
       },
-    );
+    )!
+        .then((value) => {listCon.refresh()});
   }
 
   ListComponentController<JadwalpraktekModel> getJadwal() {
