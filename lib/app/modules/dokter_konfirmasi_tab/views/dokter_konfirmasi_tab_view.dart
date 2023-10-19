@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:haimed_getx/app/mahas/components/inputs/input_radio_component.dart';
 import 'package:haimed_getx/app/mahas/components/inputs/input_text_component.dart';
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 import 'package:haimed_getx/app/models/pasien_model.dart';
@@ -378,22 +377,29 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
                               SizedBox(
                                 height: 10,
                               ),
-                              InputRadioComponent(
-                                controller: controller.tipePasienCon,
-                                label: "Pilih Tipe Pasien",
+                              // InputRadioComponent(
+                              //   controller: controller.tipePasienCon,
+                              //   label: "Pilih Tipe Pasien",
+                              // ),
+                              // Obx(
+                              //   () => Visibility(
+                              //     visible: controller.pilihPasien.value,
+                              //     child: InputTextComponent(
+                              //       placeHolder: "NRM",
+                              //       controller: controller.nrmCon,
+                              //       required:
+                              //           controller.pilihPasien.value == true
+                              //               ? true
+                              //               : false,
+                              //     ),
+                              //   ),
+                              // ),
+                              Text(
+                                "Telepon",
+                                style: MahasThemes.muted,
                               ),
-                              Obx(
-                                () => Visibility(
-                                  visible: controller.pilihPasien.value,
-                                  child: InputTextComponent(
-                                    placeHolder: "NRM",
-                                    controller: controller.nrmCon,
-                                    required:
-                                        controller.pilihPasien.value == true
-                                            ? true
-                                            : false,
-                                  ),
-                                ),
+                              SizedBox(
+                                height: 2,
                               ),
                               InputTextComponent(
                                 placeHolder: "Telepon",

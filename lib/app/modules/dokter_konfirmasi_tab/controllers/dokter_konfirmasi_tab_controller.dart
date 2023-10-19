@@ -142,7 +142,7 @@ class DokterKonfirmasiTabController extends GetxController {
           "NilaiBayar": 0.0,
           "Nama": selectedPasien.value!.nama ?? "",
           "UntukTanggal": jadwalPraktekModel.value.tanggal!.toString(),
-          "MobileKeteranganPasienBaru": tipePasienCon.value,
+          // "MobileKeteranganPasienBaru": tipePasienCon.value,
           "NRM": nrmCon.value ?? "",
           "UntukDokterID": dokterID.value,
           "UntukSectionID": sectionID.value,
