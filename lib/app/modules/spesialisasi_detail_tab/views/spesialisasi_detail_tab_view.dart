@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
@@ -6,6 +7,7 @@ import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/components/others/list_component.dart';
 import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/services/helper.dart';
 import '../../../models/jadwal_praktek_model.dart';
 import '../controllers/spesialisasi_detail_tab_controller.dart';
 
@@ -50,12 +52,41 @@ class SpesialisasiDetailTabView
               children: [
                 InkWell(
                   onTap: () {
-                    controller.toDokterKonfirmasi(
-                      e.dokterid!,
-                      e.tanggal!.toString(),
-                      e.sectionid!,
-                      e.waktuid!.toString(),
-                    );
+                    if (e.statuspraktek == "Pending") {
+                      Helper.dialogQuestionWithAction(
+                        message:
+                            "Jadwal praktek untuk ${e.namadokter} tanggal ${MahasFormat.displayDate(e.tanggal)} pukul ${MahasFormat.displayTime(TimeOfDay.fromDateTime(e.fromjam!))} - ${MahasFormat.displayTime(TimeOfDay.fromDateTime(e.tojam!))} DITUNDA dengan alasan ${e.keteranganstatuspraktek}\n Tetap Reservasi?",
+                        icon: FontAwesomeIcons.triangleExclamation,
+                        color: MahasColors.warning,
+                        withConfirm: true,
+                        textConfirm: "Lanjut",
+                        textCancel: "Tutup",
+                        actionConfirm: () => {
+                          Get.back(result: true),
+                          controller.toDokterKonfirmasi(
+                            e.dokterid!,
+                            e.tanggal!.toString(),
+                            e.sectionid!,
+                            e.waktuid!.toString(),
+                          ),
+                        },
+                      );
+                    } else if (e.statuspraktek == "Cancel") {
+                      Helper.dialogQuestionWithAction(
+                        message:
+                            "Jadwal praktek untuk ${e.namadokter} tanggal ${MahasFormat.displayDate(e.tanggal)} pukul ${MahasFormat.displayTime(TimeOfDay.fromDateTime(e.fromjam!))} - ${MahasFormat.displayTime(TimeOfDay.fromDateTime(e.tojam!))} DIBATALKAN dengan alasan ${e.keteranganstatuspraktek}",
+                        icon: FontAwesomeIcons.triangleExclamation,
+                        color: MahasColors.danger,
+                        withConfirm: false,
+                      );
+                    } else {
+                      controller.toDokterKonfirmasi(
+                        e.dokterid!,
+                        e.tanggal!.toString(),
+                        e.sectionid!,
+                        e.waktuid!.toString(),
+                      );
+                    }
                   },
                   child: Padding(
                     padding:
