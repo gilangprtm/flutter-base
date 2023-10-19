@@ -16,6 +16,7 @@ import '../../../mahas/mahas_config.dart';
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../mahas/services/http_api.dart';
+import '../../../models/notifikasi_model.dart';
 import '../../../routes/app_pages.dart';
 
 class HomeController extends GetxController {
@@ -116,15 +117,30 @@ class HomeController extends GetxController {
       var r =
           await HttpApi.get('/api/Notifikasi?userId=${auth.currentUser!.uid}');
       if (r.success) {
-        Map<String, dynamic> data = json.decode(r.body);
-        List list = data['Data'];
+        List<NotifikasiModel> listNotif = [];
+        final data = json.decode(r.body);
+        listNotif.clear();
+        var datas = data['Data'];
+        for (var e in datas) {
+          listNotif.add(NotifikasiModel.fromDynamic(e));
+        }
         var j = 0;
-        for (var i = 0; i < list.length; i++) {
-          if (list[i]['Dibaca'] == false) {
+        for (var i = 0; i < listNotif.length; i++) {
+          var item = listNotif[i];
+          if (item.dibaca == false) {
             notifikasi.value = true;
             j += 1;
           } else if (j == 0) {
             notifikasi.value = false;
+          }
+        }
+        for (var i = 0; i < listNotif.length; i++) {
+          var item = listNotif[i];
+          if (item.dibaca == false && item.judul == 'Jadwal Praktek Ditunda' ||
+              item.dibaca == false &&
+                  item.judul == 'Jadwal Praktek Dibatalkan') {
+            Helper.dialogWarning(item.pesan);
+            dibaca(item.kodeunik!);
           }
         }
       } else if (r.message!
@@ -151,6 +167,17 @@ class HomeController extends GetxController {
     } catch (e) {
       Helper.dialogWarning(e.toString());
     }
+  }
+
+  void dibaca(String kodeunik) async {
+    final body = {};
+    final url =
+        '/api/Notifikasi/TerbacaByKodeUnik?userId=${MahasConfig.profile!.userIdHaimed}&kodeUnik=$kodeunik';
+    // ignore: unused_local_variable
+    var r = await HttpApi.patch(
+      url,
+      body: body,
+    );
   }
 
   Future putUser() async {
