@@ -228,11 +228,13 @@ class HomeController extends GetxController {
     final String updateUrl = remoteConfig.getString('update_url');
     final int updateDuration = remoteConfig.getInt('update_duration');
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String versi = "${packageInfo.version}+${packageInfo.buildNumber}";
+    print(versi);
     if (!kIsWeb) {
       if ((!kIsWeb && updateLaterDate?.isAfter(now) == false) ||
           updateLater == null) {
         if (Platform.isIOS || Platform.isAndroid) {
-          if (packageInfo.version != version) {
+          if (versi != version) {
             final r = await Helper.dialogUpdate(
                 harusUpdate: mustUpdate, versiTerbaru: version);
             if (r == true) {
