@@ -169,7 +169,14 @@ class DokterKonfirmasiTabController extends GetxController {
             Helper.dialogWarning(
                 "Tidak dapat melakukan reservasi lebih dari sekali");
           } else {
-            Helper.dialogWarning(res.message);
+            List<dynamic> data = json.decode(res.message!)['Errors'];
+            if (data.isNotEmpty) {
+              for (var e in data) {
+                Helper.dialogWarning(e);
+              }
+            } else {
+              Helper.dialogWarning(res.message);
+            }
           }
         }
       } catch (e) {
