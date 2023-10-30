@@ -26,7 +26,6 @@ class DokterKonfirmasiTabController extends GetxController {
   final InputTextController noHPCon =
       InputTextController(type: InputTextType.number);
 
-  RxBool pilihPasien = false.obs;
   RxString dokterID = "".obs;
   RxString tanggal = "".obs;
   RxString sectionID = "".obs;
@@ -43,17 +42,19 @@ class DokterKonfirmasiTabController extends GetxController {
     sectionID.value = Get.parameters['sectionID']!;
     waktuID.value = Get.parameters['waktuID']!;
     namaSection.value = Get.parameters['namaSection'] ?? "";
-    tipePasienCon.onChanged = (item) {
-      pilihPasien.value = item.value;
-      nrmCon.value = "";
-    };
-    tipePasienCon.value = pilihPasien.value;
     getPhone();
     super.onInit();
   }
 
   void pasienonChanged(PasienModel? val) {
     selectedPasien.value = val!;
+    if (selectedPasien.value!.nrm != null) {
+      nrmCon.value = selectedPasien.value!.nrm;
+      tipePasienCon.value = true;
+    } else {
+      tipePasienCon.value = false;
+    }
+    update();
   }
 
   void getPhone() {
@@ -116,9 +117,18 @@ class DokterKonfirmasiTabController extends GetxController {
           pasienList.add(PasienModel.fromDynamic(e));
         }
         namaPasienCon.items = pasienList
-            .map<DropdownItem>((e) => DropdownItem.init(e.nama, e.useridhaimed))
+            .map<DropdownItem>(
+                (e) => DropdownItem.init(e.nama, e.pasienidhaimed))
             .toList();
         selectedPasien = pasienList.firstWhereOrNull((e) => e.nama != null).obs;
+
+        if (selectedPasien.value!.nrm != null) {
+          nrmCon.value = selectedPasien.value!.nrm;
+          tipePasienCon.value = true;
+        } else {
+          tipePasienCon.value = false;
+        }
+        update();
       } else {
         Helper.dialogWarning(r.message);
       }
@@ -142,7 +152,7 @@ class DokterKonfirmasiTabController extends GetxController {
           "NilaiBayar": 0.0,
           "Nama": selectedPasien.value!.nama ?? "",
           "UntukTanggal": jadwalPraktekModel.value.tanggal!.toString(),
-          // "MobileKeteranganPasienBaru": tipePasienCon.value,
+          "MobileKeteranganPasienBaru": tipePasienCon.value,
           "NRM": nrmCon.value ?? "",
           "UntukDokterID": dokterID.value,
           "UntukSectionID": sectionID.value,
