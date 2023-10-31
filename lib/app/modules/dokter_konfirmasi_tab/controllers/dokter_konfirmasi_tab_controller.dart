@@ -53,6 +53,7 @@ class DokterKonfirmasiTabController extends GetxController {
       tipePasienCon.value = true;
     } else {
       tipePasienCon.value = false;
+      nrmCon.value = null;
     }
     update();
   }
@@ -127,6 +128,7 @@ class DokterKonfirmasiTabController extends GetxController {
           tipePasienCon.value = true;
         } else {
           tipePasienCon.value = false;
+          nrmCon.value = null;
         }
         update();
       } else {
