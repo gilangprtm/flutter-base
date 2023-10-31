@@ -5,6 +5,7 @@ import 'package:haimed_getx/app/mahas/components/inputs/input_text_component.dar
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 import 'package:haimed_getx/app/models/pasien_model.dart';
 
+import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/mahas_colors.dart';
 import '../../../models/jadwal_praktek_model.dart';
@@ -377,6 +378,29 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
                               SizedBox(
                                 height: 10,
                               ),
+                              GetBuilder(
+                                builder:
+                                    (DokterKonfirmasiTabController controller) {
+                                  return Column(
+                                    children: [
+                                      InputRadioComponent(
+                                        controller: controller.tipePasienCon,
+                                        label: "Pilih Tipe Pasien",
+                                        editable: false,
+                                      ),
+                                      Visibility(
+                                        visible: controller.tipePasienCon.value,
+                                        child: InputTextComponent(
+                                          label: "NRM",
+                                          controller: controller.nrmCon,
+                                          editable: false,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+
                               // InputRadioComponent(
                               //   controller: controller.tipePasienCon,
                               //   label: "Pilih Tipe Pasien",
