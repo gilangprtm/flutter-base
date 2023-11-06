@@ -42,6 +42,10 @@ class DokterKonfirmasiTabController extends GetxController {
     sectionID.value = Get.parameters['sectionID']!;
     waktuID.value = Get.parameters['waktuID']!;
     namaSection.value = Get.parameters['namaSection'] ?? "";
+    tipePasienCon.onChanged = (item) {
+      nrmCon.value = null;
+      update();
+    };
     getPhone();
     super.onInit();
   }
