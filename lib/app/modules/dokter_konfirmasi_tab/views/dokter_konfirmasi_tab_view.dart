@@ -386,38 +386,28 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
                                       InputRadioComponent(
                                         controller: controller.tipePasienCon,
                                         label: "Pilih Tipe Pasien",
-                                        editable: false,
+                                        editable: controller.selectedPasien
+                                                    .value!.nrm ==
+                                                null
+                                            ? true
+                                            : false,
                                       ),
                                       Visibility(
                                         visible: controller.tipePasienCon.value,
                                         child: InputTextComponent(
                                           label: "NRM",
                                           controller: controller.nrmCon,
-                                          editable: false,
+                                          editable: controller.selectedPasien
+                                                      .value!.nrm ==
+                                                  null
+                                              ? true
+                                              : false,
                                         ),
                                       ),
                                     ],
                                   );
                                 },
                               ),
-
-                              // InputRadioComponent(
-                              //   controller: controller.tipePasienCon,
-                              //   label: "Pilih Tipe Pasien",
-                              // ),
-                              // Obx(
-                              //   () => Visibility(
-                              //     visible: controller.pilihPasien.value,
-                              //     child: InputTextComponent(
-                              //       placeHolder: "NRM",
-                              //       controller: controller.nrmCon,
-                              //       required:
-                              //           controller.pilihPasien.value == true
-                              //               ? true
-                              //               : false,
-                              //     ),
-                              //   ),
-                              // ),
                               Text(
                                 "Telepon",
                                 style: MahasThemes.muted,
