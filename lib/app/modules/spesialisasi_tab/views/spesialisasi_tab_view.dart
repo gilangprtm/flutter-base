@@ -21,12 +21,37 @@ class SpesialisasiTabView extends GetView<SpesialisasiTabController> {
             contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             onTap: () =>
                 controller.goToDetailPage(e.spesialisid!, e.namaspesialisasi!),
-            leading: Icon(
-              Icons.health_and_safety,
-              color: MahasColors.red,
-              size: 30,
+            leading: ClipOval(
+              child: e.spesialisasiURL != null
+                  ? Image.network(
+                      e.spesialisasiURL!,
+                      width: 50,
+                      height: 50,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Container(
+                          height: 60,
+                          width: 60,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: MahasColors.primary,
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+                        );
+                      },
+                    )
+                  : Image.asset(
+                      "assets/images/ic_poli_default.PNG",
+                      width: 50,
+                      height: 50,
+                    ),
             ),
-            horizontalTitleGap: 0,
+            horizontalTitleGap: 15,
             title: Text(
               e.namaspesialisasi ?? "",
               style: MahasThemes.h3,

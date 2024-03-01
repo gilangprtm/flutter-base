@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
 
 import '../../../mahas/components/others/list_component.dart';
@@ -32,7 +32,8 @@ class SpesialisasiDetailTabController extends GetxController {
         'sectionID': sectionID,
         'waktuID': waktuID,
       },
-    );
+    )!
+        .then((value) => {listCon.refresh()});
   }
 
   ListComponentController<JadwalpraktekModel> getJadwal() {
@@ -48,11 +49,12 @@ class SpesialisasiDetailTabController extends GetxController {
   }
 
   datePicker() async {
+    DateTime now = DateTime.now();
     return await DatePicker.showDatePicker(
       Get.context!,
       showTitleActions: true,
-      minTime: DateTime(1990, 1, 1),
-      maxTime: DateTime(2200, 12, 31),
+      minTime: DateTime(now.year, now.month, now.day),
+      maxTime: DateTime(now.year + 1, 12, 31),
       onConfirm: (date) {
         dateButton.value = date;
         listCon.refresh();

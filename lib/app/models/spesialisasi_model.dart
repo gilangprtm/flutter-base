@@ -3,7 +3,7 @@ import 'dart:convert';
 class GetSpesialisasiModel {
   String? spesialisid;
   String? namaspesialisasi;
-  String? spesialisasiidhaimed;
+  String? spesialisasiURL;
 
   GetSpesialisasiModel();
 
@@ -17,7 +17,7 @@ class GetSpesialisasiModel {
 
     model.spesialisid = dynamicData['SpesialisId'];
     model.namaspesialisasi = dynamicData['NamaSpesialisasi'];
-    model.spesialisasiidhaimed = dynamicData['SpesialisasiIdHaiMed'];
+    model.spesialisasiURL = dynamicData['SpesialisasiURL'];
 
     return model;
   }

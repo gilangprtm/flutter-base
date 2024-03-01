@@ -15,13 +15,17 @@ import '../../../mahas/services/http_api.dart';
 
 class DokterKonfirmasiTabController extends GetxController {
   final namaPasienCon = InputDropdownController();
-  late InputRadioController tipePasienCon;
+  final InputRadioController tipePasienCon = InputRadioController(
+    items: [
+      RadioButtonItem(text: "Pasien Baru", value: false),
+      RadioButtonItem(text: "Pasien Lama", value: true),
+    ],
+  );
   final InputTextController nrmCon =
       InputTextController(type: InputTextType.nrm);
   final InputTextController noHPCon =
       InputTextController(type: InputTextType.number);
 
-  RxBool pilihPasien = false.obs;
   RxString dokterID = "".obs;
   RxString tanggal = "".obs;
   RxString sectionID = "".obs;
@@ -37,23 +41,25 @@ class DokterKonfirmasiTabController extends GetxController {
     tanggal.value = Get.parameters['tanggal']!;
     sectionID.value = Get.parameters['sectionID']!;
     waktuID.value = Get.parameters['waktuID']!;
-    namaSection.value = Get.parameters['namaSection']!;
-    tipePasienCon = InputRadioController(
-        items: [
-          RadioButtonItem(text: "Pasien Baru", value: false),
-          RadioButtonItem(text: "Pasien Lama", value: true),
-        ],
-        onChanged: (item) {
-          pilihPasien.value = item.value;
-          nrmCon.value = "";
-        });
-    tipePasienCon.value = pilihPasien.value;
+    namaSection.value = Get.parameters['namaSection'] ?? "";
+    tipePasienCon.onChanged = (item) {
+      nrmCon.value = null;
+      update();
+    };
     getPhone();
     super.onInit();
   }
 
   void pasienonChanged(PasienModel? val) {
     selectedPasien.value = val!;
+    if (selectedPasien.value!.nrm != null) {
+      nrmCon.value = selectedPasien.value!.nrm;
+      tipePasienCon.value = true;
+    } else {
+      tipePasienCon.value = false;
+      nrmCon.value = null;
+    }
+    update();
   }
 
   void getPhone() {
@@ -116,9 +122,19 @@ class DokterKonfirmasiTabController extends GetxController {
           pasienList.add(PasienModel.fromDynamic(e));
         }
         namaPasienCon.items = pasienList
-            .map<DropdownItem>((e) => DropdownItem.init(e.nama, e.useridhaimed))
+            .map<DropdownItem>(
+                (e) => DropdownItem.init(e.nama, e.pasienidhaimed))
             .toList();
         selectedPasien = pasienList.firstWhereOrNull((e) => e.nama != null).obs;
+
+        if (selectedPasien.value!.nrm != null) {
+          nrmCon.value = selectedPasien.value!.nrm;
+          tipePasienCon.value = true;
+        } else {
+          tipePasienCon.value = false;
+          nrmCon.value = null;
+        }
+        update();
       } else {
         Helper.dialogWarning(r.message);
       }
@@ -134,7 +150,7 @@ class DokterKonfirmasiTabController extends GetxController {
     }
     await EasyLoading.show();
 
-    if (noHPCon.value != null) {
+    if (noHPCon.value != null && selectedPasien.value != null) {
       try {
         var res = await HttpApi.post('/api/Reservasi', body: {
           "Alamat": selectedPasien.value!.alamat ?? "",
@@ -150,11 +166,11 @@ class DokterKonfirmasiTabController extends GetxController {
           "WaktuID": waktuID.value,
           "MobileKeteranganNRM": nrmCon.value ?? "",
           "NIK": selectedPasien.value!.nik ?? "",
-          "MobileNotifikasiAktif": false,
+          "MobileNotifikasiAktif": true,
           "MobileTglLahirPasien": selectedPasien.value!.tanggallahir.toString(),
           "TanggalLahir": selectedPasien.value!.tanggallahir.toString(),
           "NoUrut": 0,
-          "Tanggal": DateTime.now().toString(),
+          "Tanggal": jadwalPraktekModel.value.tanggal!.toString(),
           "HaiMedUserId": auth.currentUser!.uid,
           "HaiMedRelasiId": selectedPasien.value!.pasienidhaimed ?? "",
           "Phone": auth.currentUser!.phoneNumber!,
@@ -169,12 +185,21 @@ class DokterKonfirmasiTabController extends GetxController {
             Helper.dialogWarning(
                 "Tidak dapat melakukan reservasi lebih dari sekali");
           } else {
-            Helper.dialogWarning(res.message);
+            List<dynamic> data = json.decode(res.message!)['Errors'];
+            if (data.isNotEmpty) {
+              for (var e in data) {
+                Helper.dialogWarning(e);
+              }
+            } else {
+              Helper.dialogWarning(res.message);
+            }
           }
         }
       } catch (e) {
         Helper.dialogWarning(e.toString());
       }
+    } else if (selectedPasien.value == null) {
+      Helper.dialogWarning("Nama Pasien harus diisi!");
     } else {
       telpOnTap();
     }

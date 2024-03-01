@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/others/empty_component.dart';
 import 'package:haimed_getx/app/mahas/services/http_api.dart';
@@ -67,7 +68,7 @@ class DokterDetailTabController extends GetxController {
         DateTime.utc(date.year, date.month + 1).subtract(Duration(days: 1));
     try {
       var r = await HttpApi.get(
-          "/api/JadwalPraktek?dariTanggal=$firstDayCurrentMonth&sampaiTanggal=$lastDayCurrentMonth&dokterId=$id");
+          "/api/JadwalPraktek?dariTanggal=$firstDayCurrentMonth&sampaiTanggal=$lastDayCurrentMonth&dokterId=$id&filter.pageSize=100");
 
       if (r.success) {
         final datas = json.decode(r.body);
@@ -241,13 +242,43 @@ class DokterDetailTabController extends GetxController {
                 itemCount: eventCard.length,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    toDokterKonfirmasi(
-                      eventCard[index].dokterid!,
-                      eventCard[index].tanggal!.toString(),
-                      eventCard[index].sectionid!,
-                      eventCard[index].waktuid!.toString(),
-                      eventCard[index].namasection!.toString(),
-                    );
+                    if (eventCard[index].statuspraktek == "Pending") {
+                      Helper.dialogQuestionWithAction(
+                        message:
+                            "Jadwal praktek untuk ${eventCard[index].namadokter} tanggal ${MahasFormat.displayDate(eventCard[index].tanggal)} pukul ${MahasFormat.displayTime(TimeOfDay.fromDateTime(eventCard[index].fromjam!))} - ${MahasFormat.displayTime(TimeOfDay.fromDateTime(eventCard[index].tojam!))} DITUNDA dengan alasan ${eventCard[index].keteranganstatuspraktek}\n Tetap Reservasi?",
+                        icon: FontAwesomeIcons.triangleExclamation,
+                        color: MahasColors.warning,
+                        withConfirm: true,
+                        textConfirm: "Lanjut",
+                        textCancel: "Tutup",
+                        actionConfirm: () => {
+                          Get.back(result: true),
+                          toDokterKonfirmasi(
+                            eventCard[index].dokterid!,
+                            eventCard[index].tanggal!.toString(),
+                            eventCard[index].sectionid!,
+                            eventCard[index].waktuid!.toString(),
+                            eventCard[index].namasection!.toString(),
+                          ),
+                        },
+                      );
+                    } else if (eventCard[index].statuspraktek == "Cancel") {
+                      Helper.dialogQuestionWithAction(
+                        message:
+                            "Jadwal praktek untuk ${eventCard[index].namadokter} tanggal ${MahasFormat.displayDate(eventCard[index].tanggal)} pukul ${MahasFormat.displayTime(TimeOfDay.fromDateTime(eventCard[index].fromjam!))} - ${MahasFormat.displayTime(TimeOfDay.fromDateTime(eventCard[index].tojam!))} DIBATALKAN dengan alasan ${eventCard[index].keteranganstatuspraktek}",
+                        icon: FontAwesomeIcons.triangleExclamation,
+                        color: MahasColors.danger,
+                        withConfirm: false,
+                      );
+                    } else {
+                      toDokterKonfirmasi(
+                        eventCard[index].dokterid!,
+                        eventCard[index].tanggal!.toString(),
+                        eventCard[index].sectionid!,
+                        eventCard[index].waktuid!.toString(),
+                        eventCard[index].namasection!.toString(),
+                      );
+                    }
                   },
                   child: Material(
                     elevation: 3,

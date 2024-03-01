@@ -1,17 +1,30 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:haimed_getx/app/models/profile_model.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../mahas/mahas_config.dart';
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../mahas/services/http_api.dart';
+import '../../../models/notifikasi_model.dart';
 import '../../../routes/app_pages.dart';
 
 class HomeController extends GetxController {
   RxInt current = 0.obs;
   RxBool notifikasi = false.obs;
   final CarouselController imageController = CarouselController();
+  String? token;
+  static final storage = GetStorage();
 
   final List<String> imgList = [
     'assets/images/slider1.jpg',
@@ -22,7 +35,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    await getNotifikasi();
+    await homeProcedure();
     super.onInit();
   }
 
@@ -104,22 +117,157 @@ class HomeController extends GetxController {
       var r =
           await HttpApi.get('/api/Notifikasi?userId=${auth.currentUser!.uid}');
       if (r.success) {
-        Map<String, dynamic> data = json.decode(r.body);
-        List list = data['Data'];
+        List<NotifikasiModel> listNotif = [];
+        final data = json.decode(r.body);
+        listNotif.clear();
+        var datas = data['Data'];
+        for (var e in datas) {
+          listNotif.add(NotifikasiModel.fromDynamic(e));
+        }
         var j = 0;
-        for (var i = 0; i < list.length; i++) {
-          if (list[i]['Dibaca'] == false) {
+        for (var i = 0; i < listNotif.length; i++) {
+          var item = listNotif[i];
+          if (item.dibaca == false) {
             notifikasi.value = true;
             j += 1;
           } else if (j == 0) {
             notifikasi.value = false;
           }
         }
+        for (var i = 0; i < listNotif.length; i++) {
+          var item = listNotif[i];
+          if (item.dibaca == false && item.judul == 'Jadwal Praktek Ditunda' ||
+              item.dibaca == false &&
+                  item.judul == 'Jadwal Praktek Dibatalkan') {
+            Helper.dialogWarning(item.pesan);
+            dibaca(item.kodeunik!);
+          }
+        }
+      } else if (r.message!
+          .contains(RegExp('No host specified in URI', caseSensitive: false))) {
+        Helper.dialogConnection(
+            action: () async {
+              await homeProcedure();
+              Get.back(result: false);
+            },
+            message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
+      } else if (r.message!
+              .contains(RegExp('connection failed', caseSensitive: false)) ||
+          r.message!
+              .contains(RegExp('failed host lookup', caseSensitive: false))) {
+        Helper.dialogConnection(
+            action: () async {
+              await homeProcedure();
+              Get.back(result: false);
+            },
+            message: "Tidak ada koneksi internet, silahkan coba lagi");
       } else {
         Helper.dialogWarning(r.message);
       }
     } catch (e) {
       Helper.dialogWarning(e.toString());
     }
+  }
+
+  void dibaca(String kodeunik) async {
+    final body = {};
+    final url =
+        '/api/Notifikasi/TerbacaByKodeUnik?userId=${MahasConfig.profile!.userIdHaimed}&kodeUnik=$kodeunik';
+    // ignore: unused_local_variable
+    var r = await HttpApi.patch(
+      url,
+      body: body,
+    );
+  }
+
+  Future putUser() async {
+    if (EasyLoading.isShow) {
+      EasyLoading.dismiss();
+    }
+    await EasyLoading.show();
+
+    var r = await HttpApi.put('/api/User', body: {
+      "UserIdHaimed": auth.currentUser!.uid.toString(),
+      "Email": auth.currentUser!.email.toString(),
+      "Nama": auth.currentUser!.displayName.toString(),
+      "Fcm": token.toString(),
+    });
+    if (r.success) {
+      MahasConfig.profile = ProfileModel.fromJson(r.body);
+    } else if (r.message!
+        .contains(RegExp('No host specified in URI', caseSensitive: false))) {
+      Helper.dialogConnection(
+          action: () async {
+            await homeProcedure();
+            Get.back(result: false);
+          },
+          message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
+    } else if (r.message!
+            .contains(RegExp('connection failed', caseSensitive: false)) ||
+        r.message!
+            .contains(RegExp('failed host lookup', caseSensitive: false))) {
+      Helper.dialogConnection(
+          action: () async {
+            await homeProcedure();
+            Get.back(result: false);
+          },
+          message: "Tidak ada koneksi internet, silahkan coba lagi");
+    } else {
+      Helper.dialogWarning(r.message);
+    }
+    EasyLoading.dismiss();
+  }
+
+  Future<void> versionCheck() async {
+    final updateLater = storage.read('update_later');
+    final now = DateTime.now();
+    final updateLaterDate =
+        updateLater == null ? null : DateTime.parse(updateLater);
+    final bool mustUpdate = remoteConfig.getBool('must_update');
+    final String version = remoteConfig.getString('version');
+    final String updateUrl = remoteConfig.getString('update_url');
+    final int updateDuration = remoteConfig.getInt('update_duration');
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String versi = "${packageInfo.version}+${packageInfo.buildNumber}";
+    if (!kIsWeb) {
+      if ((!kIsWeb && updateLaterDate?.isAfter(now) == false) ||
+          updateLater == null) {
+        if (Platform.isIOS || Platform.isAndroid) {
+          if (versi != version) {
+            final r = await Helper.dialogUpdate(
+                harusUpdate: mustUpdate, versiTerbaru: version);
+            if (r == true) {
+              await launchUrl(Uri.parse(updateUrl),
+                      mode: LaunchMode.externalApplication)
+                  .then((value) => {
+                        if (Platform.isAndroid)
+                          {
+                            SystemNavigator.pop(),
+                          }
+                        else if (Platform.isIOS)
+                          {
+                            exit(0),
+                          }
+                      });
+            } else {
+              storage.write('update_later',
+                  now.add(Duration(days: updateDuration)).toString());
+            }
+          }
+        }
+      }
+    }
+  }
+
+  Future homeProcedure() async {
+    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    token = await messaging.getToken();
+    if (MahasConfig.urlApi == "") {
+      await EasyLoading.show();
+      MahasConfig.urlApi = remoteConfig.getString('api');
+    }
+    await putUser();
+    await getNotifikasi();
+    await versionCheck();
   }
 }

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/mahas_service.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -120,7 +120,7 @@ class HomeView extends GetView<HomeController> {
                             Container(
                               // color: Colors.red,
                               child: Text(
-                                MahasConfig.profile!.nama!,
+                                auth.currentUser!.displayName!,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,

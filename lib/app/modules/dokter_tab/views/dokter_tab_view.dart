@@ -26,6 +26,23 @@ class DokterTabView extends GetView<DokterTabController> {
                       e.photourl!,
                       width: 60,
                       height: 60,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Container(
+                          height: 60,
+                          width: 60,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: MahasColors.primary,
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+                        );
+                      },
                     )
                   : Image.asset(
                       "assets/images/Doctor.png",
