@@ -319,7 +319,7 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
                                           isExpanded: true,
                                           value:
                                               controller.selectedPasien.value,
-                                          icon: const Icon(
+                                          icon:  Icon(
                                             Icons.arrow_drop_down,
                                             color: MahasColors.primary,
                                           ),

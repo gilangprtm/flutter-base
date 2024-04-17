@@ -32,7 +32,7 @@ class UlasanInformasiController extends GetxController {
               box.write("cm_informasi", true);
               onNext();
             },
-            child: const Text(
+            child:  Text(
               "Lanjut",
               style: TextStyle(
                 color: MahasColors.primary,

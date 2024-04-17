@@ -14,8 +14,13 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
   const DetailReservasiView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => controller.backOnPressed(),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }controller.backOnPressed();
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Detail Reservasi'),

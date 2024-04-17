@@ -254,8 +254,14 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: widget.controller.backOnPressed,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        widget.controller.backOnPressed();
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? ""),

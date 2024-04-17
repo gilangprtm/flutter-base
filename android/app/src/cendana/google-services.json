@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "1026284748792-mbqo0dobni0kgv61tho5fhddt8kvu05l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.cendana",
+            "certificate_hash": "d1a58c92845af7a4267a47d1aea3d3e3ef0012fa"
+          }
+        },
+        {
           "client_id": "1026284748792-oheuhfjvd6merd5ma4ipqa68kljq2fpr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

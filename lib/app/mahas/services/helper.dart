@@ -208,7 +208,7 @@ class Helper {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+             Icon(
               FontAwesomeIcons.triangleExclamation,
               color: MahasColors.warning,
               size: 40,
@@ -217,7 +217,7 @@ class Helper {
             Text(
               textAlign: TextAlign.center,
               message ?? "-",
-              style: const TextStyle(
+              style:  TextStyle(
                 color: MahasColors.warning,
               ),
             ),
@@ -236,7 +236,7 @@ class Helper {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+               Icon(
                 FontAwesomeIcons.triangleExclamation,
                 color: MahasColors.warning,
                 size: 40,
@@ -245,7 +245,7 @@ class Helper {
               Text(
                 textAlign: TextAlign.center,
                 message ?? "-",
-                style: const TextStyle(
+                style:  TextStyle(
                   color: MahasColors.warning,
                 ),
               ),
@@ -276,7 +276,7 @@ class Helper {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+             Icon(
               FontAwesomeIcons.checkToSlot,
               color: MahasColors.primary,
               size: 40,
@@ -285,7 +285,7 @@ class Helper {
             Text(
               textAlign: TextAlign.center,
               message ?? "-",
-              style: const TextStyle(
+              style:  TextStyle(
                 color: MahasColors.primary,
               ),
             ),

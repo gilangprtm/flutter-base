@@ -143,7 +143,7 @@ class InputBoxComponent extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       errorMessage ?? "",
-                      style: const TextStyle(color: MahasColors.danger),
+                      style:  TextStyle(color: MahasColors.danger),
                     ),
                   ),
                 ),
@@ -167,7 +167,7 @@ class InputBoxComponent extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       errorMessage ?? "",
-                      style: const TextStyle(color: MahasColors.danger),
+                      style:  TextStyle(color: MahasColors.danger),
                     ),
                   ),
                 ),

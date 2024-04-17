@@ -4,20 +4,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/others/icon_button.dart';
 
+import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/mahas_config.dart';
+import '../../../mahas/mahas_service.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // title: Text('LoginView'),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Colors.amber,
-        ),
-      ),
+      backgroundColor: MahasColors.primary,
       body: Container(
         margin: const EdgeInsets.all(20),
         child: Center(
@@ -28,7 +24,9 @@ class LoginView extends GetView<LoginController> {
               SizedBox(
                 height: 300,
                 child: Image.asset(
-                  "assets/images/logo-nobg.png",
+                  MahasConfig.currentEnv == MahasEnvironmentType.cendana
+                      ? "assets/images/logo-nobg.png"
+                      : "assets/images/logorsbk.png",
                 ),
               ),
               const SizedBox(height: 10),

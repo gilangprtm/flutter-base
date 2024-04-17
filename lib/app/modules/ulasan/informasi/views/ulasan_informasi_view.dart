@@ -49,7 +49,7 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.location_pin,
                               color: MahasColors.primary,
                               size: 18,

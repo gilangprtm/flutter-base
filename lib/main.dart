@@ -7,8 +7,8 @@ import 'package:haimed_getx/app/mahas/mahas_service.dart';
 
 import 'app/routes/app_pages.dart';
 
-void main() {
-  MahasService.init();
+void main() async {
+  await MahasService.init();
   runApp(
     GetMaterialApp(
       theme: MahasThemes.light,

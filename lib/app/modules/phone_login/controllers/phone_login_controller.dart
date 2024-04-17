@@ -73,8 +73,14 @@ class PhoneLoginController extends GetxController {
         expand: true,
         isDismissible: false,
         context: Get.context!,
-        builder: (context) => WillPopScope(
-          onWillPop: () => bottomSheetBack(),
+        builder: (context) => PopScope(
+          canPop: false,
+          onPopInvoked: (didPop) {
+            if (didPop) {
+              return;
+            }
+            bottomSheetBack();
+          },
           child: Scaffold(
             appBar: AppBar(
               title: const Text("Konfirmasi"),

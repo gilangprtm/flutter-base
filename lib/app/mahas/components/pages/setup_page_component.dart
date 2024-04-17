@@ -257,8 +257,14 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: widget.controller._onWillPop,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        widget.controller._onWillPop();
+      },
       child: Scaffold(
         appBar: !widget.showAppBar
             ? null

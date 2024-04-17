@@ -10,7 +10,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haimed_getx/app/models/profile_model.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../mahas/mahas_config.dart';
 import '../../../mahas/mahas_service.dart';
@@ -26,12 +25,12 @@ class HomeController extends GetxController {
   String? token;
   static final storage = GetStorage();
 
-  final List<String> imgList = [
-    'assets/images/slider1.jpg',
-    'assets/images/slider2.jpg',
-    'assets/images/slider1.jpg',
-    'assets/images/slider2.jpg',
-  ];
+  // final List<String> imgList = [
+  //   'assets/images/slider1.jpg',
+  //   'assets/images/slider2.jpg',
+  //   'assets/images/slider1.jpg',
+  //   'assets/images/slider2.jpg',
+  // ];
 
   @override
   void onInit() async {
@@ -40,7 +39,7 @@ class HomeController extends GetxController {
   }
 
   imageSlider() {
-    final List<Widget> imageSliders = imgList
+    final List<Widget> imageSliders = MahasConfig.coverImages
         .map((item) => Container(
               margin: const EdgeInsets.all(5.0),
               child: ClipRRect(
@@ -223,21 +222,19 @@ class HomeController extends GetxController {
     final now = DateTime.now();
     final updateLaterDate =
         updateLater == null ? null : DateTime.parse(updateLater);
-    final bool mustUpdate = remoteConfig.getBool('must_update');
-    final String version = remoteConfig.getString('version');
-    final String updateUrl = remoteConfig.getString('update_url');
-    final int updateDuration = remoteConfig.getInt('update_duration');
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String versi = "${packageInfo.version}+${packageInfo.buildNumber}";
+    String versi =
+        "${MahasConfig.packageInfo!.version}+${MahasConfig.packageInfo!.buildNumber}";
     if (!kIsWeb) {
       if ((!kIsWeb && updateLaterDate?.isAfter(now) == false) ||
           updateLater == null) {
         if (Platform.isIOS || Platform.isAndroid) {
-          if (versi != version) {
+          if (versi != MahasConfig.updateAppValues.version) {
             final r = await Helper.dialogUpdate(
-                harusUpdate: mustUpdate, versiTerbaru: version);
+                harusUpdate: MahasConfig.updateAppValues.mustUpdate ?? false,
+                versiTerbaru: MahasConfig.updateAppValues.version ?? "");
             if (r == true) {
-              await launchUrl(Uri.parse(updateUrl),
+              await launchUrl(
+                      Uri.parse(MahasConfig.updateAppValues.urlUpdate ?? ""),
                       mode: LaunchMode.externalApplication)
                   .then((value) => {
                         if (Platform.isAndroid)
@@ -250,8 +247,13 @@ class HomeController extends GetxController {
                           }
                       });
             } else {
-              storage.write('update_later',
-                  now.add(Duration(days: updateDuration)).toString());
+              storage.write(
+                  'update_later',
+                  now
+                      .add(Duration(
+                          days:
+                              MahasConfig.updateAppValues.dismissDuration ?? 7))
+                      .toString());
             }
           }
         }
@@ -264,7 +266,7 @@ class HomeController extends GetxController {
     token = await messaging.getToken();
     if (MahasConfig.urlApi == "") {
       await EasyLoading.show();
-      MahasConfig.urlApi = remoteConfig.getString('api');
+      // MahasConfig.urlApi = remoteConfig.getString('api');
     }
     await putUser();
     await getNotifikasi();

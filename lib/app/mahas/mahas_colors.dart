@@ -16,12 +16,12 @@ class MahasColors {
   static const Color green = Colors.green;
   static const Color backgroundColor = Colors.white;
 
-  static const Color primary = red;
+  static Color primary = red;
   static const Color light = Colors.white;
   static const Color dark = Colors.black;
   static const Color link = Colors.blue;
-  static const Color danger = red;
-  static const Color warning = yellow;
+  static Color danger = red;
+  static Color warning = yellow;
 
   static BoxDecoration decoration = BoxDecoration(
     gradient: LinearGradient(

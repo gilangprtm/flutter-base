@@ -1,0 +1,851 @@
+{
+  "project_info": {
+    "project_number": "22523139239",
+    "firebase_url": "https://haimed-d4d84.firebaseio.com",
+    "project_id": "haimed-d4d84",
+    "storage_bucket": "haimed-d4d84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:21796886f6f823806fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.aricanti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-28f120gjdqeaak1mtgvqi25mg691cnol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.aricanti",
+            "certificate_hash": "9f8b2d4f34e5ff518d649f965804315e4201eaaf"
+          }
+        },
+        {
+          "client_id": "22523139239-k04taepcism1cgrq3dsksjs63r4goade.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.aricanti",
+            "certificate_hash": "a94016cebf6d4ebc0ad220a57739ffcb6399736b"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:47d30ab272c62cc46fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.bmc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-di7navih649so9qv4ffn82o5ae0rad6n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.bmc",
+            "certificate_hash": "8db3f781e7eb9629f4b6439527b2e1eafb6380d2"
+          }
+        },
+        {
+          "client_id": "22523139239-t92aclio61qv29lumvfj0jjckjetengu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.bmc",
+            "certificate_hash": "217f483cce4740b8aab02e5dd041efa20d997938"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:aabc4013087c3c076fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.dharmakerti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-5c42jhpbrrk5cvtpqm3je35emq0su7a3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.dharmakerti",
+            "certificate_hash": "08284361b5d5369acc057f00bd7f1208f2c07edc"
+          }
+        },
+        {
+          "client_id": "22523139239-beoi7eh9s8ag2efe8mcsb73ujcvg8min.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.dharmakerti",
+            "certificate_hash": "8b5d2a581ca3cf97a5c68c954be5a000d583d7ae"
+          }
+        },
+        {
+          "client_id": "22523139239-he1hijgiis2b6v3cc1je87tq9l5gteij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.dharmakerti",
+            "certificate_hash": "e165e4bdaaa3cdd09c67dcc618758a17a4d74722"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:83a9e225d1d01452",
+        "android_client_info": {
+          "package_name": "com.haimed.dharmayadnyarelease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-6omgs0qovub023pv4eeadqeb18mh60fc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.dharmayadnyarelease",
+            "certificate_hash": "7f418bdca7fabbccba1aa59af280c3a5f1b4cd09"
+          }
+        },
+        {
+          "client_id": "22523139239-c6kj9gm3c1ovclkj29cp9r1nvflhuc20.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.dharmayadnyarelease",
+            "certificate_hash": "7dd392f4eab60032e4a7b25df9761265967418a1"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:90152fa8662c8e186fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.ganesha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:5b868a0eec92746f6fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.padmabahtera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:fd9540401759f0176fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.primamedika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-18qhc63uehvinq2gm6kucqn1feg0hju0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.primamedika",
+            "certificate_hash": "08284361b5d5369acc057f00bd7f1208f2c07edc"
+          }
+        },
+        {
+          "client_id": "22523139239-vvbvo2clojtb7bvgc41ueasskr57p92c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.primamedika",
+            "certificate_hash": "8ddf78a041bd2c8b92a66fe2cf7b55e79556b77f"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:5d624de816fed8fe6fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.pucukpermatahati"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-kvle5k4cb2uj4ffkbj1oi0tatu6btp50.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.pucukpermatahati",
+            "certificate_hash": "d3c90c4751a7a38391e2b3913362b993150826ea"
+          }
+        },
+        {
+          "client_id": "22523139239-u4q98h9n0kc7l9rggi0au7d5p40o3in1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.pucukpermatahati",
+            "certificate_hash": "f6a9b5b192f1720d29558e9ae249ba71da3fa0a9"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:51d5c9a739c178386fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.rsbk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-ajmfivdhg24rprnlhmnfcshnlmsol459.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.rsbk",
+            "certificate_hash": "4d408581a7f8e14a3c3a95c43a726c79c0f1c5d3"
+          }
+        },
+        {
+          "client_id": "22523139239-ktpns6hsi9fudnoob7rd92cf2jn7tvca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.rsbk",
+            "certificate_hash": "d1a58c92845af7a4267a47d1aea3d3e3ef0012fa"
+          }
+        },
+        {
+          "client_id": "22523139239-u503hgtdad8o6pra2lr1pe94j8uscpo7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.rsbk",
+            "certificate_hash": "50e1b693a17e69e01870e0dfaacfd120c958edee"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:86f56799170d0e126fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.rsiadedarirelease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-f5id6gj9jfr5e19spvbki74rp80n72a6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.rsiadedarirelease",
+            "certificate_hash": "8b5d2a581ca3cf97a5c68c954be5a000d583d7ae"
+          }
+        },
+        {
+          "client_id": "22523139239-sgi4u23kjsnp4bv35l2p7ov5q33ejng3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.rsiadedarirelease",
+            "certificate_hash": "b6e76dfc5254661a3d1b2716b8b59799c60d5054"
+          }
+        },
+        {
+          "client_id": "22523139239-vsi02kf3hg1ljio40gtktjk49oqbeqlq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.rsiadedarirelease",
+            "certificate_hash": "7954ea74194b4855d3f776289ef572993900b429"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:311db0f48b8980be6fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.rsudbangli"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-6ssiuk4ctcc0iuqvdscp4ahfljte4rbl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.rsudbangli",
+            "certificate_hash": "d76c8065ede632b72b987830c23fc0915396c569"
+          }
+        },
+        {
+          "client_id": "22523139239-82um15faqst549ckikcetmuaoam2sr72.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.rsudbangli",
+            "certificate_hash": "08284361b5d5369acc057f00bd7f1208f2c07edc"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:82a459548f87b3306fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.suryahusadha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-sefhjgish0j2ldc44vv1njp5lgtnvt8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.suryahusadha",
+            "certificate_hash": "40b7c8dfe224bd6960d3e4e150f616ba22044c57"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:35121cdb819a8b416fb782",
+        "android_client_info": {
+          "package_name": "com.haimed.unud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-e36dg72qg17gh1l9u8eq681h9qft15iv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haimed.unud",
+            "certificate_hash": "ead3782a03d6ad1664e76d0af7bf818d070bf191"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:94b9ceddd06910506fb782",
+        "android_client_info": {
+          "package_name": "id.haimed.dokterdharmakerti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-le2hrut36ie88gu7vj3j3m3rk4qlu43o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.haimed.dokterdharmakerti",
+            "certificate_hash": "08284361b5d5369acc057f00bd7f1208f2c07edc"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:6f030cfeca1eb4fc6fb782",
+        "android_client_info": {
+          "package_name": "id.haimed.dokterrspm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22523139239:android:b086721418627d9e6fb782",
+        "android_client_info": {
+          "package_name": "id.haimed.dokterrsubangli"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22523139239-fupqvphotjjunedrrqtdktvkqjgo1dfv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.haimed.dokterrsubangli",
+            "certificate_hash": "8b5d2a581ca3cf97a5c68c954be5a000d583d7ae"
+          }
+        },
+        {
+          "client_id": "22523139239-g8mjvufbqpqna51524vkg5grj61jja0t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.haimed.dokterrsubangli",
+            "certificate_hash": "6ab2dc0bfee4bd0762f8a5289d4a8d18793fa15e"
+          }
+        },
+        {
+          "client_id": "22523139239-p0e2b0um2evsdsfpsehjitsssdfabpnb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.haimed.dokterrsubangli",
+            "certificate_hash": "08284361b5d5369acc057f00bd7f1208f2c07edc"
+          }
+        },
+        {
+          "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBColHIwgPxrEXhaalW2lyZQkSaUD0hie8"
+        },
+        {
+          "current_key": "AIzaSyCXVR-Cv9MRQ8x2zicvIvRX9R5UHq_PyeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22523139239-5cgp3dmvle5ikcctpcv45110o3d16ri9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haimed.rsbk"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

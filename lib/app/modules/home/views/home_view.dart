@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
@@ -23,7 +24,7 @@ class HomeView extends GetView<HomeController> {
               children: [
                 Container(
                   height: 80,
-                  decoration: const BoxDecoration(
+                  decoration:  BoxDecoration(
                     color: MahasColors.primary,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15),
@@ -154,7 +155,7 @@ class HomeView extends GetView<HomeController> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:
-                                controller.imgList.asMap().entries.map((entry) {
+                                MahasConfig.coverImages.asMap().entries.map((entry) {
                               return GestureDetector(
                                 onTap: () => controller.imageController
                                     .animateToPage(entry.key),

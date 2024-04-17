@@ -43,10 +43,11 @@ class ReservasiView extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
               ),
-              child: QrImage(
-                data: noReservasi,
-                version: QrVersions.auto,
-              ),
+              child: QrImageView(data: noReservasi),
+              // QrImage(
+              //   data: noReservasi,
+              //   version: QrVersions.auto,
+              // ),
             ),
             Expanded(
               child: SizedBox(

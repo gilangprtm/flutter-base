@@ -156,7 +156,7 @@ class InputDetailSetupControler<T> {
                     visible: editable,
                     child: InkWell(
                       onTap: () => _itemDeleteOnPress(key),
-                      child: const Icon(
+                      child:  Icon(
                         Icons.delete_forever,
                         color: MahasColors.danger,
                       ),
@@ -166,7 +166,7 @@ class InputDetailSetupControler<T> {
               ),
               InkWell(
                 onTap: () => _itemEditOnPress(key),
-                child: const Text(
+                child:  Text(
                   "Edit",
                   style: TextStyle(color: MahasColors.primary),
                 ),
@@ -320,7 +320,7 @@ class _InputDetailSetupComponentState<T>
                 alignment: Alignment.centerLeft,
                 child: Text(
                   widget.controller._errorMessage ?? "",
-                  style: const TextStyle(color: MahasColors.primary),
+                  style:  TextStyle(color: MahasColors.primary),
                 ),
               ),
             ),

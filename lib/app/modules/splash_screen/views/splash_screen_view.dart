@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
+import 'package:haimed_getx/app/mahas/mahas_service.dart';
 
 import '../controllers/splash_screen_controller.dart';
 
@@ -18,7 +20,9 @@ class SplashScreenView extends GetView<SplashScreenController> {
               SizedBox(
                 height: 200,
                 child: Image.asset(
-                  "assets/images/logo-nobg.png",
+                  MahasConfig.currentEnv == MahasEnvironmentType.cendana
+                      ? "assets/images/logo-nobg.png"
+                      : "assets/images/loadingrsbktiga.gif",
                   scale: 1,
                 ),
               ),

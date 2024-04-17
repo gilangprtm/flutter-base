@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,27 +9,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:haimed_getx/app/models/informasi_umum_model.dart';
+import 'package:haimed_getx/app/models/update_app_values_model.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../../../firebase_options.dart';
 import '../controllers/auth_controller.dart';
+import '../models/faq_model.dart';
 import '../services/local_notification_service.dart';
 import 'mahas_colors.dart';
 import 'mahas_config.dart';
+import 'models/color_theme_model.dart';
+
+enum MahasEnvironmentType { cendana, rsbk }
 
 final authController = AuthController.instance;
 final remoteConfig = FirebaseRemoteConfig.instance;
 final auth = FirebaseAuth.instance;
-// final Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp(
-//   options: DefaultFirebaseOptions.currentPlatform,
-// );
 
 class MahasService {
-  static PackageInfo? packageInfo;
-  static Future<void> backgroundHandler(RemoteMessage message) async {}
+  // static Future<void> backgroundHandler(RemoteMessage message) async {}
 
   static Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    //package info
+    MahasConfig.packageInfo = await PackageInfo.fromPlatform();
+    
+    // Environment
+    MahasConfig.currentEnv = await currentEnv();
 
     // transparent status bar
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -36,45 +44,38 @@ class MahasService {
     ));
 
     try {
-      final Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp(
-        // name: 'haimed-cendana',
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+      final Future<FirebaseApp> firebaseInitialization =
+          (defaultTargetPlatform == TargetPlatform.android ||
+                  defaultTargetPlatform == TargetPlatform.iOS)
+              ? Firebase.initializeApp()
+              : Firebase.initializeApp(
+                  options: DefaultFirebaseOptions.currentPlatform,
+                );
 
       // auth controller
-      await firebaseInitialization.then((value) {
-        Get.put(AuthController());
-      });
+      await firebaseInitialization.then(
+        (value) async {
+          // remote config
+          await remoteConfig.setConfigSettings(
+            RemoteConfigSettings(
+              fetchTimeout: const Duration(seconds: 5),
+              minimumFetchInterval: Duration.zero,
+            ),
+          );
+          await remoteConfig.fetchAndActivate();
+          getRemoteConfig();
+          Get.put(AuthController());
+        },
+      );
 
       // notif
-      FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+      // FirebaseMessaging.onBackgroundMessage(backgroundHandler);
       if (!kIsWeb) {
-        if (Platform.isAndroid || Platform.isIOS) {
-          if (Platform.isAndroid) {
-            androidNotification();
-          } else {
-            appleNotification();
-          }
-        }
+        notification();
       }
-
-      // remote config
-      await remoteConfig.setConfigSettings(
-        RemoteConfigSettings(
-          fetchTimeout: const Duration(hours: 1),
-          minimumFetchInterval: const Duration(minutes: 2),
-        ),
-      );
-      await remoteConfig.fetchAndActivate();
-      // get api from remote config
-      MahasConfig.urlApi = remoteConfig.getString('api');
-      // MahasConfig.hasInternet = true;
     } catch (e) {
       Get.put(AuthController());
     }
-
-    // packageInfo
-    packageInfo = await PackageInfo.fromPlatform();
 
     // getstorange
     await GetStorage.init();
@@ -85,28 +86,63 @@ class MahasService {
     HttpOverrides.global = MyHttpOverrides();
   }
 
-  //Notif Android
-  static Future<void> androidNotification() async {
-    //terminated state
-    FirebaseMessaging.instance.getInitialMessage().then((message) {});
-
-    //foreground state
-    FirebaseMessaging.onMessage.listen((message) {
-      LocalNotificationService.showNotificatiOnForeground(message);
-    });
-
-    //notif jadwal
-    // FirebaseMessaging.onMessage.listen((message) {
-    //   LocalNotificationService.showNotifJadwal(message);
-    // });
-
-    //background state
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {});
+  static Future<MahasEnvironmentType> currentEnv() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    if (packageInfo.packageName == "com.haimed.rsbk") {
+      return MahasEnvironmentType.rsbk;
+    } else {
+      return MahasEnvironmentType.cendana;
+    }
   }
 
-  //Notif Apple
-  static Future<void> appleNotification() async {
-    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
+  static void getRemoteConfig() {
+    // get api from remote config
+    MahasConfig.urlApi = remoteConfig.getString("api");
+    MahasConfig.coverImages.add(remoteConfig.getString("cover_images"));
+    String faqRemote = remoteConfig.getString("faq");
+    if (faqRemote.isNotEmpty) {
+      List<dynamic> values = jsonDecode(faqRemote);
+      for (var faq in values) {
+        MahasConfig.faq.add(FaqModel.fromDynamic(faq));
+      }
+    }
+    String informasiRemote = remoteConfig.getString("informasi_umum");
+    if (informasiRemote.isNotEmpty) {
+      MahasConfig.informasiUmum = InformasiumumModel.fromJson(informasiRemote);
+    }
+    String noInternetRemoteConfig =
+        remoteConfig.getString("no_internet_error_message");
+    if (noInternetRemoteConfig.isNotEmpty) {
+      List<dynamic> dataNoInternet = jsonDecode(noInternetRemoteConfig);
+      if (dataNoInternet.isNotEmpty) {
+        List<String> strlist = dataNoInternet.cast<String>();
+        MahasConfig.noInternetErrorMessage.clear();
+        MahasConfig.noInternetErrorMessage.addAll(strlist);
+      }
+    }
+    String colorThemeRemoteConfig = remoteConfig.getString("theme_color");
+    if (colorThemeRemoteConfig.isNotEmpty) {
+      ColorThemeModel colorTheme =
+          ColorThemeModel.fromJson(colorThemeRemoteConfig);
+      if (colorTheme.primary != null) {
+        MahasColors.primary = Color(int.parse(colorTheme.primary!));
+      }
+      if (colorTheme.danger != null) {
+        MahasColors.danger = Color(int.parse(colorTheme.danger!));
+      }
+      if (colorTheme.warning != null) {
+        MahasColors.warning = Color(int.parse(colorTheme.warning!));
+      }
+    }
+    String updateRemote = remoteConfig.getString("update_app_values");
+    if (updateRemote.isNotEmpty) {
+      MahasConfig.updateAppValues = UpdateappvaluesModel.fromJson(updateRemote);
+    }
+  }
+
+  //Notif
+  static Future<void> notification() async {
+    final FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
@@ -120,14 +156,7 @@ class MahasService {
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       // For handling the received notifications
       //terminated state
-      FirebaseMessaging.instance.getInitialMessage().then((message) {
-        //   showSimpleNotification(
-        //     Text("${message?.notification!.title}"),
-        //     subtitle: Text("${message?.notification!.body}"),
-        //     background: MahasColors.lightBlue,
-        //     duration: const Duration(seconds: 3),
-        //  );
-      });
+      FirebaseMessaging.instance.getInitialMessage();
 
       //foreground state
       await FirebaseMessaging.instance
@@ -138,23 +167,7 @@ class MahasService {
       );
 
       FirebaseMessaging.onMessage.listen((message) {
-        // LocalNotificationService.showNotificatiOnForeground(message);
-        showSimpleNotification(
-          Text("${message.notification!.title}"),
-          subtitle: Text("${message.notification!.body}"),
-          background: MahasColors.primary,
-          duration: const Duration(seconds: 3),
-        );
-      });
-
-      //background state
-      FirebaseMessaging.onMessageOpenedApp.listen((message) {
-        // showSimpleNotification(
-        //   Text("${message.notification!.title}"),
-        //   subtitle: Text("${message.notification!.body}"),
-        //   background: MahasColors.lightBlue,
-        //   duration: const Duration(seconds: 3),
-        // );
+        LocalNotificationService.showNotificatiOnForeground(message);
       });
     }
   }

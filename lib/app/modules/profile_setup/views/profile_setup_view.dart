@@ -63,7 +63,7 @@ class ProfileSetupView extends GetView<ProfileSetupController> {
                                     MahasThemes.borderRadius),
                               ),
                               child: c.getImage == null && c.image == null
-                                  ? const Center(
+                                  ?  Center(
                                       child: SizedBox(
                                         width: 30,
                                         height: 30,

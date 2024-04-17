@@ -120,7 +120,7 @@ class InputDetailControler<T> {
                     visible: editable,
                     child: InkWell(
                       onTap: () => _itemDeleteOnPress(element),
-                      child: const Icon(
+                      child:  Icon(
                         Icons.delete_forever,
                         color: MahasColors.danger,
                       ),
@@ -264,7 +264,7 @@ class _InputDetailComponentState<T> extends State<InputDetailComponent<T>> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   widget.controller._errorMessage ?? "",
-                  style: const TextStyle(color: MahasColors.danger),
+                  style:  TextStyle(color: MahasColors.danger),
                 ),
               ),
             ),

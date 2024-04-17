@@ -156,7 +156,7 @@ class InputDetailSetupListControler<T, U> {
                     visible: editable,
                     child: InkWell(
                       onTap: () => _itemDeleteOnPress(element),
-                      child: const Icon(
+                      child:  Icon(
                         Icons.delete_forever,
                         color: MahasColors.danger,
                       ),
@@ -166,7 +166,7 @@ class InputDetailSetupListControler<T, U> {
               ),
               InkWell(
                 onTap: () => _itemEditOnPress(element),
-                child: const Text(
+                child:  Text(
                   "Edit",
                   style: TextStyle(color: MahasColors.primary),
                 ),
@@ -358,7 +358,7 @@ class _InputDetailSetupListComponentState<T, U>
                 alignment: Alignment.centerLeft,
                 child: Text(
                   widget.controller._errorMessage ?? "",
-                  style: const TextStyle(color: MahasColors.danger),
+                  style:  TextStyle(color: MahasColors.danger),
                 ),
               ),
             ),

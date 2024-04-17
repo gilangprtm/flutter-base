@@ -7,6 +7,7 @@ class MahasThemes {
 
   static ThemeData light = ThemeData(
     fontFamily: 'Poppins',
+    useMaterial3: false,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(88, 40),
@@ -24,7 +25,7 @@ class MahasThemes {
         ),
       ),
     ),
-    appBarTheme: const AppBarTheme(
+    appBarTheme:  AppBarTheme(
       backgroundColor: MahasColors.primary,
     ),
   );
@@ -53,7 +54,7 @@ class MahasThemes {
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle primaryH3 = const TextStyle(
+  static TextStyle primaryH3 =  TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w700,
     color: MahasColors.primary,
@@ -73,7 +74,7 @@ class MahasThemes {
     fontSize: 12,
     color: MahasColors.light,
   );
-  static TextStyle normalPrimary = const TextStyle(
+  static TextStyle normalPrimary =  TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 12,
     color: MahasColors.primary,
