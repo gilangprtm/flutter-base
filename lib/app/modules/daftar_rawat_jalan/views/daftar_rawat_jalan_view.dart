@@ -17,6 +17,7 @@ class DaftarRawatJalanView extends GetView<DaftarRawatJalanController> {
       appBar: AppBar(
         title: const Text('Daftar Dokter'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: TabBarView(
         controller: controller.tabController,

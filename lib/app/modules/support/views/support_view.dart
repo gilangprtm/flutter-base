@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../mahas/mahas_colors.dart';
 import '../controllers/support_controller.dart';
 
 class SupportView extends GetView<SupportController> {
@@ -12,6 +13,7 @@ class SupportView extends GetView<SupportController> {
       appBar: AppBar(
         title: Text('Pusat Bantuan'),
         centerTitle: true,
+        backgroundColor: MahasColors.primary,
       ),
       body: ListView.separated(
         itemBuilder: (context, i) => ListTile(

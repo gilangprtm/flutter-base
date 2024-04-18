@@ -24,7 +24,7 @@ class HomeView extends GetView<HomeController> {
               children: [
                 Container(
                   height: 80,
-                  decoration:  BoxDecoration(
+                  decoration: BoxDecoration(
                     color: MahasColors.primary,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15),
@@ -154,8 +154,10 @@ class HomeView extends GetView<HomeController> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children:
-                                MahasConfig.coverImages.asMap().entries.map((entry) {
+                            children: MahasConfig.coverImages
+                                .asMap()
+                                .entries
+                                .map((entry) {
                               return GestureDetector(
                                 onTap: () => controller.imageController
                                     .animateToPage(entry.key),
@@ -184,7 +186,7 @@ class HomeView extends GetView<HomeController> {
 
                       // menu layanan
                       Container(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -208,7 +210,7 @@ class HomeView extends GetView<HomeController> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
-                                      height: 100,
+                                      height: 90,
                                       width: MediaQuery.of(context).size.width,
                                       child: Row(
                                         mainAxisAlignment:
@@ -229,9 +231,10 @@ class HomeView extends GetView<HomeController> {
                                                 children: [
                                                   Image.asset(
                                                     'assets/images/daftar_rawat_jalan.png',
-                                                    height: 50,
+                                                    height: 40,
                                                     width: double.infinity,
                                                     fit: BoxFit.fitHeight,
+                                                    color: MahasColors.primary,
                                                   ),
                                                   SizedBox(
                                                     height: 5,
@@ -262,9 +265,10 @@ class HomeView extends GetView<HomeController> {
                                                 children: [
                                                   Image.asset(
                                                     'assets/images/ulasan.png',
-                                                    height: 50,
+                                                    height: 40,
                                                     width: double.infinity,
                                                     fit: BoxFit.fitHeight,
+                                                    color: MahasColors.primary,
                                                   ),
                                                   SizedBox(
                                                     height: 5,
@@ -295,9 +299,10 @@ class HomeView extends GetView<HomeController> {
                                                 children: [
                                                   Image.asset(
                                                     'assets/images/riwayat_pendaftaran.png',
-                                                    height: 50,
+                                                    height: 40,
                                                     width: double.infinity,
                                                     fit: BoxFit.fitHeight,
+                                                    color: MahasColors.primary,
                                                   ),
                                                   SizedBox(
                                                     height: 5,
@@ -314,11 +319,6 @@ class HomeView extends GetView<HomeController> {
                                         ],
                                       ),
                                     ),
-                                    // Divider(
-                                    //   color: MahasColors.primary,
-                                    //   thickness: 2,
-                                    //   height: 10,
-                                    // ),
                                   ],
                                 ),
                               ),
@@ -340,9 +340,12 @@ class HomeView extends GetView<HomeController> {
                         child: Container(
                           padding: EdgeInsets.only(left: 10, right: 10, top: 5),
                           height: Get.height,
-                          child: ListView.builder(
-                            itemBuilder: ((context, index) => InkWell(
-                                  onTap: () => controller.goToArticleDetail(),
+                          child: Obx(
+                            () => ListView.builder(
+                              itemBuilder: (context, index) {
+                                var item = controller.artikels[index];
+                                return InkWell(
+                                  onTap: () => controller.goToArticleDetail(item),
                                   child: Container(
                                     margin: EdgeInsets.only(bottom: 5),
                                     decoration: BoxDecoration(
@@ -358,14 +361,35 @@ class HomeView extends GetView<HomeController> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Image.asset(
-                                            'assets/images/ilustrasi.jpeg',
+                                          Image.network(
+                                            item.image ?? "",
                                             fit: BoxFit.fill,
                                             width: Get.width,
                                             height: Get.width * 0.4,
+                                            loadingBuilder: (context, child,
+                                                    loadingProgress) =>
+                                                loadingProgress != null
+                                                    ? Center(
+                                                        child: Image.asset(
+                                                          "assets/images/iosloading.gif",
+                                                          height: 30,
+                                                          width: 30,
+                                                        ),
+                                                      )
+                                                    : child,
                                           ),
                                           Container(
-                                            margin: EdgeInsets.all(10),
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(
+                                                    MahasThemes.borderRadius),
+                                                bottomRight: Radius.circular(
+                                                    MahasThemes.borderRadius),
+                                              ),
+                                              border: Border.all(
+                                                  color: MahasColors.grey),
+                                            ),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -374,18 +398,12 @@ class HomeView extends GetView<HomeController> {
                                               children: [
                                                 Text(
                                                   MahasFormat.displayDate(
-                                                      DateTime.now()),
+                                                    item.tanggal?.toDate(),
+                                                  ),
                                                   style: MahasThemes.mutedH3,
                                                 ),
-                                                SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Text(
-                                                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                                                  style: MahasThemes.mutedH3,
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.clip,
-                                                ),
+                                                Text(item.title ?? "",
+                                                    style: MahasThemes.h3),
                                               ],
                                             ),
                                           ),
@@ -393,8 +411,10 @@ class HomeView extends GetView<HomeController> {
                                       ),
                                     ),
                                   ),
-                                )),
-                            itemCount: 5,
+                                );
+                              },
+                              itemCount: controller.artikels.length,
+                            ),
                           ),
                         ),
                       ),

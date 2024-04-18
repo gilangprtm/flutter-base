@@ -5,6 +5,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/mahas_config.dart';
 import '../../../mahas/services/mahas_format.dart';
 
 class ReservasiView extends StatelessWidget {
@@ -96,7 +97,7 @@ class ReservasiView extends StatelessWidget {
         SizedBox(
           width: Get.width,
           child: Text(
-            "RS Cendana Premier",
+            MahasConfig.informasiUmum.namars ?? "",
             style: MahasThemes.h2,
             textAlign: TextAlign.center,
           ),

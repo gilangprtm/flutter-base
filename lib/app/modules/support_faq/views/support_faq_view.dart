@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
+import '../../../mahas/mahas_colors.dart';
 import '../controllers/support_faq_controller.dart';
 
 class SupportFaqView extends GetView<SupportFaqController> {
@@ -12,6 +13,7 @@ class SupportFaqView extends GetView<SupportFaqController> {
       appBar: AppBar(
         title: Text('Frequently Asked Questions'),
         centerTitle: true,
+        backgroundColor: MahasColors.primary,
       ),
       body: Obx(
         () {

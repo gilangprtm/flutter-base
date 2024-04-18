@@ -21,4 +21,12 @@ class ColorThemeModel {
 
     return model;
   }
+
+  factory ColorThemeModel.mapFromJson(Map<String, dynamic> json) {
+    return ColorThemeModel.fromDynamic(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {"primary": primary, "danger": danger, "warning": warning};
+  }
 }

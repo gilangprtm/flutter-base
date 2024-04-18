@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
+import '../../../mahas/mahas_colors.dart';
 import '../controllers/phone_login_controller.dart';
 
 class PhoneLoginView extends GetView<PhoneLoginController> {
@@ -14,6 +15,7 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
       appBar: AppBar(
         title: const Text('Konfirmasi'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: Center(
         child: Container(

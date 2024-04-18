@@ -7,6 +7,7 @@ import 'package:haimed_getx/app/models/reservasi_model.dart';
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/components/others/list_component.dart';
 import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/mahas_config.dart';
 import '../controllers/reservasi_controller.dart';
 
 class ReservasiView extends GetView<ReservasiController> {
@@ -16,6 +17,7 @@ class ReservasiView extends GetView<ReservasiController> {
       appBar: AppBar(
         title: Text("List Reservasi"),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: GetBuilder<ReservasiController>(
         builder: (c) => ListComponent(
@@ -50,7 +52,7 @@ class ReservasiView extends GetView<ReservasiController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "RS. Cendana Premier",
+                                    MahasConfig.informasiUmum.namars ?? "",
                                     style: MahasThemes.h2,
                                     overflow: TextOverflow.visible,
                                     maxLines: 4,

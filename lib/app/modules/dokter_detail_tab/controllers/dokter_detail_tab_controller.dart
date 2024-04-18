@@ -13,6 +13,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/mahas_config.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../mahas/services/mahas_format.dart';
 import '../../../models/dokter_detail_model.dart';
@@ -348,7 +349,7 @@ class DokterDetailTabController extends GetxController {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "RS. Cendana Premiere",
+                                        MahasConfig.informasiUmum.namars ?? "",
                                         style: MahasThemes.muted,
                                         overflow: TextOverflow.visible,
                                         maxLines: 2,

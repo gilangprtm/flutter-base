@@ -19,6 +19,7 @@ class PasienView extends GetView<PasienController> {
       appBar: AppBar(
         title: const Text('Pasien'),
         centerTitle: true,
+        backgroundColor: MahasColors.primary,
       ),
       floatingActionButton: CoachPoint(
         initial: '1',

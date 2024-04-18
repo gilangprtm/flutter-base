@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:haimed_getx/app/constant/strings.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:haimed_getx/app/mahas/mahas_service.dart';
@@ -22,7 +21,7 @@ class WelcomeView extends GetView<WelcomeController> {
       pages: [
         PageViewModel(
           bodyWidget: Text(
-            "Selamat datang di Aplikasi HaiMed \n$namaRS",
+            "Selamat datang di Aplikasi \n${MahasConfig.informasiUmum.namaaplikasi}",
             style: MahasThemes.welcomeTitle.copyWith(fontSize: 18),
             textAlign: TextAlign.center,
           ),

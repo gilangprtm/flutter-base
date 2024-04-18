@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import '../../mahas_colors.dart';
 import '../../models/api_result_model.dart';
 import '../../services/helper.dart';
 import '../../services/http_api.dart';
@@ -269,6 +270,7 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
         appBar: !widget.showAppBar
             ? null
             : AppBar(
+              backgroundColor: MahasColors.primary,
                 title: Text(widget.title),
                 centerTitle: true,
                 actions: widget.controller._id == null ||

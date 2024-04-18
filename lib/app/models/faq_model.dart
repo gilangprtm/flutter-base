@@ -19,4 +19,12 @@ class FaqModel {
 
     return model;
   }
+
+  factory FaqModel.mapFromJson(Map<String, dynamic> json) {
+    return FaqModel.fromDynamic(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {"question": question, "answer": answer};
+  }
 }

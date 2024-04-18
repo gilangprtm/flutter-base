@@ -16,6 +16,7 @@ class DokterFavoriteView extends GetView<DokterFavoriteController> {
       appBar: AppBar(
         title: Text('Dokter Favorite'),
         centerTitle: true,
+        backgroundColor: MahasColors.primary,
       ),
       body: Container(
         margin: EdgeInsets.only(top: 10),

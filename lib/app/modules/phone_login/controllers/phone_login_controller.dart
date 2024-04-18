@@ -85,6 +85,7 @@ class PhoneLoginController extends GetxController {
             appBar: AppBar(
               title: const Text("Konfirmasi"),
               centerTitle: false,
+              backgroundColor: MahasColors.primary,
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),

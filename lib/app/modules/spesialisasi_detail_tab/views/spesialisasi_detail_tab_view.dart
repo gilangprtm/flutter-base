@@ -20,6 +20,7 @@ class SpesialisasiDetailTabView
       appBar: AppBar(
         title: Text(controller.title),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
         actions: [
           Obx(
             () => Container(

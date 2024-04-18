@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/mahas_colors.dart';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
+import 'package:haimed_getx/app/mahas/mahas_service.dart';
 
 import '../../../../mahas_complement/coachmaker/coachmaker.dart';
 import '../controllers/ulasan_informasi_controller.dart';
@@ -18,7 +21,6 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
           padding: EdgeInsets.all(10),
           child: Column(
             children: [
-              // Rs bhayangkara
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -29,50 +31,49 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Image.asset(
-                      'assets/images/logo-nobg.png',
+                      MahasConfig.currentEnv == MahasEnvironmentType.cendana
+                          ? 'assets/images/logo-nobg.png'
+                          : 'assets/images/logorsbk.png',
                       width: 80.0,
                       fit: BoxFit.fill,
                     ),
                     SizedBox(
                       width: 10,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "RS. Cendana Premier",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            MahasConfig.informasiUmum.namars ?? "",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.location_pin,
-                              color: MahasColors.primary,
-                              size: 18,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Container(
-                              // width: 240,
-                              width: MediaQuery.of(context).size.width - 180,
-                              child: Text(
-                                "Jl. Cok Rai Pudak, Peliatan, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571",
-                                style: TextStyle(),
-                                maxLines: 6,
-                                overflow: TextOverflow.ellipsis,
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.location_pin,
+                                color: MahasColors.primary,
+                                size: 18,
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  MahasConfig.informasiUmum.alamat ?? "",
+                                  style: TextStyle(),
+                                  maxLines: 6,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -172,32 +173,11 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                             children: [
                               Container(
                                 width: MediaQuery.of(context).size.width - 60,
-                                child: Text(
-                                  "Nama rumah sakit ini adalah Rumah Sakit Cendana Premier",
-                                  style: TextStyle(),
-                                  maxLines: 6,
-                                  overflow: TextOverflow.ellipsis,
+                                child: HtmlWidget(
+                                  MahasConfig
+                                          .informasiUmum.deskripsirumahsakit ??
+                                      "",
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 60,
-                                child: RichText(
-                                  text: TextSpan(
-                                    style: DefaultTextStyle.of(context).style,
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            "Visi, Misi, Falsafah dan Tujuan Rumah Sakit Cendana Premier",
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
                               ),
                             ],
                           ),
@@ -238,7 +218,8 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  controller.launchEmail("example@example.com");
+                                  controller.launchEmail(
+                                      MahasConfig.informasiUmum.email ?? "");
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
@@ -251,7 +232,9 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text("Email"),
-                                          Text("example@example.com"),
+                                          Text(
+                                              MahasConfig.informasiUmum.email ??
+                                                  ""),
                                         ],
                                       ),
                                       const Icon(
@@ -277,7 +260,8 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  controller.lauchPhoneCall("+6280000000000");
+                                  controller.lauchPhoneCall(
+                                      MahasConfig.informasiUmum.notelp ?? "");
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
@@ -290,7 +274,9 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text("Telephone"),
-                                          Text("+62 80000000000"),
+                                          Text(MahasConfig
+                                                  .informasiUmum.notelp ??
+                                              ""),
                                         ],
                                       ),
                                       const Icon(
@@ -316,8 +302,11 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  controller
-                                      .launchWebsite(Uri.https('example.com'));
+                                  controller.launchWebsite(
+                                    Uri.parse(
+                                      MahasConfig.informasiUmum.website ?? "",
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width - 60,
@@ -330,7 +319,9 @@ class UlasanInformasiView extends GetView<UlasanInformasiController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text("Website"),
-                                          Text("https://example.com/"),
+                                          Text(MahasConfig
+                                                  .informasiUmum.website ??
+                                              ""),
                                         ],
                                       ),
                                       const Icon(

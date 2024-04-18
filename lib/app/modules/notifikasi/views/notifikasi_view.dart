@@ -15,6 +15,7 @@ class NotifikasiView extends GetView<NotifikasiController> {
       appBar: AppBar(
         title: const Text('Notifikasi'),
         centerTitle: true,
+        backgroundColor: MahasColors.primary,
       ),
       body: ListComponent(
         controller: controller.listCon,

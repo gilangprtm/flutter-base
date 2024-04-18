@@ -25,6 +25,7 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
         appBar: AppBar(
           title: const Text('Detail Reservasi'),
           centerTitle: true,
+          backgroundColor: MahasColors.primary,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),

@@ -19,6 +19,7 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
       appBar: AppBar(
         title: const Text('Konfirmasi'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: FutureBuilder<JadwalpraktekModel>(
         future: controller.getDataDokter(),

@@ -266,6 +266,7 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
         appBar: AppBar(
           title: Text(widget.title ?? ""),
           centerTitle: true,
+          backgroundColor: MahasColors.primary,
         ),
         body: StatefulBuilder(
           builder: (

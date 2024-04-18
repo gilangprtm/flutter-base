@@ -15,6 +15,7 @@ class RegisterView extends GetView<RegisterController> {
         title: Obx(() =>
             controller.isLogin.value == false ? Text('Daftar') : Text('Login')),
         centerTitle: true,
+        backgroundColor: MahasColors.primary,
       ),
       body: Container(
         padding: EdgeInsets.all(15),

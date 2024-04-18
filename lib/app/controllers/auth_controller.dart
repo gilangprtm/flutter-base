@@ -21,7 +21,6 @@ class AuthController extends GetxController {
 
   @override
   void onInit() async {
-    await GetStorage.init();
     late final FirebaseMessaging messaging = FirebaseMessaging.instance;
     token = await messaging.getToken();
     firebaseUser = Rx<User?>(auth.currentUser);

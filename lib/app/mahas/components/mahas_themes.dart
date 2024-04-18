@@ -8,14 +8,8 @@ class MahasThemes {
   static ThemeData light = ThemeData(
     fontFamily: 'Poppins',
     useMaterial3: false,
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(88, 40),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-        ),
-        backgroundColor: MahasColors.primary,
-      ),
+    appBarTheme: AppBarTheme(
+      color: MahasColors.primary,
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -25,8 +19,15 @@ class MahasThemes {
         ),
       ),
     ),
-    appBarTheme:  AppBarTheme(
-      backgroundColor: MahasColors.primary,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(88, 40),
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
+        ),
+        backgroundColor: MahasColors.primary,
+      ),
     ),
   );
 
@@ -54,7 +55,7 @@ class MahasThemes {
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle primaryH3 =  TextStyle(
+  static TextStyle primaryH3 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w700,
     color: MahasColors.primary,
@@ -74,7 +75,7 @@ class MahasThemes {
     fontSize: 12,
     color: MahasColors.light,
   );
-  static TextStyle normalPrimary =  TextStyle(
+  static TextStyle normalPrimary = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 12,
     color: MahasColors.primary,

@@ -15,6 +15,7 @@ import '../../../mahas/mahas_config.dart';
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../mahas/services/http_api.dart';
+import '../../../models/artikel_firebase_model.dart';
 import '../../../models/notifikasi_model.dart';
 import '../../../routes/app_pages.dart';
 
@@ -25,12 +26,7 @@ class HomeController extends GetxController {
   String? token;
   static final storage = GetStorage();
 
-  // final List<String> imgList = [
-  //   'assets/images/slider1.jpg',
-  //   'assets/images/slider2.jpg',
-  //   'assets/images/slider1.jpg',
-  //   'assets/images/slider2.jpg',
-  // ];
+  RxList<ArtikelFirestoreModel> artikels = <ArtikelFirestoreModel>[].obs;
 
   @override
   void onInit() async {
@@ -38,39 +34,53 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  imageSlider() {
-    final List<Widget> imageSliders = MahasConfig.coverImages
-        .map((item) => Container(
-              margin: const EdgeInsets.all(5.0),
-              child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(item,
-                          fit: BoxFit.cover, width: double.infinity),
-                      Positioned(
-                        bottom: 0.0,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(200, 0, 0, 0),
-                                Color.fromARGB(0, 0, 0, 0)
-                              ],
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                            ),
-                          ),
-                        ),
+  List<Widget> imageSlider() {
+    return MahasConfig.coverImages.map(
+      (item) {
+        return Container(
+          margin: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+            child: Stack(
+              children: <Widget>[
+                Image.network(
+                  item,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      loadingProgress != null
+                          ? Center(
+                              child: Image.asset(
+                                "assets/images/iosloading.gif",
+                                height: 50,
+                                width: 50,
+                              ),
+                            )
+                          : child,
+                ),
+                Positioned(
+                  bottom: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color.fromARGB(200, 0, 0, 0),
+                          Color.fromARGB(0, 0, 0, 0)
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
                       ),
-                    ],
-                  )),
-            ))
-        .toList();
-
-    return imageSliders;
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    ).toList();
   }
 
   void toLogin() {
@@ -89,8 +99,11 @@ class HomeController extends GetxController {
         });
   }
 
-  void goToArticleDetail() {
-    Get.toNamed(Routes.ARTIKEL_DETAIL);
+  void goToArticleDetail(ArtikelFirestoreModel model) {
+    Get.toNamed(
+      Routes.ARTIKEL_DETAIL,
+      arguments: {'model': model,},
+    );
   }
 
   void toNotif() {
@@ -271,5 +284,7 @@ class HomeController extends GetxController {
     await putUser();
     await getNotifikasi();
     await versionCheck();
+
+    artikels.value = await MahasService().getListArtikelFirestore();
   }
 }

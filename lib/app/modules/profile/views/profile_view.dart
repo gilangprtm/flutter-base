@@ -19,6 +19,7 @@ class ProfileView extends GetView<ProfileController> {
               expandedHeight: 200.0,
               floating: false,
               pinned: true,
+              backgroundColor: MahasColors.primary,
               actions: [
                 PopupMenuButton(
                   icon: const Icon(

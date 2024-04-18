@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
@@ -208,12 +209,8 @@ class UlasanUlasanView extends GetView<UlasanUlasanController> {
                                                     height: 8,
                                                   ),
                                                   Container(
-                                                    child: Text(
-                                                      item.balasan ?? "text",
-                                                      style: TextStyle(
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
+                                                    child: HtmlWidget(
+                                                      item.balasan ?? "",
                                                     ),
                                                   ),
                                                 ],

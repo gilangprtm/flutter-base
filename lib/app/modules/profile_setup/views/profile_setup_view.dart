@@ -17,6 +17,7 @@ class ProfileSetupView extends GetView<ProfileSetupController> {
       appBar: AppBar(
         title: const Text('Profile'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: SingleChildScrollView(
         child: Padding(

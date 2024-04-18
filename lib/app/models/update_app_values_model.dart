@@ -25,4 +25,17 @@ class UpdateappvaluesModel {
 
     return model;
   }
+
+  factory UpdateappvaluesModel.mapFromJson(Map<String, dynamic> json) {
+    return UpdateappvaluesModel.fromDynamic(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "version": version,
+      "must_update": mustUpdate,
+      "url_update": urlUpdate,
+      "dismiss_duration": dismissDuration,
+    };
+  }
 }

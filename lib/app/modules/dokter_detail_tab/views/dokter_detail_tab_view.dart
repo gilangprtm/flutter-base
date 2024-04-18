@@ -14,6 +14,7 @@ class DokterDetailTabView extends GetView<DokterDetailTabController> {
       appBar: AppBar(
         title: const Text('Kalender Praktek'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: Container(
         color: MahasColors.light,
