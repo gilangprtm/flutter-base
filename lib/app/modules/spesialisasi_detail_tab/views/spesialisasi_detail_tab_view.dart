@@ -106,18 +106,24 @@ class SpesialisasiDetailTabView
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ClipOval(
-                              child: e.fotodokter != null
-                                  ? Image.network(
-                                      e.fotodokter!,
-                                      width: 60,
-                                      height: 60,
-                                    )
-                                  : Image.asset(
-                                      "assets/images/Doctor.png",
-                                      width: 60,
-                                      height: 60,
-                                    ),
+                            InkWell(
+                              onTap: () async => await Helper.dialogFoto(
+                                  e.fotodokter,
+                                  "assets/images/Doctor.png",
+                                  e.namadokter),
+                              child: ClipOval(
+                                child: e.fotodokter != null
+                                    ? Image.network(
+                                        e.fotodokter!,
+                                        width: 60,
+                                        height: 60,
+                                      )
+                                    : Image.asset(
+                                        "assets/images/Doctor.png",
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                              ),
                             ),
                             SizedBox(
                               width: 10,

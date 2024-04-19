@@ -36,7 +36,7 @@ class DaftarRawatJalanView extends GetView<DaftarRawatJalanController> {
           isScrollable: false,
           labelColor: MahasColors.light,
           unselectedLabelColor: MahasColors.light.withOpacity(0.6),
-          indicatorColor: MahasColors.primary.withRed(20),
+          indicatorColor: MahasColors.light.withOpacity(0.6),
           controller: controller.tabController,
           tabs: [
             SizedBox(

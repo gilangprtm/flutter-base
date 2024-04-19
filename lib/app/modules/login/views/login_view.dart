@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:haimed_getx/app/mahas/components/others/icon_button.dart';
+import 'package:haimed_getx/app/mahas/components/others/login_button.dart';
 
 import '../../../mahas/mahas_colors.dart';
 import '../../../mahas/mahas_config.dart';
@@ -38,34 +39,22 @@ class LoginView extends GetView<LoginController> {
                     textAlign: TextAlign.center,
                     maxLines: 5,
                   ),
-                  // const SizedBox(height: 10),
-                  // Container(
-                  //   height: 46,
-                  //   width: 300,
-                  //   child: ButtonWithIcon(
-                  //     label: "Login menggunakan Email",
-                  //     onTap: () {
-                  //       controller.toLogin();
-                  //     },
-                  //   ),
-                  // ),
                   const SizedBox(height: 10),
-                  Container(
-                    height: 46,
-                    width: 300,
-                    child: ButtonWithIcon(
-                      label: "Login menggunakan Google",
-                      icon: Icon(FontAwesomeIcons.google),
-                      // color: Colors.grey[800],
-                      onTap: () {
-                        controller.googleLoginOnPress();
-                      },
+                  LoginButton(
+                    onPressed: () => controller.googleLoginOnPress(),
+                    type: LoginButtonType.google,
+                  ),
+                  const SizedBox(height: 10),
+                  Visibility(
+                    visible: Platform.isIOS,
+                    child: LoginButton(
+                      onPressed: () => controller.appleLoginOnPress(),
+                      type: LoginButtonType.apple,
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 30),
-              // Expanded(child: Container()),
             ],
           ),
         ),

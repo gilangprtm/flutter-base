@@ -18,6 +18,7 @@ import '../../../firebase_options.dart';
 import '../controllers/auth_controller.dart';
 import '../models/artikel_firebase_model.dart';
 import '../models/faq_model.dart';
+import '../modules/splash_screen/controllers/splash_screen_controller.dart';
 import '../services/local_notification_service.dart';
 import 'mahas_colors.dart';
 import 'mahas_config.dart';
@@ -29,6 +30,7 @@ final authController = AuthController.instance;
 final remoteConfig = FirebaseRemoteConfig.instance;
 final auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+final splashController = SplashScreenController.instance;
 
 class MahasService {
   // static Future<void> backgroundHandler(RemoteMessage message) async {}
@@ -45,39 +47,8 @@ class MahasService {
       statusBarColor: Colors.transparent,
     ));
 
-    try {
-      final Future<FirebaseApp> firebaseInitialization =
-          (defaultTargetPlatform == TargetPlatform.android ||
-                  defaultTargetPlatform == TargetPlatform.iOS)
-              ? Firebase.initializeApp()
-              : Firebase.initializeApp(
-                  options: DefaultFirebaseOptions.currentPlatform,
-                );
-
-      // auth controller
-      await firebaseInitialization.then(
-        (value) async {
-          // remote config
-          await remoteConfig.setConfigSettings(
-            RemoteConfigSettings(
-              fetchTimeout: const Duration(seconds: 5),
-              minimumFetchInterval: Duration.zero,
-            ),
-          );
-          await remoteConfig.fetchAndActivate();
-          getRemoteConfig();
-          Get.put(AuthController());
-        },
-      );
-
-      // notif
-      // FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-      if (!kIsWeb) {
-        notification();
-      }
-    } catch (e) {
-      Get.put(AuthController());
-    }
+    //init firebase
+    await checkFirebase(isInit: true);
 
     // init notification
     LocalNotificationService().initialize();
@@ -91,6 +62,38 @@ class MahasService {
       return MahasEnvironmentType.rsbk;
     } else {
       return MahasEnvironmentType.cendana;
+    }
+  }
+
+  static Future<void> checkFirebase({bool isInit = false}) async {
+    try {
+      final Future<FirebaseApp> firebaseInitialization =
+          (defaultTargetPlatform == TargetPlatform.android ||
+                  defaultTargetPlatform == TargetPlatform.iOS)
+              ? Firebase.initializeApp()
+              : Firebase.initializeApp(
+                  options: DefaultFirebaseOptions.currentPlatform,
+                );
+      await firebaseInitialization.then(
+        (value) async {
+          // remote config
+          await remoteConfig.setConfigSettings(
+            RemoteConfigSettings(
+              fetchTimeout: const Duration(seconds: 5),
+              minimumFetchInterval: Duration.zero,
+            ),
+          );
+           await remoteConfig.fetchAndActivate();
+          getRemoteConfig();
+          if (isInit) Get.put(AuthController());
+          splashController.isError.value = false;
+        },
+      );
+      if (!kIsWeb) {
+        notification();
+      }
+    } catch (e) {
+      splashController.isError.value = true;
     }
   }
 
@@ -198,6 +201,18 @@ class MahasService {
         .toList();
   }
 
+  static bool isInternetCausedError(String error) {
+    bool result = true;
+    for (var e in MahasConfig.noInternetErrorMessage) {
+      if (error.contains(RegExp(e, caseSensitive: false))) {
+        result = true;
+        break;
+      } else {
+        result = false;
+      }
+    }
+    return result;
+  }
 
   //Notif
   static Future<void> notification() async {

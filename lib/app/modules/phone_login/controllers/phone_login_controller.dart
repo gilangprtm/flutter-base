@@ -11,6 +11,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
 import '../../dokter_konfirmasi_tab/controllers/dokter_konfirmasi_tab_controller.dart';
 
@@ -255,9 +256,14 @@ class PhoneLoginController extends GetxController {
               konfirmasi!.noHPCon.value = phoneCon.value;
               Get.back();
               Get.back();
+            } else {
+              bool error =
+                  MahasService.isInternetCausedError(res.message.toString());
+              Helper.errorToast(
+                  message: !error ? res.message.toString() : null);
             }
           } catch (e) {
-            Helper.dialogWarning(e.toString());
+            Helper.errorToast(message: e.toString());
           }
         } else {
           konfirmasi!.noHPCon.value = phoneCon.value;

@@ -25,7 +25,6 @@ class ProfileSetupController extends GetxController {
   @override
   void onInit() {
     getImage = auth.currentUser!.photoURL;
-    print(getImage);
     namaCon.value = auth.currentUser?.displayName;
     if (auth.currentUser!.phoneNumber != null) {
       telpCon.value = auth.currentUser!.phoneNumber;
@@ -82,13 +81,15 @@ class ProfileSetupController extends GetxController {
               .ref(auth.currentUser!.uid)
               .child("profile.$ext")
               .getDownloadURL();
-          print(getImage);
           await auth.currentUser!.updatePhotoURL(getImage);
         }
         editable.value = false;
+      } else{
+        bool error = MahasService.isInternetCausedError(res.message.toString());
+        Helper.errorToast(message: !error ? res.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
     EasyLoading.dismiss();
   }

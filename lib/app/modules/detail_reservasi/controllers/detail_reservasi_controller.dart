@@ -103,10 +103,11 @@ class DetailReservasiController extends GetxController {
         }
         isLoad.value = true;
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
     EasyLoading.dismiss();
   }
@@ -118,10 +119,11 @@ class DetailReservasiController extends GetxController {
       if (r.success) {
         biayaSementara = BiayasementaraModel.fromJson(r.body);
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
   }
 

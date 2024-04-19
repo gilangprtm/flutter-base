@@ -6,6 +6,7 @@ import 'package:haimed_getx/app/mahas/mahas_colors.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/components/others/list_component.dart';
+import '../../../mahas/services/helper.dart';
 import '../../../models/dokter_fav_model.dart';
 import '../controllers/dokter_favorite_controller.dart';
 
@@ -39,18 +40,24 @@ class DokterFavoriteView extends GetView<DokterFavoriteController> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ClipOval(
-                          child: e.photourl != null
-                              ? Image.network(
-                                  e.photourl ?? "assets/images/Doctor.png",
-                                  width: 50,
-                                  height: 50,
-                                )
-                              : Image.asset(
-                                  "assets/images/Doctor.png",
-                                  width: 50,
-                                  height: 50,
-                                ),
+                        InkWell(
+                    onTap: () async => await Helper.dialogFoto(
+                        e.photourl,
+                        "assets/images/Doctor.png",
+                        e.namadokter),
+                          child: ClipOval(
+                            child: e.photourl != null
+                                ? Image.network(
+                                    e.photourl ?? "assets/images/Doctor.png",
+                                    width: 50,
+                                    height: 50,
+                                  )
+                                : Image.asset(
+                                    "assets/images/Doctor.png",
+                                    width: 50,
+                                    height: 50,
+                                  ),
+                          ),
                         ),
                         SizedBox(
                           width: 10,

@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
 class FaqModel {
   String? question;
   String? answer;
+  RxBool tap = false.obs;
 
   FaqModel();
 

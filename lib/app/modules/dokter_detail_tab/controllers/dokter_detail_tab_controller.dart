@@ -14,6 +14,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/mahas_colors.dart';
 import '../../../mahas/mahas_config.dart';
+import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../mahas/services/mahas_format.dart';
 import '../../../models/dokter_detail_model.dart';
@@ -51,10 +52,11 @@ class DokterDetailTabController extends GetxController {
         DokterdetailModel res = DokterdetailModel.fromJson(r.body);
         dokterCon.value = res;
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
     EasyLoading.dismiss();
   }
@@ -88,10 +90,11 @@ class DokterDetailTabController extends GetxController {
           noData.value = true;
         }
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
     EasyLoading.dismiss();
   }

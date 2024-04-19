@@ -14,7 +14,6 @@ class NotifikasiDetailController extends GetxController {
   String? dokter;
   String? kodeunik;
 
-  final count = 0.obs;
   @override
   void onInit() {
     kodeunik = Get.arguments['kodeunik'];
@@ -34,14 +33,11 @@ class NotifikasiDetailController extends GetxController {
     super.onInit();
   }
 
-  void increment() => count.value++;
-
   void dibaca() async {
     final body = {};
     final url =
         '/api/Notifikasi/TerbacaByKodeUnik?userId=${MahasConfig.profile!.userIdHaimed}&kodeUnik=$kodeunik';
-    // ignore: unused_local_variable
-    var r = await HttpApi.patch(
+    await HttpApi.patch(
       url,
       body: body,
     );

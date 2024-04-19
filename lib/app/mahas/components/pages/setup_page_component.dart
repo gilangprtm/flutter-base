@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../mahas_colors.dart';
+import '../../mahas_service.dart';
 import '../../models/api_result_model.dart';
 import '../../services/helper.dart';
 import '../../services/http_api.dart';
@@ -105,7 +106,12 @@ class SetupPageController<T> extends ChangeNotifier {
           apiToView!(r.body);
         });
       } else {
-        Helper.dialogWarning(r.message!);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.dialogWarning(
+          error
+              ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
+              : r.message,
+        );
       }
     } else {
       setState(() {
@@ -151,7 +157,12 @@ class SetupPageController<T> extends ChangeNotifier {
           _backRefresh = true;
           _back();
         } else {
-          Helper.dialogWarning(r.message!);
+          bool error = MahasService.isInternetCausedError(r.message.toString());
+          Helper.dialogWarning(
+            error
+                ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
+                : r.message,
+          );
         }
       }
     }
@@ -194,7 +205,13 @@ class SetupPageController<T> extends ChangeNotifier {
             editable = false;
           }
         } else {
-          Helper.dialogWarning(r.message ?? "");
+          bool error = MahasService.isInternetCausedError(r.message.toString());
+          Helper.dialogWarning(
+            error
+                ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
+                : r.message,
+          );
+          
           setState(() {
             editable = true;
           });

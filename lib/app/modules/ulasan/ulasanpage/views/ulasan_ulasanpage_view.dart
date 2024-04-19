@@ -24,7 +24,7 @@ class UlasanUlasanpageView extends GetView<UlasanUlasanpageController> {
           child: TabBar(
             labelColor: MahasColors.light,
             unselectedLabelColor: MahasColors.light.withOpacity(0.6),
-            indicatorColor: MahasColors.primary.withRed(20),
+            indicatorColor: MahasColors.light.withOpacity(0.6),
             tabs: [
               Tab(
                 text: "Informasi",

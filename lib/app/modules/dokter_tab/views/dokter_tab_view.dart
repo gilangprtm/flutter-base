@@ -6,6 +6,7 @@ import 'package:haimed_getx/app/mahas/components/others/list_component.dart';
 import 'package:haimed_getx/app/mahas/mahas_colors.dart';
 import 'package:haimed_getx/app/models/dokter_fav_model.dart';
 
+import '../../../mahas/services/helper.dart';
 import '../controllers/dokter_tab_controller.dart';
 
 class DokterTabView extends GetView<DokterTabController> {
@@ -20,35 +21,39 @@ class DokterTabView extends GetView<DokterTabController> {
           return ListTile(
             contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             onTap: () => controller.goToDokterDetail(e.dokterid!),
-            leading: ClipOval(
-              child: e.photourl != null
-                  ? Image.network(
-                      e.photourl!,
-                      width: 60,
-                      height: 60,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Container(
-                          height: 60,
-                          width: 60,
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: MahasColors.primary,
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
+            leading: InkWell(
+              onTap: () async => await Helper.dialogFoto(
+                  e.photourl, "assets/images/Doctor.png", e.namadokter),
+              child: ClipOval(
+                child: e.photourl != null
+                    ? Image.network(
+                        e.photourl!,
+                        width: 60,
+                        height: 60,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Container(
+                            height: 60,
+                            width: 60,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: MahasColors.primary,
+                                value: loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    )
-                  : Image.asset(
-                      "assets/images/Doctor.png",
-                      width: 60,
-                      height: 60,
-                    ),
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        "assets/images/Doctor.png",
+                        width: 60,
+                        height: 60,
+                      ),
+              ),
             ),
             title: Text(
               e.namadokter ?? "",

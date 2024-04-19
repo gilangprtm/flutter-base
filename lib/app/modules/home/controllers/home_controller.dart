@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -102,7 +101,9 @@ class HomeController extends GetxController {
   void goToArticleDetail(ArtikelFirestoreModel model) {
     Get.toNamed(
       Routes.ARTIKEL_DETAIL,
-      arguments: {'model': model,},
+      arguments: {
+        'model': model,
+      },
     );
   }
 
@@ -155,29 +156,12 @@ class HomeController extends GetxController {
             dibaca(item.kodeunik!);
           }
         }
-      } else if (r.message!
-          .contains(RegExp('No host specified in URI', caseSensitive: false))) {
-        Helper.dialogConnection(
-            action: () async {
-              await homeProcedure();
-              Get.back(result: false);
-            },
-            message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
-      } else if (r.message!
-              .contains(RegExp('connection failed', caseSensitive: false)) ||
-          r.message!
-              .contains(RegExp('failed host lookup', caseSensitive: false))) {
-        Helper.dialogConnection(
-            action: () async {
-              await homeProcedure();
-              Get.back(result: false);
-            },
-            message: "Tidak ada koneksi internet, silahkan coba lagi");
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
   }
 
@@ -185,8 +169,7 @@ class HomeController extends GetxController {
     final body = {};
     final url =
         '/api/Notifikasi/TerbacaByKodeUnik?userId=${MahasConfig.profile!.userIdHaimed}&kodeUnik=$kodeunik';
-    // ignore: unused_local_variable
-    var r = await HttpApi.patch(
+    await HttpApi.patch(
       url,
       body: body,
     );
@@ -206,26 +189,9 @@ class HomeController extends GetxController {
     });
     if (r.success) {
       MahasConfig.profile = ProfileModel.fromJson(r.body);
-    } else if (r.message!
-        .contains(RegExp('No host specified in URI', caseSensitive: false))) {
-      Helper.dialogConnection(
-          action: () async {
-            await homeProcedure();
-            Get.back(result: false);
-          },
-          message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
-    } else if (r.message!
-            .contains(RegExp('connection failed', caseSensitive: false)) ||
-        r.message!
-            .contains(RegExp('failed host lookup', caseSensitive: false))) {
-      Helper.dialogConnection(
-          action: () async {
-            await homeProcedure();
-            Get.back(result: false);
-          },
-          message: "Tidak ada koneksi internet, silahkan coba lagi");
     } else {
-      Helper.dialogWarning(r.message);
+      bool error = MahasService.isInternetCausedError(r.message.toString());
+      Helper.errorToast(message: !error ? r.message.toString() : null);
     }
     EasyLoading.dismiss();
   }
@@ -275,16 +241,9 @@ class HomeController extends GetxController {
   }
 
   Future homeProcedure() async {
-    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    token = await messaging.getToken();
-    if (MahasConfig.urlApi == "") {
-      await EasyLoading.show();
-      // MahasConfig.urlApi = remoteConfig.getString('api');
-    }
+    artikels.value = await MahasService().getListArtikelFirestore();
     await putUser();
     await getNotifikasi();
     await versionCheck();
-
-    artikels.value = await MahasService().getListArtikelFirestore();
   }
 }
