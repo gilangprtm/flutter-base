@@ -202,8 +202,10 @@ class DokterDetailTabController extends GetxController {
                               fontWeight: FontWeight.w400,
                               fontSize: 11,
                               color: MahasColors.light),
-                          todayDecoration: const BoxDecoration(
-                              color: MahasColors.red, shape: BoxShape.circle),
+                          todayDecoration: BoxDecoration(
+                            color: MahasColors.primary,
+                            shape: BoxShape.circle,
+                          ),
                           selectedDecoration: const BoxDecoration(
                               color: MahasColors.blueGrey,
                               shape: BoxShape.circle),

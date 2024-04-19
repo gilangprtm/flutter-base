@@ -345,12 +345,15 @@ class HomeView extends GetView<HomeController> {
                               itemBuilder: (context, index) {
                                 var item = controller.artikels[index];
                                 return InkWell(
-                                  onTap: () => controller.goToArticleDetail(item),
+                                  onTap: () =>
+                                      controller.goToArticleDetail(item),
                                   child: Container(
                                     margin: EdgeInsets.only(bottom: 5),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(
                                             MahasThemes.borderRadius),
+                                        border:
+                                            Border.all(color: MahasColors.grey),
                                         color: MahasColors.light),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(
@@ -369,27 +372,21 @@ class HomeView extends GetView<HomeController> {
                                             loadingBuilder: (context, child,
                                                     loadingProgress) =>
                                                 loadingProgress != null
-                                                    ? Center(
-                                                        child: Image.asset(
-                                                          "assets/images/iosloading.gif",
-                                                          height: 30,
-                                                          width: 30,
+                                                    ? SizedBox(
+                                                        width: Get.width,
+                                                        height: Get.width * 0.4,
+                                                        child: Center(
+                                                          child: Image.asset(
+                                                            "assets/images/iosloading.gif",
+                                                            width: 30,
+                                                            height: 30,
+                                                          ),
                                                         ),
                                                       )
                                                     : child,
                                           ),
                                           Container(
                                             padding: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft: Radius.circular(
-                                                    MahasThemes.borderRadius),
-                                                bottomRight: Radius.circular(
-                                                    MahasThemes.borderRadius),
-                                              ),
-                                              border: Border.all(
-                                                  color: MahasColors.grey),
-                                            ),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,

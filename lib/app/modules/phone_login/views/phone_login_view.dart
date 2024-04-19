@@ -52,6 +52,7 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
                   borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
                 ),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: MahasColors.primary,),
                     onPressed: () {
                       controller.signInOnTap();
                     },

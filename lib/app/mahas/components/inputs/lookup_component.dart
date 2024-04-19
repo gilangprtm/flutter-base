@@ -283,6 +283,10 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
                           ElevatedButton(
                             onPressed: widget.controller.insertOnPress,
                             child: const Text("Masukan"),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(MahasColors.primary),
+                            ),
                           )
                         ],
                       ),
@@ -356,6 +360,7 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
                             ),
+                            backgroundColor: MahasColors.primary,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
                           child: const Text("Masukan"),

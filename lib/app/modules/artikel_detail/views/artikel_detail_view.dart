@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/mahas_colors.dart';
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../controllers/artikel_detail_controller.dart';
 
@@ -62,7 +63,10 @@ class ArtikelDetailView extends GetView<ArtikelDetailController> {
                   ),
                   Expanded(child: SizedBox()),
                   InkWell(
-                    onTap: (() => controller.onTap()),
+                    onTap: () {
+                      Share.share(controller.artikel.link ?? "",
+                          subject: "Cek berita dari RS Bhayangkara ini");
+                    },
                     child: Icon(
                       Icons.share,
                       color: MahasColors.link,

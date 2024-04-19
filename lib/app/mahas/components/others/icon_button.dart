@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../mahas_colors.dart';
 import '../mahas_themes.dart';
 
 class ButtonWithIcon extends StatefulWidget {
@@ -30,7 +31,7 @@ class _ButtonWithIconState extends State<ButtonWithIcon> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: widget.color ?? Colors.redAccent,
+        backgroundColor: widget.color ?? MahasColors.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
               Radius.circular(widget.radius ?? MahasThemes.borderRadius)),

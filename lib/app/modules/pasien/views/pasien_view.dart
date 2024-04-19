@@ -129,6 +129,10 @@ class PasienView extends GetView<PasienController> {
                             ),
                           ),
                           ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(MahasColors.primary),
+                            ),
                             onPressed: () {
                               controller.toReservasi(e.pasienidhaimed!);
                             },

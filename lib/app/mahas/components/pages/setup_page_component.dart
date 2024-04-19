@@ -270,7 +270,7 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
         appBar: !widget.showAppBar
             ? null
             : AppBar(
-              backgroundColor: MahasColors.primary,
+                backgroundColor: MahasColors.primary,
                 title: Text(widget.title),
                 centerTitle: true,
                 actions: widget.controller._id == null ||
@@ -328,6 +328,9 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
                               horizontal: !widget.childrenPadding ? 10 : 0),
                           child: ElevatedButton(
                             onPressed: widget.controller.submitOnPressed,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: MahasColors.primary,
+                            ),
                             child: const Text('Simpan'),
                           ),
                         ),

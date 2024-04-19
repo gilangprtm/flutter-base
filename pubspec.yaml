@@ -46,7 +46,8 @@ dependencies:
   flutter_rating_stars: ^1.0.3+4
   url_launcher: ^6.1.10
   coachmaker: ^0.2.1
-  flutter_widget_from_html: ^0.14.11 
+  flutter_widget_from_html: ^0.14.11
+  share_plus: ^8.0.3
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
