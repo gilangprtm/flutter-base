@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/constant/environment_constant.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/mahas_config.dart';
-import 'package:haimed_getx/app/mahas/mahas_service.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import '../../../mahas/mahas_colors.dart';
@@ -12,10 +12,6 @@ import '../controllers/welcome_controller.dart';
 class WelcomeView extends GetView<WelcomeController> {
   @override
   Widget build(BuildContext context) {
-    final String imgPath =
-        MahasConfig.currentEnv == MahasEnvironmentType.cendana
-            ? "assets/images/logo-nobg.png"
-            : "assets/images/logorsbk.png";
     return IntroductionScreen(
       globalBackgroundColor: MahasColors.primary,
       pages: [
@@ -27,7 +23,7 @@ class WelcomeView extends GetView<WelcomeController> {
           ),
           title: "",
           image: Image.asset(
-            imgPath,
+            EnvironmentConstant.imageLogo,
             width: 250,
           ),
         ),
@@ -43,7 +39,7 @@ class WelcomeView extends GetView<WelcomeController> {
             textAlign: TextAlign.center,
           ),
           image: Image.asset(
-            imgPath,
+            EnvironmentConstant.imageLogo,
             width: 200,
           ),
         ),
@@ -59,7 +55,7 @@ class WelcomeView extends GetView<WelcomeController> {
             textAlign: TextAlign.center,
           ),
           image: Image.asset(
-            imgPath,
+            EnvironmentConstant.imageLogo,
             width: 200,
           ),
         ),

@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/constant/environment_constant.dart';
 import 'package:haimed_getx/app/mahas/components/others/login_button.dart';
 
 import '../../../mahas/mahas_colors.dart';
-import '../../../mahas/mahas_config.dart';
-import '../../../mahas/mahas_service.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -25,9 +24,7 @@ class LoginView extends GetView<LoginController> {
               SizedBox(
                 height: 300,
                 child: Image.asset(
-                  MahasConfig.currentEnv == MahasEnvironmentType.cendana
-                      ? "assets/images/logo-nobg.png"
-                      : "assets/images/logorsbk.png",
+                  EnvironmentConstant.imageLogo,
                 ),
               ),
               const SizedBox(height: 10),

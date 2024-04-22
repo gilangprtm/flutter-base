@@ -24,7 +24,7 @@ import 'mahas_colors.dart';
 import 'mahas_config.dart';
 import 'models/color_theme_model.dart';
 
-enum MahasEnvironmentType { cendana, rsbk }
+enum MahasEnvironmentType { cendana, rsbk, premagana }
 
 final authController = AuthController.instance;
 final remoteConfig = FirebaseRemoteConfig.instance;
@@ -60,6 +60,8 @@ class MahasService {
     final packageInfo = await PackageInfo.fromPlatform();
     if (packageInfo.packageName == "com.haimed.rsbk") {
       return MahasEnvironmentType.rsbk;
+    } else if (packageInfo.packageName == "com.sanata.haimed.premagana") {
+      return MahasEnvironmentType.premagana;
     } else {
       return MahasEnvironmentType.cendana;
     }
@@ -83,7 +85,7 @@ class MahasService {
               minimumFetchInterval: Duration.zero,
             ),
           );
-           await remoteConfig.fetchAndActivate();
+          await remoteConfig.fetchAndActivate();
           getRemoteConfig();
           if (isInit) Get.put(AuthController());
           splashController.isError.value = false;

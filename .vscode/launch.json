@@ -14,6 +14,15 @@
             ]
         },
         {
+            "name": "HaiMed RS Premagana",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "premagana"
+            ]
+        },
+        {
             "name": "SIPRAJA",
             "request": "launch",
             "type": "dart",

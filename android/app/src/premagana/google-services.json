@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "12506517632",
+    "project_id": "haimed-premagana",
+    "storage_bucket": "haimed-premagana.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12506517632:android:dbdfeb7c4741d28d355665",
+        "android_client_info": {
+          "package_name": "com.sanata.haimed.premagana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12506517632-al3mmf7iupeljgvvorbtdik3ufrae95t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.premagana",
+            "certificate_hash": "069eff26af6b68a9f8b77ad707b07d429afc6c34"
+          }
+        },
+        {
+          "client_id": "12506517632-dm5n55u1qcl8ft9fnv081lg0901tn1k7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.premagana",
+            "certificate_hash": "d1a58c92845af7a4267a47d1aea3d3e3ef0012fa"
+          }
+        },
+        {
+          "client_id": "12506517632-nmgtlf9quqnb9dicamgkbvb3p7e46cae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqG-FFRcAh4Dk1arTdbSJ1RpJ_K_OQZtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12506517632-b2gh3rfrh01n0eiqpr434de032c4892p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "12506517632-c0btgcneq4b8imtuuth3v7p6o667f45i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sanata.haimedGetx"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -26,11 +26,11 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
 
-def keystoreProperties = new Properties()
-    def keystorePropertiesFile = rootProject.file('key.properties')
-    if (keystorePropertiesFile.exists()) {
-        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-    }
+// def keystoreProperties = new Properties()
+//     def keystorePropertiesFile = rootProject.file('key.properties')
+//     if (keystorePropertiesFile.exists()) {
+//         keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+//     }
 
 android {
     compileSdkVersion 34
@@ -65,12 +65,27 @@ android {
     }
 
     signingConfigs {
-        // release {
-        //     keyAlias keystoreProperties['keyAlias']
-        //     keyPassword keystoreProperties['keyPassword']
-        //     storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-        //     storePassword keystoreProperties['storePassword']
-        // }
+        cendana {
+            def keystorePropertiesFile = rootProject.file("app/src/cendana/key.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+
+        premagana {
+            def keystorePropertiesFile = rootProject.file("app/src/premagana/key.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
 
         debug {
             keyAlias "AndroidDebugKey"
@@ -79,15 +94,23 @@ android {
             storePassword "android"
         }
     }
-    buildTypes {
-        release {
-            // signingConfig signingConfigs.release
-            signingConfig signingConfigs.debug
-        }
-        debug {
-            signingConfig signingConfigs.debug
-        }
-    }
+    // buildTypes {
+    //     cendana {
+    //         // signingConfig signingConfigs.cendana
+    //         //uncomment signingconfig above and comment signingconfig below for release per flavor
+    //         signingConfig signingConfigs.debug
+    //     }
+
+    //     premagana {
+    //         // signingConfig signingConfigs.premagana
+    //         //uncomment signingconfig above and comment signingconfig below for release per flavor
+    //         signingConfig signingConfigs.debug
+    //     }
+
+    //     debug {
+    //         signingConfig signingConfigs.debug
+    //     }
+    // }
 
     //flavor
     flavorDimensions "app"
@@ -96,16 +119,30 @@ android {
             dimension "app"
             resValue "string", "app_name", "HaiMed RS Cendana"
             applicationId "com.sanata.haimed.cendana"
-            // applicationIdSuffix ".dev"
             versionName flutterVersionName
+            // signingConfig signingConfigs.cendana
+            //uncomment signingconfig above and comment signingconfig below for release per flavor
+            signingConfig signingConfigs.debug
         }
 
         rsbk {
             dimension "app"
             resValue "string", "app_name", "SIPRAJA RS Bhayangkara Denpasar"
             applicationId "com.haimed.rsbk"
-            // applicationIdSuffix ".stg"
             versionName flutterVersionName
+            // signingConfig signingConfigs.rsbk
+            //uncomment signingconfig above and comment signingconfig below for release per flavor
+            signingConfig signingConfigs.debug
+        }
+
+        premagana {
+            dimension "app"
+            resValue "string", "app_name", "HaiMed RS Premagana"
+            applicationId "com.sanata.haimed.premagana"
+            versionName flutterVersionName
+            // signingConfig signingConfigs.premagana
+            //uncomment signingconfig above and comment signingconfig below for release per flavor
+            signingConfig signingConfigs.debug
         }
     }
 }
