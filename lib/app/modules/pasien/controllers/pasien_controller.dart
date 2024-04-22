@@ -34,7 +34,7 @@ class PasienController extends GetxController {
               box.write("cm_pasien", true);
               onNext();
             },
-            child: const Text(
+            child:  Text(
               "Lanjut",
               style: TextStyle(
                 color: MahasColors.primary,

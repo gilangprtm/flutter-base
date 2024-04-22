@@ -102,7 +102,7 @@ class InputTextComponent extends StatefulWidget {
   final bool? visibility;
 
   const InputTextComponent({
-    Key? key,
+    super.key,
     required this.controller,
     this.required = false,
     this.label,
@@ -114,7 +114,7 @@ class InputTextComponent extends StatefulWidget {
     this.prefixText,
     this.borderRadius,
     this.visibility = true,
-  }) : super(key: key);
+  });
 
   @override
   State<InputTextComponent> createState() => _InputTextState();

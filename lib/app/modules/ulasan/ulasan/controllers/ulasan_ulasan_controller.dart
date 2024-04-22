@@ -35,7 +35,8 @@ class UlasanUlasanController extends GetxController {
         models.add(ReviewModel.fromDynamic(e));
       }
     } else {
-      Helper.dialogWarning(r.message);
+      bool error = MahasService.isInternetCausedError(r.message.toString());
+      Helper.errorToast(message: !error ? r.message.toString() : null);
     }
     isLoading.value = false;
     EasyLoading.dismiss();
@@ -51,7 +52,8 @@ class UlasanUlasanController extends GetxController {
       var data = r.body;
       model.value = SummaryModel.fromJson(data);
     } else {
-      Helper.dialogWarning(r.message);
+      bool error = MahasService.isInternetCausedError(r.message.toString());
+      Helper.errorToast(message: !error ? r.message.toString() : null);
     }
     EasyLoading.dismiss();
   }
@@ -130,11 +132,11 @@ class UlasanUlasanController extends GetxController {
                 },
                 starBuilder: (index, color) => Icon(
                   Icons.star_rounded,
-                  size: 50,
+                  size: 45,
                   color: color ?? MahasColors.primary,
                 ),
                 starCount: 5,
-                starSize: 50,
+                starSize: 45,
                 valueLabelColor: MahasColors.grey,
                 valueLabelTextStyle: MahasThemes.h3White,
                 valueLabelRadius: 10,
@@ -205,7 +207,8 @@ class UlasanUlasanController extends GetxController {
       "NamaUser": auth.currentUser!.displayName,
     });
     if (!r.success) {
-      Helper.dialogWarning(r.message);
+      bool error = MahasService.isInternetCausedError(r.message.toString());
+      Helper.errorToast(message: !error ? r.message.toString() : null);
     }
     EasyLoading.dismiss();
   }

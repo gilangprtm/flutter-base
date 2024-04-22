@@ -8,17 +8,19 @@ import 'package:haimed_getx/app/models/pasien_model.dart';
 import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/services/helper.dart';
 import '../../../models/jadwal_praktek_model.dart';
 import '../controllers/dokter_konfirmasi_tab_controller.dart';
 
 class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
-  const DokterKonfirmasiTabView({Key? key}) : super(key: key);
+  const DokterKonfirmasiTabView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Konfirmasi'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: FutureBuilder<JadwalpraktekModel>(
         future: controller.getDataDokter(),
@@ -44,18 +46,24 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ClipOval(
-                                child: snap.data!.fotodokter != null
-                                    ? Image.network(
-                                        snap.data!.fotodokter!,
-                                        width: 60,
-                                        height: 60,
-                                      )
-                                    : Image.asset(
-                                        "assets/images/Doctor.png",
-                                        width: 60,
-                                        height: 60,
-                                      ),
+                              InkWell(
+                                onTap: () async => await Helper.dialogFoto(
+                                    snap.data!.fotodokter,
+                                    "assets/images/Doctor.png",
+                                    snap.data!.namadokter),
+                                child: ClipOval(
+                                  child: snap.data!.fotodokter != null
+                                      ? Image.network(
+                                          snap.data!.fotodokter!,
+                                          width: 60,
+                                          height: 60,
+                                        )
+                                      : Image.asset(
+                                          "assets/images/Doctor.png",
+                                          width: 60,
+                                          height: 60,
+                                        ),
+                                ),
                               ),
                               SizedBox(
                                 width: 10,
@@ -319,7 +327,7 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
                                           isExpanded: true,
                                           value:
                                               controller.selectedPasien.value,
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.arrow_drop_down,
                                             color: MahasColors.primary,
                                           ),

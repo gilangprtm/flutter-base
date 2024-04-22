@@ -15,7 +15,7 @@ class LoginController extends GetxController {
     await authCon.signInWithGoogle();
   }
 
-  void demoOnPress() async {
-    await authCon.singInWithPassword('demo@demo.com', '123456');
+  void appleLoginOnPress() async {
+    await authCon.signInWithApple();
   }
 }

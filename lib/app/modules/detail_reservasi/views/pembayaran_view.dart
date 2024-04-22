@@ -10,11 +10,11 @@ class PembayaranView extends StatelessWidget {
   final double? jumlahBayar;
 
   const PembayaranView({
-    Key? key,
+    super.key,
     this.noReservasi,
     this.noPembayaran,
     this.jumlahBayar,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

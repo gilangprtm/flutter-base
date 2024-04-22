@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/models/artikel_firebase_model.dart';
 
 class ArtikelDetailController extends GetxController {
-  void onTap(){
-    print("Works!");
-  }
+  final ArtikelFirestoreModel artikel = Get.arguments["model"];
 }

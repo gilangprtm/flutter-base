@@ -39,7 +39,6 @@ class TambahPasienController extends GetxController {
       },
     );
     formCon.editable = true;
-    print(formCon.editable);
     super.onInit();
   }
 }

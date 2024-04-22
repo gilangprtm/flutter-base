@@ -4,16 +4,18 @@ import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
+import '../../../mahas/mahas_colors.dart';
 import '../controllers/phone_login_controller.dart';
 
 class PhoneLoginView extends GetView<PhoneLoginController> {
-  const PhoneLoginView({Key? key}) : super(key: key);
+  const PhoneLoginView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Konfirmasi'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: Center(
         child: Container(
@@ -50,6 +52,9 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
                   borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
                 ),
                 child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MahasColors.primary,
+                    ),
                     onPressed: () {
                       controller.signInOnTap();
                     },

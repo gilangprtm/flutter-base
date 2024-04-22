@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../mahas_config.dart';
+import '../../mahas_service.dart';
 import '../../models/api_list_resut_model.dart';
 import '../../services/helper.dart';
 import '../../services/http_api.dart';
@@ -123,11 +124,13 @@ class LookupController<T, U> extends ChangeNotifier {
           }
         }
       } else {
-        Helper.dialogWarning(apiModel.message);
+        bool error =
+            MahasService.isInternetCausedError(apiModel.message.toString());
+        Helper.errorToast(message: !error ? apiModel.message.toString() : null);
       }
       return result;
     } catch (ex) {
-      Helper.dialogWarning('$ex');
+      Helper.errorToast(message: ex.toString());
       setState(() {
         _isItemRefresh = false;
       });
@@ -231,11 +234,11 @@ class LookupComponent<T, U> extends StatefulWidget {
   final Widget Function(dynamic)? setup;
 
   const LookupComponent({
-    Key? key,
+    super.key,
     this.title,
     required this.controller,
     this.setup,
-  }) : super(key: key);
+  });
 
   @override
   State<LookupComponent> createState() => _LookupComponentState();
@@ -254,12 +257,19 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: widget.controller.backOnPressed,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        widget.controller.backOnPressed();
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? ""),
           centerTitle: true,
+          backgroundColor: MahasColors.primary,
         ),
         body: StatefulBuilder(
           builder: (
@@ -276,6 +286,10 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
                           ElevatedButton(
                             onPressed: widget.controller.insertOnPress,
                             child: const Text("Masukan"),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(MahasColors.primary),
+                            ),
                           )
                         ],
                       ),
@@ -349,6 +363,7 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
                             ),
+                            backgroundColor: MahasColors.primary,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
                           child: const Text("Masukan"),

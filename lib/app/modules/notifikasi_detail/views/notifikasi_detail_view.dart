@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../mahas/mahas_colors.dart';
 import '../controllers/notifikasi_detail_controller.dart';
 
 class NotifikasiDetailView extends GetView<NotifikasiDetailController> {
-  const NotifikasiDetailView({Key? key}) : super(key: key);
+  const NotifikasiDetailView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Notifikasi"),
         centerTitle: true,
+        backgroundColor: MahasColors.primary,
       ),
       body: Container(
         child: SingleChildScrollView(

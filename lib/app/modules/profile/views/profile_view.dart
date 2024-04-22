@@ -19,6 +19,7 @@ class ProfileView extends GetView<ProfileController> {
               expandedHeight: 200.0,
               floating: false,
               pinned: true,
+              backgroundColor: MahasColors.primary,
               actions: [
                 PopupMenuButton(
                   icon: const Icon(
@@ -143,13 +144,13 @@ class ListMenu extends StatelessWidget {
   final bool? detail;
   final Function()? onTap;
   const ListMenu({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.icon,
     this.detail = true,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

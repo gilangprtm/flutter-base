@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import '../../mahas_colors.dart';
+import '../../mahas_service.dart';
 import '../../models/api_result_model.dart';
 import '../../services/helper.dart';
 import '../../services/http_api.dart';
@@ -104,7 +106,12 @@ class SetupPageController<T> extends ChangeNotifier {
           apiToView!(r.body);
         });
       } else {
-        Helper.dialogWarning(r.message!);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.dialogWarning(
+          error
+              ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
+              : r.message,
+        );
       }
     } else {
       setState(() {
@@ -150,7 +157,12 @@ class SetupPageController<T> extends ChangeNotifier {
           _backRefresh = true;
           _back();
         } else {
-          Helper.dialogWarning(r.message!);
+          bool error = MahasService.isInternetCausedError(r.message.toString());
+          Helper.dialogWarning(
+            error
+                ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
+                : r.message,
+          );
         }
       }
     }
@@ -193,7 +205,13 @@ class SetupPageController<T> extends ChangeNotifier {
             editable = false;
           }
         } else {
-          Helper.dialogWarning(r.message ?? "");
+          bool error = MahasService.isInternetCausedError(r.message.toString());
+          Helper.dialogWarning(
+            error
+                ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
+                : r.message,
+          );
+
           setState(() {
             editable = true;
           });
@@ -227,7 +245,7 @@ class SetupPageComponent extends StatefulWidget {
   final List<Widget>? childrenAfterButton;
 
   const SetupPageComponent({
-    Key? key,
+    super.key,
     required this.title,
     required this.controller,
     this.childrenPadding = true,
@@ -236,7 +254,7 @@ class SetupPageComponent extends StatefulWidget {
     this.crossAxisAlignmentChildren = CrossAxisAlignment.center,
     this.titleFunction,
     this.showAppBar = true,
-  }) : super(key: key);
+  });
 
   @override
   State<SetupPageComponent> createState() => _SetupPageComponentState();
@@ -257,12 +275,19 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: widget.controller._onWillPop,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        widget.controller._onWillPop();
+      },
       child: Scaffold(
         appBar: !widget.showAppBar
             ? null
             : AppBar(
+                backgroundColor: MahasColors.primary,
                 title: Text(widget.title),
                 centerTitle: true,
                 actions: widget.controller._id == null ||
@@ -320,6 +345,9 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
                               horizontal: !widget.childrenPadding ? 10 : 0),
                           child: ElevatedButton(
                             onPressed: widget.controller.submitOnPressed,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: MahasColors.primary,
+                            ),
                             child: const Text('Simpan'),
                           ),
                         ),

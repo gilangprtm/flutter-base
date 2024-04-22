@@ -10,13 +10,14 @@ import '../../../mahas/mahas_colors.dart';
 import '../controllers/profile_setup_controller.dart';
 
 class ProfileSetupView extends GetView<ProfileSetupController> {
-  const ProfileSetupView({Key? key}) : super(key: key);
+  const ProfileSetupView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -63,7 +64,7 @@ class ProfileSetupView extends GetView<ProfileSetupController> {
                                     MahasThemes.borderRadius),
                               ),
                               child: c.getImage == null && c.image == null
-                                  ? const Center(
+                                  ? Center(
                                       child: SizedBox(
                                         width: 30,
                                         height: 30,

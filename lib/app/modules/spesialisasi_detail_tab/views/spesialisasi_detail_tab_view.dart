@@ -13,13 +13,14 @@ import '../controllers/spesialisasi_detail_tab_controller.dart';
 
 class SpesialisasiDetailTabView
     extends GetView<SpesialisasiDetailTabController> {
-  const SpesialisasiDetailTabView({Key? key}) : super(key: key);
+  const SpesialisasiDetailTabView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(controller.title),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
         actions: [
           Obx(
             () => Container(
@@ -105,18 +106,24 @@ class SpesialisasiDetailTabView
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ClipOval(
-                              child: e.fotodokter != null
-                                  ? Image.network(
-                                      e.fotodokter!,
-                                      width: 60,
-                                      height: 60,
-                                    )
-                                  : Image.asset(
-                                      "assets/images/Doctor.png",
-                                      width: 60,
-                                      height: 60,
-                                    ),
+                            InkWell(
+                              onTap: () async => await Helper.dialogFoto(
+                                  e.fotodokter,
+                                  "assets/images/Doctor.png",
+                                  e.namadokter),
+                              child: ClipOval(
+                                child: e.fotodokter != null
+                                    ? Image.network(
+                                        e.fotodokter!,
+                                        width: 60,
+                                        height: 60,
+                                      )
+                                    : Image.asset(
+                                        "assets/images/Doctor.png",
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                              ),
                             ),
                             SizedBox(
                               width: 10,

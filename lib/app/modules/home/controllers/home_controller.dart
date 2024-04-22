@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,12 +9,12 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haimed_getx/app/models/profile_model.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../mahas/mahas_config.dart';
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../mahas/services/http_api.dart';
+import '../../../models/artikel_firebase_model.dart';
 import '../../../models/notifikasi_model.dart';
 import '../../../routes/app_pages.dart';
 
@@ -26,12 +25,7 @@ class HomeController extends GetxController {
   String? token;
   static final storage = GetStorage();
 
-  final List<String> imgList = [
-    'assets/images/slider1.jpg',
-    'assets/images/slider2.jpg',
-    'assets/images/slider1.jpg',
-    'assets/images/slider2.jpg',
-  ];
+  RxList<ArtikelFirestoreModel> artikels = <ArtikelFirestoreModel>[].obs;
 
   @override
   void onInit() async {
@@ -39,39 +33,53 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  imageSlider() {
-    final List<Widget> imageSliders = imgList
-        .map((item) => Container(
-              margin: const EdgeInsets.all(5.0),
-              child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(item,
-                          fit: BoxFit.cover, width: double.infinity),
-                      Positioned(
-                        bottom: 0.0,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(200, 0, 0, 0),
-                                Color.fromARGB(0, 0, 0, 0)
-                              ],
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                            ),
-                          ),
-                        ),
+  List<Widget> imageSlider() {
+    return MahasConfig.coverImages.map(
+      (item) {
+        return Container(
+          margin: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+            child: Stack(
+              children: <Widget>[
+                Image.network(
+                  item,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      loadingProgress != null
+                          ? Center(
+                              child: Image.asset(
+                                "assets/images/iosloading.gif",
+                                height: 50,
+                                width: 50,
+                              ),
+                            )
+                          : child,
+                ),
+                Positioned(
+                  bottom: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color.fromARGB(200, 0, 0, 0),
+                          Color.fromARGB(0, 0, 0, 0)
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
                       ),
-                    ],
-                  )),
-            ))
-        .toList();
-
-    return imageSliders;
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    ).toList();
   }
 
   void toLogin() {
@@ -90,8 +98,13 @@ class HomeController extends GetxController {
         });
   }
 
-  void goToArticleDetail() {
-    Get.toNamed(Routes.ARTIKEL_DETAIL);
+  void goToArticleDetail(ArtikelFirestoreModel model) {
+    Get.toNamed(
+      Routes.ARTIKEL_DETAIL,
+      arguments: {
+        'model': model,
+      },
+    );
   }
 
   void toNotif() {
@@ -143,29 +156,12 @@ class HomeController extends GetxController {
             dibaca(item.kodeunik!);
           }
         }
-      } else if (r.message!
-          .contains(RegExp('No host specified in URI', caseSensitive: false))) {
-        Helper.dialogConnection(
-            action: () async {
-              await homeProcedure();
-              Get.back(result: false);
-            },
-            message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
-      } else if (r.message!
-              .contains(RegExp('connection failed', caseSensitive: false)) ||
-          r.message!
-              .contains(RegExp('failed host lookup', caseSensitive: false))) {
-        Helper.dialogConnection(
-            action: () async {
-              await homeProcedure();
-              Get.back(result: false);
-            },
-            message: "Tidak ada koneksi internet, silahkan coba lagi");
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
   }
 
@@ -173,8 +169,7 @@ class HomeController extends GetxController {
     final body = {};
     final url =
         '/api/Notifikasi/TerbacaByKodeUnik?userId=${MahasConfig.profile!.userIdHaimed}&kodeUnik=$kodeunik';
-    // ignore: unused_local_variable
-    var r = await HttpApi.patch(
+    await HttpApi.patch(
       url,
       body: body,
     );
@@ -194,26 +189,9 @@ class HomeController extends GetxController {
     });
     if (r.success) {
       MahasConfig.profile = ProfileModel.fromJson(r.body);
-    } else if (r.message!
-        .contains(RegExp('No host specified in URI', caseSensitive: false))) {
-      Helper.dialogConnection(
-          action: () async {
-            await homeProcedure();
-            Get.back(result: false);
-          },
-          message: "Koneksi internet anda tidak stabil, silahkan coba lagi");
-    } else if (r.message!
-            .contains(RegExp('connection failed', caseSensitive: false)) ||
-        r.message!
-            .contains(RegExp('failed host lookup', caseSensitive: false))) {
-      Helper.dialogConnection(
-          action: () async {
-            await homeProcedure();
-            Get.back(result: false);
-          },
-          message: "Tidak ada koneksi internet, silahkan coba lagi");
     } else {
-      Helper.dialogWarning(r.message);
+      bool error = MahasService.isInternetCausedError(r.message.toString());
+      Helper.errorToast(message: !error ? r.message.toString() : null);
     }
     EasyLoading.dismiss();
   }
@@ -223,21 +201,19 @@ class HomeController extends GetxController {
     final now = DateTime.now();
     final updateLaterDate =
         updateLater == null ? null : DateTime.parse(updateLater);
-    final bool mustUpdate = remoteConfig.getBool('must_update');
-    final String version = remoteConfig.getString('version');
-    final String updateUrl = remoteConfig.getString('update_url');
-    final int updateDuration = remoteConfig.getInt('update_duration');
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String versi = "${packageInfo.version}+${packageInfo.buildNumber}";
+    String versi =
+        "${MahasConfig.packageInfo!.version}+${MahasConfig.packageInfo!.buildNumber}";
     if (!kIsWeb) {
       if ((!kIsWeb && updateLaterDate?.isAfter(now) == false) ||
           updateLater == null) {
         if (Platform.isIOS || Platform.isAndroid) {
-          if (versi != version) {
+          if (versi != MahasConfig.updateAppValues.version) {
             final r = await Helper.dialogUpdate(
-                harusUpdate: mustUpdate, versiTerbaru: version);
+                harusUpdate: MahasConfig.updateAppValues.mustUpdate ?? false,
+                versiTerbaru: MahasConfig.updateAppValues.version ?? "");
             if (r == true) {
-              await launchUrl(Uri.parse(updateUrl),
+              await launchUrl(
+                      Uri.parse(MahasConfig.updateAppValues.urlUpdate ?? ""),
                       mode: LaunchMode.externalApplication)
                   .then((value) => {
                         if (Platform.isAndroid)
@@ -250,8 +226,13 @@ class HomeController extends GetxController {
                           }
                       });
             } else {
-              storage.write('update_later',
-                  now.add(Duration(days: updateDuration)).toString());
+              storage.write(
+                  'update_later',
+                  now
+                      .add(Duration(
+                          days:
+                              MahasConfig.updateAppValues.dismissDuration ?? 7))
+                      .toString());
             }
           }
         }
@@ -260,12 +241,7 @@ class HomeController extends GetxController {
   }
 
   Future homeProcedure() async {
-    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    token = await messaging.getToken();
-    if (MahasConfig.urlApi == "") {
-      await EasyLoading.show();
-      MahasConfig.urlApi = remoteConfig.getString('api');
-    }
+    artikels.value = await MahasService().getListArtikelFirestore();
     await putUser();
     await getNotifikasi();
     await versionCheck();

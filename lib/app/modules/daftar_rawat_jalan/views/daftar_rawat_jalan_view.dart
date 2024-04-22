@@ -9,20 +9,26 @@ import 'package:haimed_getx/app/modules/spesialisasi_tab/views/spesialisasi_tab_
 import '../controllers/daftar_rawat_jalan_controller.dart';
 
 class DaftarRawatJalanView extends GetView<DaftarRawatJalanController> {
-  const DaftarRawatJalanView({Key? key}) : super(key: key);
+  const DaftarRawatJalanView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('Daftar Dokter'),
-        centerTitle: false,
+    return Container(
+      color: MahasColors.primary,
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            title: const Text('Daftar Dokter'),
+            centerTitle: false,
+            backgroundColor: MahasColors.primary,
+          ),
+          body: TabBarView(
+            controller: controller.tabController,
+            children: [DokterTabView(), SpesialisasiTabView()],
+          ),
+          bottomNavigationBar: bottomNavBar(),
+        ),
       ),
-      body: TabBarView(
-        controller: controller.tabController,
-        children: [DokterTabView(), SpesialisasiTabView()],
-      ),
-      bottomNavigationBar: bottomNavBar(),
     );
   }
 
@@ -35,7 +41,7 @@ class DaftarRawatJalanView extends GetView<DaftarRawatJalanController> {
           isScrollable: false,
           labelColor: MahasColors.light,
           unselectedLabelColor: MahasColors.light.withOpacity(0.6),
-          indicatorColor: MahasColors.red,
+          indicatorColor: MahasColors.light.withOpacity(0.6),
           controller: controller.tabController,
           tabs: [
             SizedBox(

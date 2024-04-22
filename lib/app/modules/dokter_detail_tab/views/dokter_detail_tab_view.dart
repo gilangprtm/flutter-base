@@ -4,16 +4,18 @@ import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/mahas_colors.dart';
 import '../../../mahas/components/others/shimmer_component.dart';
+import '../../../mahas/services/helper.dart';
 import '../controllers/dokter_detail_tab_controller.dart';
 
 class DokterDetailTabView extends GetView<DokterDetailTabController> {
-  const DokterDetailTabView({Key? key}) : super(key: key);
+  const DokterDetailTabView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kalender Praktek'),
         centerTitle: false,
+        backgroundColor: MahasColors.primary,
       ),
       body: Container(
         color: MahasColors.light,
@@ -27,20 +29,26 @@ class DokterDetailTabView extends GetView<DokterDetailTabController> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ClipOval(
-                    child: Obx(
-                      () => controller.dokterCon.value.photourl != null
-                          ? Image.network(
-                              controller.dokterCon.value.photourl ??
-                                  "assets/images/Doctor.png",
-                              width: 100,
-                              height: 100,
-                            )
-                          : Image.asset(
-                              "assets/images/Doctor.png",
-                              width: 100,
-                              height: 100,
-                            ),
+                  InkWell(
+                    onTap: () async => await Helper.dialogFoto(
+                        controller.dokterCon.value.photourl,
+                        "assets/images/Doctor.png",
+                        controller.dokterCon.value.namadokter),
+                    child: ClipOval(
+                      child: Obx(
+                        () => controller.dokterCon.value.photourl != null
+                            ? Image.network(
+                                controller.dokterCon.value.photourl ??
+                                    "assets/images/Doctor.png",
+                                width: 100,
+                                height: 100,
+                              )
+                            : Image.asset(
+                                "assets/images/Doctor.png",
+                                width: 100,
+                                height: 100,
+                              ),
+                      ),
                     ),
                   ),
                   SizedBox(

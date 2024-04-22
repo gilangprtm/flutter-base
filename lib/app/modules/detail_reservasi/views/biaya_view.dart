@@ -9,10 +9,10 @@ class BiayaView extends StatelessWidget {
   final double? biayaSementara;
 
   const BiayaView({
-    Key? key,
+    super.key,
     this.deposit,
     this.biayaSementara,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

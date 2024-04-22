@@ -11,8 +11,14 @@ import '../controllers/pasien_setup_controller.dart';
 class PasienSetupView extends GetView<PasienSetupController> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => controller.backOnPressed(),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        controller.backOnPressed();
+      },
       child: SetupPageComponent(
         controller: controller.formCon,
         title: 'Pasien',

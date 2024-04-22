@@ -208,7 +208,7 @@ class Helper {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               FontAwesomeIcons.triangleExclamation,
               color: MahasColors.warning,
               size: 40,
@@ -217,7 +217,7 @@ class Helper {
             Text(
               textAlign: TextAlign.center,
               message ?? "-",
-              style: const TextStyle(
+              style: TextStyle(
                 color: MahasColors.warning,
               ),
             ),
@@ -236,7 +236,7 @@ class Helper {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+              Icon(
                 FontAwesomeIcons.triangleExclamation,
                 color: MahasColors.warning,
                 size: 40,
@@ -245,7 +245,7 @@ class Helper {
               Text(
                 textAlign: TextAlign.center,
                 message ?? "-",
-                style: const TextStyle(
+                style: TextStyle(
                   color: MahasColors.warning,
                 ),
               ),
@@ -276,7 +276,7 @@ class Helper {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               FontAwesomeIcons.checkToSlot,
               color: MahasColors.primary,
               size: 40,
@@ -285,13 +285,99 @@ class Helper {
             Text(
               textAlign: TextAlign.center,
               message ?? "-",
-              style: const TextStyle(
+              style: TextStyle(
                 color: MahasColors.primary,
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  static Future dialogFoto(
+      String? fotoUrl, String? fallbackFoto, String? message) async {
+    await Get.dialog(
+      AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(MahasThemes.borderRadius),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        contentPadding: EdgeInsets.all(0),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: Get.width * 0.6,
+              margin: EdgeInsets.all(20),
+              child: Center(
+                child: fotoUrl != null
+                    ? Image.network(
+                        fotoUrl,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Container(
+                            height: 60,
+                            width: 60,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: MahasColors.primary,
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        fallbackFoto ?? "assets/images/Doctor.png",
+                      ),
+              ),
+            ),
+            Container(
+              width: Get.width,
+              color: MahasColors.primary,
+              padding: EdgeInsets.all(5),
+              child: Text(
+                textAlign: TextAlign.center,
+                message ?? "-",
+                style: TextStyle(
+                  color: MahasColors.light,
+                  backgroundColor: MahasColors.primary,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static void errorToast({String? message}) {
+    Get.snackbar(
+      "Terjadi Kesalahan",
+      message ?? 'Pastikan internetmu lancar, cek ulang jaringan di tempatmu',
+      snackPosition: SnackPosition.BOTTOM,
+      duration: const Duration(seconds: 5),
+      backgroundColor: MahasColors.danger,
+      margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+      borderRadius: MahasThemes.borderRadius,
+      colorText: MahasColors.light,
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      boxShadows: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.5),
+          spreadRadius: 2,
+          blurRadius: 5,
+          offset: const Offset(0, 5),
+        ),
+      ],
     );
   }
 

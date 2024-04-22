@@ -96,10 +96,11 @@ class DokterKonfirmasiTabController extends GetxController {
       if (r.success) {
         jadwalPraktekModel.value = JadwalpraktekModel.fromJson(r.body);
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
     await getDataPasien();
     EasyLoading.dismiss();
@@ -136,10 +137,11 @@ class DokterKonfirmasiTabController extends GetxController {
         }
         update();
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
     EasyLoading.dismiss();
   }
@@ -188,15 +190,18 @@ class DokterKonfirmasiTabController extends GetxController {
             List<dynamic> data = json.decode(res.message!)['Errors'];
             if (data.isNotEmpty) {
               for (var e in data) {
-                Helper.dialogWarning(e);
+                Helper.errorToast(message: e);
               }
             } else {
-              Helper.dialogWarning(res.message);
+              bool error =
+                  MahasService.isInternetCausedError(res.message.toString());
+              Helper.errorToast(
+                  message: !error ? res.message.toString() : null);
             }
           }
         }
       } catch (e) {
-        Helper.dialogWarning(e.toString());
+        Helper.errorToast(message: e.toString());
       }
     } else if (selectedPasien.value == null) {
       Helper.dialogWarning("Nama Pasien harus diisi!");

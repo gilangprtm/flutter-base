@@ -5,6 +5,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/mahas_colors.dart';
+import '../../../mahas/mahas_config.dart';
 import '../../../mahas/services/mahas_format.dart';
 
 class ReservasiView extends StatelessWidget {
@@ -19,7 +20,7 @@ class ReservasiView extends StatelessWidget {
   final int? noAntrian;
 
   const ReservasiView({
-    Key? key,
+    super.key,
     required this.noReservasi,
     this.tanggal,
     this.noUrut,
@@ -29,7 +30,7 @@ class ReservasiView extends StatelessWidget {
     this.keterangan,
     this.statusReservasi,
     this.memo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +44,11 @@ class ReservasiView extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
               ),
-              child: QrImage(
-                data: noReservasi,
-                version: QrVersions.auto,
-              ),
+              child: QrImageView(data: noReservasi),
+              // QrImage(
+              //   data: noReservasi,
+              //   version: QrVersions.auto,
+              // ),
             ),
             Expanded(
               child: SizedBox(
@@ -95,7 +97,7 @@ class ReservasiView extends StatelessWidget {
         SizedBox(
           width: Get.width,
           child: Text(
-            "RS Cendana Premier",
+            MahasConfig.informasiUmum.namars ?? "",
             style: MahasThemes.h2,
             textAlign: TextAlign.center,
           ),

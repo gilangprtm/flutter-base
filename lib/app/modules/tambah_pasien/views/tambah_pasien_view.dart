@@ -10,7 +10,7 @@ import 'package:haimed_getx/app/mahas/mahas_colors.dart';
 import '../controllers/tambah_pasien_controller.dart';
 
 class TambahPasienView extends GetView<TambahPasienController> {
-  const TambahPasienView({Key? key}) : super(key: key);
+  const TambahPasienView({super.key});
   @override
   Widget build(BuildContext context) {
     return SetupPageComponent(

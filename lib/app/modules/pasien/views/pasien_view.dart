@@ -19,6 +19,7 @@ class PasienView extends GetView<PasienController> {
       appBar: AppBar(
         title: const Text('Pasien'),
         centerTitle: true,
+        backgroundColor: MahasColors.primary,
       ),
       floatingActionButton: CoachPoint(
         initial: '1',
@@ -128,6 +129,10 @@ class PasienView extends GetView<PasienController> {
                             ),
                           ),
                           ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(MahasColors.primary),
+                            ),
                             onPressed: () {
                               controller.toReservasi(e.pasienidhaimed!);
                             },

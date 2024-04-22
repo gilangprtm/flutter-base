@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../mahas_config.dart';
+import '../../mahas_service.dart';
 import '../../models/api_list_resut_model.dart';
 import '../../services/helper.dart';
 import '../../services/http_api.dart';
@@ -76,11 +77,13 @@ class ListComponentController<T> {
           result.add(fromDynamic(obj));
         }
       } else {
-        Helper.dialogWarning(apiModel.message ?? "");
+        bool error =
+            MahasService.isInternetCausedError(apiModel.message.toString());
+        Helper.errorToast(message: !error ? apiModel.message.toString() : null);
       }
       return result;
     } catch (ex) {
-      Helper.dialogWarning('$ex');
+      Helper.errorToast(message: ex.toString());
       setState(() {
         _isItemRefresh = false;
       });
@@ -117,13 +120,13 @@ class ListComponent<T> extends StatefulWidget {
       separatorBuilder;
 
   const ListComponent({
-    Key? key,
+    super.key,
     required this.controller,
     required this.itemBuilder,
     this.allowMenuAction = false,
     this.listMenuAction,
     this.separatorBuilder,
-  }) : super(key: key);
+  });
 
   @override
   State<ListComponent<T>> createState() => _ListComponentState<T>();

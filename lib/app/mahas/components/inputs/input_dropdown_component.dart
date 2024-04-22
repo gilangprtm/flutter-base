@@ -104,14 +104,14 @@ class InputDropdownComponent extends StatefulWidget {
   final Radius? borderRadius;
 
   const InputDropdownComponent({
-    Key? key,
+    super.key,
     this.label,
     this.marginBottom,
     this.editable = true,
     required this.controller,
     this.required = false,
     this.borderRadius,
-  }) : super(key: key);
+  });
 
   @override
   State<InputDropdownComponent> createState() => _InputDropdownComponentState();

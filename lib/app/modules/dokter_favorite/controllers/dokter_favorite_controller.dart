@@ -32,10 +32,11 @@ class DokterFavoriteController extends GetxController {
       if (r.success) {
         listCon.refresh();
       } else {
-        Helper.dialogWarning(r.message);
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
       }
     } catch (e) {
-      Helper.dialogWarning(e.toString());
+      Helper.errorToast(message: e.toString());
     }
 
     EasyLoading.dismiss();

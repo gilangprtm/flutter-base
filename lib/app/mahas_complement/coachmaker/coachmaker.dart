@@ -61,8 +61,7 @@ class CoachButtonOptions {
 class CoachPoint extends StatelessWidget {
   final String initial;
   final Widget child;
-  const CoachPoint({Key? key, required this.initial, required this.child})
-      : super(key: key);
+  const CoachPoint({super.key, required this.initial, required this.child});
 
   @override
   Widget build(BuildContext context) {

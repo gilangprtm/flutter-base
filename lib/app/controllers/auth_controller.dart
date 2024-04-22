@@ -21,7 +21,6 @@ class AuthController extends GetxController {
 
   @override
   void onInit() async {
-    await GetStorage.init();
     late final FirebaseMessaging messaging = FirebaseMessaging.instance;
     token = await messaging.getToken();
     firebaseUser = Rx<User?>(auth.currentUser);
@@ -171,27 +170,11 @@ class AuthController extends GetxController {
   }
 
   Future signOut() async {
-    if (EasyLoading.isShow) return;
+    if (EasyLoading.isShow) EasyLoading.dismiss();
     EasyLoading.show();
-    // late final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    // String? token = await messaging.getToken();
-    // if (token != null) {
-    //   var r = await HttpApi.put(
-    //     '/api/Notifikasi/Token',
-    //     body: {"Token": token},
-    //   );
-    //   if (!r.success) {
-    //     EasyLoading.dismiss();
-    //     Helper.dialogWarning(r.message!);
-    //   } else {
-    //     await auth.signOut();
-    //     HttpApi.clearToken();
-    //   }
-    // } else {
-    //   await auth.signOut();
-    //   HttpApi.clearToken();
-    // }
+    token = null;
     await auth.signOut();
+    await GoogleSignIn().signOut();
     EasyLoading.dismiss();
   }
 

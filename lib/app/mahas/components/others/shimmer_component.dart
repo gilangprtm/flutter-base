@@ -11,13 +11,13 @@ class ShimmerComponent extends StatelessWidget {
   final double marginRight;
 
   const ShimmerComponent({
-    Key? key,
+    super.key,
     this.count = 5,
     this.marginBottom = 0,
     this.marginLeft = 0,
     this.marginRight = 0,
     this.marginTop = 0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
