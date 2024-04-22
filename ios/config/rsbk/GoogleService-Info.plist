@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.22523139239-2nf13t63ttakm79g54kcd9shvh7ntpod</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>22523139239-18qhc63uehvinq2gm6kucqn1feg0hju0.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCZrJrnSjf-y8Fq_E6Swf5_p9wcVV1nY9s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>22523139239</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.haimed.rsbk</string>
+	<key>PROJECT_ID</key>
+	<string>haimed-d4d84</string>
+	<key>STORAGE_BUCKET</key>
+	<string>haimed-d4d84.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:22523139239:ios:da304e43ec75746c6fb782</string>
+	<key>DATABASE_URL</key>
+	<string>https://haimed-d4d84.firebaseio.com</string>
+</dict>
+</plist>

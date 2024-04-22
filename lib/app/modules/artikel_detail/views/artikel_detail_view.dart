@@ -10,7 +10,7 @@ import 'package:share_plus/share_plus.dart';
 import '../controllers/artikel_detail_controller.dart';
 
 class ArtikelDetailView extends GetView<ArtikelDetailController> {
-  const ArtikelDetailView({Key? key}) : super(key: key);
+  const ArtikelDetailView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

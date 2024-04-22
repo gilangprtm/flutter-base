@@ -121,13 +121,13 @@ class InputLookupComponent<T> extends StatefulWidget {
   final bool required;
 
   const InputLookupComponent({
-    Key? key,
+    super.key,
     this.label,
     this.marginBottom,
     required this.controller,
     this.editable = true,
     this.required = false,
-  }) : super(key: key);
+  });
 
   @override
   State<InputLookupComponent<T>> createState() =>

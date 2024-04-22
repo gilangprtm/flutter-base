@@ -144,13 +144,13 @@ class ListMenu extends StatelessWidget {
   final bool? detail;
   final Function()? onTap;
   const ListMenu({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.icon,
     this.detail = true,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

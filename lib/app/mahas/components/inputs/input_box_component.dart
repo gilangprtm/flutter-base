@@ -18,7 +18,7 @@ class InputBoxComponent extends StatelessWidget {
   final Function()? clearOnTab;
 
   const InputBoxComponent({
-    Key? key,
+    super.key,
     this.label,
     this.marginBottom,
     this.childText,
@@ -31,7 +31,7 @@ class InputBoxComponent extends StatelessWidget {
     this.isRequired = false,
     this.icon,
     this.editable,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +143,7 @@ class InputBoxComponent extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       errorMessage ?? "",
-                      style:  TextStyle(color: MahasColors.danger),
+                      style: TextStyle(color: MahasColors.danger),
                     ),
                   ),
                 ),
@@ -167,7 +167,7 @@ class InputBoxComponent extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       errorMessage ?? "",
-                      style:  TextStyle(color: MahasColors.danger),
+                      style: TextStyle(color: MahasColors.danger),
                     ),
                   ),
                 ),

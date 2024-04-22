@@ -13,7 +13,7 @@ import '../controllers/spesialisasi_detail_tab_controller.dart';
 
 class SpesialisasiDetailTabView
     extends GetView<SpesialisasiDetailTabController> {
-  const SpesialisasiDetailTabView({Key? key}) : super(key: key);
+  const SpesialisasiDetailTabView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

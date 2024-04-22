@@ -18,7 +18,7 @@ class WidgetMain extends StatefulWidget {
   final Widget Function(Function? onSkip, Function onNext)? customNavigator;
 
   const WidgetMain({
-    Key? key,
+    super.key,
     required this.x,
     required this.y,
     required this.h,
@@ -31,7 +31,7 @@ class WidgetMain extends StatefulWidget {
     this.buttonOptions,
     required this.model,
     this.customNavigator,
-  }) : super(key: key);
+  });
 
   @override
   _WidgetMainState createState() => _WidgetMainState();

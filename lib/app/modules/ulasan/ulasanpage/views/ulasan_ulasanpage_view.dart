@@ -11,35 +11,40 @@ import '../controllers/ulasan_ulasanpage_controller.dart';
 class UlasanUlasanpageView extends GetView<UlasanUlasanpageController> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(MahasConfig.informasiUmum.namars ?? ""),
-          centerTitle: true,
-          backgroundColor: MahasColors.primary,
-        ),
-        bottomNavigationBar: Material(
-          color: MahasColors.primary,
-          child: TabBar(
-            labelColor: MahasColors.light,
-            unselectedLabelColor: MahasColors.light.withOpacity(0.6),
-            indicatorColor: MahasColors.light.withOpacity(0.6),
-            tabs: [
-              Tab(
-                text: "Informasi",
+    return Container(
+      color: MahasColors.primary,
+      child: SafeArea(
+        child: DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(MahasConfig.informasiUmum.namars ?? ""),
+              centerTitle: true,
+              backgroundColor: MahasColors.primary,
+            ),
+            bottomNavigationBar: Material(
+              color: MahasColors.primary,
+              child: TabBar(
+                labelColor: MahasColors.light,
+                unselectedLabelColor: MahasColors.light.withOpacity(0.6),
+                indicatorColor: MahasColors.light.withOpacity(0.6),
+                tabs: [
+                  Tab(
+                    text: "Informasi",
+                  ),
+                  Tab(
+                    text: "Ulasan",
+                  ),
+                ],
               ),
-              Tab(
-                text: "Ulasan",
-              ),
-            ],
+            ),
+            body: TabBarView(
+              children: [
+                UlasanInformasiView(),
+                UlasanUlasanView(),
+              ],
+            ),
           ),
-        ),
-        body: TabBarView(
-          children: [
-            UlasanInformasiView(),
-            UlasanUlasanView(),
-          ],
         ),
       ),
     );

@@ -14,13 +14,13 @@ class ButtonWithIcon extends StatefulWidget {
   final Function()? onTap;
 
   const ButtonWithIcon({
-    Key? key,
+    super.key,
     required this.label,
     this.onTap,
     this.icon,
     this.color,
     this.radius,
-  }) : super(key: key);
+  });
 
   @override
   State<ButtonWithIcon> createState() => _ButtonWithIconState();

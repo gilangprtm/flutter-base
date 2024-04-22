@@ -50,12 +50,12 @@ class InputCheckboxComponent extends StatefulWidget {
   final bool isSwitch;
 
   const InputCheckboxComponent({
-    Key? key,
+    super.key,
     required this.controller,
     this.editable = true,
     this.label,
     this.isSwitch = false,
-  }) : super(key: key);
+  });
 
   @override
   State<InputCheckboxComponent> createState() => _InputCheckboxComponentState();

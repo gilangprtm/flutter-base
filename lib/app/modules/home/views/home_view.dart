@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/components/others/empty_component.dart';
 import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 
@@ -341,77 +342,88 @@ class HomeView extends GetView<HomeController> {
                           padding: EdgeInsets.only(left: 10, right: 10, top: 5),
                           height: Get.height,
                           child: Obx(
-                            () => ListView.builder(
-                              itemBuilder: (context, index) {
-                                var item = controller.artikels[index];
-                                return InkWell(
-                                  onTap: () =>
-                                      controller.goToArticleDetail(item),
-                                  child: Container(
-                                    margin: EdgeInsets.only(bottom: 5),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            MahasThemes.borderRadius),
-                                        border:
-                                            Border.all(color: MahasColors.grey),
-                                        color: MahasColors.light),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(
-                                          MahasThemes.borderRadius),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Image.network(
-                                            item.image ?? "",
-                                            fit: BoxFit.fill,
-                                            width: Get.width,
-                                            height: Get.width * 0.4,
-                                            loadingBuilder: (context, child,
-                                                    loadingProgress) =>
-                                                loadingProgress != null
-                                                    ? SizedBox(
-                                                        width: Get.width,
-                                                        height: Get.width * 0.4,
-                                                        child: Center(
-                                                          child: Image.asset(
-                                                            "assets/images/iosloading.gif",
-                                                            width: 30,
-                                                            height: 30,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : child,
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.all(10),
+                            () => controller.artikels.isEmpty
+                                ? EmptyComponent()
+                                : ListView.builder(
+                                    itemBuilder: (context, index) {
+                                      var item = controller.artikels[index];
+                                      return InkWell(
+                                        onTap: () =>
+                                            controller.goToArticleDetail(item),
+                                        child: Container(
+                                          margin: EdgeInsets.only(bottom: 5),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      MahasThemes.borderRadius),
+                                              border: Border.all(
+                                                  color: MahasColors.grey),
+                                              color: MahasColors.light),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                                MahasThemes.borderRadius),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  MahasFormat.displayDate(
-                                                    item.tanggal?.toDate(),
-                                                  ),
-                                                  style: MahasThemes.mutedH3,
+                                                Image.network(
+                                                  item.image ?? "",
+                                                  fit: BoxFit.fill,
+                                                  width: Get.width,
+                                                  height: Get.width * 0.4,
+                                                  loadingBuilder: (context,
+                                                          child,
+                                                          loadingProgress) =>
+                                                      loadingProgress != null
+                                                          ? SizedBox(
+                                                              width: Get.width,
+                                                              height:
+                                                                  Get.width *
+                                                                      0.4,
+                                                              child: Center(
+                                                                child:
+                                                                    Image.asset(
+                                                                  "assets/images/iosloading.gif",
+                                                                  width: 30,
+                                                                  height: 30,
+                                                                ),
+                                                              ),
+                                                            )
+                                                          : child,
                                                 ),
-                                                Text(item.title ?? "",
-                                                    style: MahasThemes.h3),
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        MahasFormat.displayDate(
+                                                          item.tanggal
+                                                              ?.toDate(),
+                                                        ),
+                                                        style:
+                                                            MahasThemes.mutedH3,
+                                                      ),
+                                                      Text(item.title ?? "",
+                                                          style:
+                                                              MahasThemes.h3),
+                                                    ],
+                                                  ),
+                                                ),
                                               ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
+                                        ),
+                                      );
+                                    },
+                                    itemCount: controller.artikels.length,
                                   ),
-                                );
-                              },
-                              itemCount: controller.artikels.length,
-                            ),
                           ),
                         ),
                       ),

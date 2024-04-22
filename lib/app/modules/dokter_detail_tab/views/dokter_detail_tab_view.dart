@@ -8,7 +8,7 @@ import '../../../mahas/services/helper.dart';
 import '../controllers/dokter_detail_tab_controller.dart';
 
 class DokterDetailTabView extends GetView<DokterDetailTabController> {
-  const DokterDetailTabView({Key? key}) : super(key: key);
+  const DokterDetailTabView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

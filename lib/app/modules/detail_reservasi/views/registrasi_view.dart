@@ -12,12 +12,12 @@ class RegistrasiView extends StatelessWidget {
   final String? statusResep;
 
   const RegistrasiView({
-    Key? key,
+    super.key,
     this.noreg,
     this.nama,
     this.statusPeriksa,
     this.statusResep,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

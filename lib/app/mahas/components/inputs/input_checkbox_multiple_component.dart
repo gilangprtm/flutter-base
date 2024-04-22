@@ -63,11 +63,11 @@ class InputCheckboxMultipleComponent extends StatefulWidget {
   final String? label;
 
   const InputCheckboxMultipleComponent({
-    Key? key,
+    super.key,
     required this.controller,
     this.editable = true,
     this.label,
-  }) : super(key: key);
+  });
 
   @override
   State<InputCheckboxMultipleComponent> createState() =>

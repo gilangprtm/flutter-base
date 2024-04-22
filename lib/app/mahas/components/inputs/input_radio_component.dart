@@ -92,12 +92,12 @@ class InputRadioComponent extends StatefulWidget {
   final String? label;
 
   const InputRadioComponent({
-    Key? key,
+    super.key,
     required this.controller,
     this.editable = true,
     this.label,
     this.required = false,
-  }) : super(key: key);
+  });
 
   @override
   State<InputRadioComponent> createState() => _InputRadioComponentState();

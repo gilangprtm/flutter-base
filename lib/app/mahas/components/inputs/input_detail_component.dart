@@ -120,7 +120,7 @@ class InputDetailControler<T> {
                     visible: editable,
                     child: InkWell(
                       onTap: () => _itemDeleteOnPress(element),
-                      child:  Icon(
+                      child: Icon(
                         Icons.delete_forever,
                         color: MahasColors.danger,
                       ),
@@ -176,13 +176,13 @@ class InputDetailComponent<T> extends StatefulWidget {
       builder;
 
   const InputDetailComponent({
-    Key? key,
+    super.key,
     this.label,
     this.editable = true,
     this.required = false,
     required this.controller,
     this.builder,
-  }) : super(key: key);
+  });
 
   @override
   State<InputDetailComponent<T>> createState() =>
@@ -264,7 +264,7 @@ class _InputDetailComponentState<T> extends State<InputDetailComponent<T>> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   widget.controller._errorMessage ?? "",
-                  style:  TextStyle(color: MahasColors.danger),
+                  style: TextStyle(color: MahasColors.danger),
                 ),
               ),
             ),

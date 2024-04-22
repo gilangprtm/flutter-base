@@ -15,7 +15,7 @@ class WidgetCard extends StatefulWidget {
   final Widget Function(Function? onSkip, Function onNext)? customNavigator;
 
   const WidgetCard({
-    Key? key,
+    super.key,
     required this.enable,
     required this.x,
     required this.y,
@@ -28,7 +28,7 @@ class WidgetCard extends StatefulWidget {
     this.onSkip,
     this.onTapNext,
     this.customNavigator,
-  }) : super(key: key);
+  });
 
   @override
   _WidgetCardState createState() => _WidgetCardState();

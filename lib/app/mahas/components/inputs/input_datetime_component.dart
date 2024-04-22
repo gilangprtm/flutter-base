@@ -121,14 +121,14 @@ class InputDatetimeComponent extends StatefulWidget {
   final InputDatetimeType type;
 
   const InputDatetimeComponent({
-    Key? key,
+    super.key,
     this.label,
     this.marginBottom,
     required this.controller,
     this.editable = true,
     this.required = false,
     this.type = InputDatetimeType.date,
-  }) : super(key: key);
+  });
 
   @override
   State<InputDatetimeComponent> createState() => _InputDatetimeComponentState();

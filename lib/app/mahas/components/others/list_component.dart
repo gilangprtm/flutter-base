@@ -120,13 +120,13 @@ class ListComponent<T> extends StatefulWidget {
       separatorBuilder;
 
   const ListComponent({
-    Key? key,
+    super.key,
     required this.controller,
     required this.itemBuilder,
     this.allowMenuAction = false,
     this.listMenuAction,
     this.separatorBuilder,
-  }) : super(key: key);
+  });
 
   @override
   State<ListComponent<T>> createState() => _ListComponentState<T>();

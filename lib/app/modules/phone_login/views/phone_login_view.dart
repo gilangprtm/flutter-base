@@ -8,7 +8,7 @@ import '../../../mahas/mahas_colors.dart';
 import '../controllers/phone_login_controller.dart';
 
 class PhoneLoginView extends GetView<PhoneLoginController> {
-  const PhoneLoginView({Key? key}) : super(key: key);
+  const PhoneLoginView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +52,9 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
                   borderRadius: BorderRadius.circular(MahasThemes.borderRadius),
                 ),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: MahasColors.primary,),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MahasColors.primary,
+                    ),
                     onPressed: () {
                       controller.signInOnTap();
                     },

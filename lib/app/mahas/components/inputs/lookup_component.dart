@@ -124,7 +124,8 @@ class LookupController<T, U> extends ChangeNotifier {
           }
         }
       } else {
-        bool error = MahasService.isInternetCausedError(apiModel.message.toString());
+        bool error =
+            MahasService.isInternetCausedError(apiModel.message.toString());
         Helper.errorToast(message: !error ? apiModel.message.toString() : null);
       }
       return result;
@@ -233,11 +234,11 @@ class LookupComponent<T, U> extends StatefulWidget {
   final Widget Function(dynamic)? setup;
 
   const LookupComponent({
-    Key? key,
+    super.key,
     this.title,
     required this.controller,
     this.setup,
-  }) : super(key: key);
+  });
 
   @override
   State<LookupComponent> createState() => _LookupComponentState();

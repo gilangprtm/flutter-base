@@ -6,9 +6,9 @@ class EmptyComponent extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const EmptyComponent({
-    Key? key,
+    super.key,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

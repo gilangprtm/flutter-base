@@ -13,7 +13,7 @@ import '../../../models/jadwal_praktek_model.dart';
 import '../controllers/dokter_konfirmasi_tab_controller.dart';
 
 class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
-  const DokterKonfirmasiTabView({Key? key}) : super(key: key);
+  const DokterKonfirmasiTabView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

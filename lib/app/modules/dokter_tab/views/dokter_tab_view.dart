@@ -10,7 +10,7 @@ import '../../../mahas/services/helper.dart';
 import '../controllers/dokter_tab_controller.dart';
 
 class DokterTabView extends GetView<DokterTabController> {
-  const DokterTabView({Key? key}) : super(key: key);
+  const DokterTabView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +39,8 @@ class DokterTabView extends GetView<DokterTabController> {
                             child: Center(
                               child: CircularProgressIndicator(
                                 color: MahasColors.primary,
-                                value: loadingProgress.expectedTotalBytes != null
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
                                     ? loadingProgress.cumulativeBytesLoaded /
                                         loadingProgress.expectedTotalBytes!
                                     : null,

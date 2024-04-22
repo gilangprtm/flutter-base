@@ -20,7 +20,7 @@ class ReservasiView extends StatelessWidget {
   final int? noAntrian;
 
   const ReservasiView({
-    Key? key,
+    super.key,
     required this.noReservasi,
     this.tanggal,
     this.noUrut,
@@ -30,7 +30,7 @@ class ReservasiView extends StatelessWidget {
     this.keterangan,
     this.statusReservasi,
     this.memo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

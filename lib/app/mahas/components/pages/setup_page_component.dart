@@ -211,7 +211,7 @@ class SetupPageController<T> extends ChangeNotifier {
                 ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
                 : r.message,
           );
-          
+
           setState(() {
             editable = true;
           });
@@ -245,7 +245,7 @@ class SetupPageComponent extends StatefulWidget {
   final List<Widget>? childrenAfterButton;
 
   const SetupPageComponent({
-    Key? key,
+    super.key,
     required this.title,
     required this.controller,
     this.childrenPadding = true,
@@ -254,7 +254,7 @@ class SetupPageComponent extends StatefulWidget {
     this.crossAxisAlignmentChildren = CrossAxisAlignment.center,
     this.titleFunction,
     this.showAppBar = true,
-  }) : super(key: key);
+  });
 
   @override
   State<SetupPageComponent> createState() => _SetupPageComponentState();

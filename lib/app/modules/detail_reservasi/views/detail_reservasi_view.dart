@@ -11,7 +11,7 @@ import 'package:timeline_tile/timeline_tile.dart';
 import '../controllers/detail_reservasi_controller.dart';
 
 class DetailReservasiView extends GetView<DetailReservasiController> {
-  const DetailReservasiView({Key? key}) : super(key: key);
+  const DetailReservasiView({super.key});
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -19,7 +19,8 @@ class DetailReservasiView extends GetView<DetailReservasiController> {
       onPopInvoked: (didPop) {
         if (didPop) {
           return;
-        }controller.backOnPressed();
+        }
+        controller.backOnPressed();
       },
       child: Scaffold(
         appBar: AppBar(
