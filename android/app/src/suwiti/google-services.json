@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "894116160966",
+    "project_id": "haimed-rs-suwiti",
+    "storage_bucket": "haimed-rs-suwiti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894116160966:android:f485b207f72639358abec7",
+        "android_client_info": {
+          "package_name": "com.sanata.haimed.rssuwiti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894116160966-mdcn6csq5b82e6vgt0nsahkiublg8lok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.rssuwiti",
+            "certificate_hash": "d1a58c92845af7a4267a47d1aea3d3e3ef0012fa"
+          }
+        },
+        {
+          "client_id": "894116160966-ohuoh144nije1kqc496gb3hdbb50eoaj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMD0GhQu2sQzeVoL_Mv8agwi1bJVhK7x8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894116160966-ohuoh144nije1kqc496gb3hdbb50eoaj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "894116160966-6a9d6u6npvs2n11rus09e3ogt4gm2pj6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sanata.haimedGetx"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

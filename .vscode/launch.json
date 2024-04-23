@@ -23,6 +23,24 @@
             ]
         },
         {
+            "name": "HaiMed RSD Suwiti",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "suwiti"
+            ]
+        },
+        {
+            "name": "HaiMed RSD Giri Asih",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "giriasih"
+            ]
+        },
+        {
             "name": "SIPRAJA",
             "request": "launch",
             "type": "dart",

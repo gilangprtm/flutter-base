@@ -63,6 +63,8 @@ flutter:
     - assets/images/cendana/
     - assets/images/rsbk/
     - assets/images/premagana/
+    - assets/images/suwiti/
+    - assets/images/giriasih/
     - assets/icons/
 
   fonts:

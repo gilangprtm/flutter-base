@@ -112,6 +112,26 @@ android {
             signingConfig signingConfigs.debug
         }
 
+        suwiti {
+            dimension "app"
+            resValue "string", "app_name", "HaiMed RSD Suwiti"
+            applicationId "com.sanata.haimed.rssuwiti"
+            versionName flutterVersionName
+            // signingConfig signingConfigs.suwiti
+            //uncomment signingconfig above and comment signingconfig below for release per flavor
+            signingConfig signingConfigs.debug
+        }
+
+        giriasih {
+            dimension "app"
+            resValue "string", "app_name", "HaiMed RSD Giri Asih"
+            applicationId "com.sanata.haimed.rsgiriasih"
+            versionName flutterVersionName
+            // signingConfig signingConfigs.giriasih
+            //uncomment signingconfig above and comment signingconfig below for release per flavor
+            signingConfig signingConfigs.debug
+        }
+
         premagana {
             dimension "app"
             resValue "string", "app_name", "HaiMed RS Premagana"

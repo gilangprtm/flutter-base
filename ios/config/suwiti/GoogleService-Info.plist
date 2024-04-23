@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>894116160966-hqlvtov12psq8u4jo9ojujtoqjp0uhko.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.894116160966-hqlvtov12psq8u4jo9ojujtoqjp0uhko</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>894116160966-612dh4quv7n8rok01r1ec6ggco7mk751.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCnlO5R00zFBR65Ti5Gj5t5GLOh8SOAkno</string>
+	<key>GCM_SENDER_ID</key>
+	<string>894116160966</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sanata.haimed.rssuwiti</string>
+	<key>PROJECT_ID</key>
+	<string>haimed-rs-suwiti</string>
+	<key>STORAGE_BUCKET</key>
+	<string>haimed-rs-suwiti.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:894116160966:ios:21850943fa7e42768abec7</string>
+</dict>
+</plist>

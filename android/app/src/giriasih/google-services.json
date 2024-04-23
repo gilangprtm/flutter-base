@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "839320340926",
+    "project_id": "haimed-rsd-abiansemal",
+    "storage_bucket": "haimed-rsd-abiansemal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839320340926:android:d73bc99d817592fcd351ef",
+        "android_client_info": {
+          "package_name": "com.sanata.haimed.rsgiriasih"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839320340926-c19fg0abigi94sh5cclumbvefdbfqvpq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanata.haimed.rsgiriasih",
+            "certificate_hash": "d1a58c92845af7a4267a47d1aea3d3e3ef0012fa"
+          }
+        },
+        {
+          "client_id": "839320340926-2vbcgpm9tvcmp9ua2avb1v5saihkbp11.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIRCV9cS7gwgSdPbHZLs4CmMkkPxAKrjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839320340926-2vbcgpm9tvcmp9ua2avb1v5saihkbp11.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "839320340926-lg0g0uk8n0k1v3jug371c8c7haf5dfb2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sanata.haimed.rsgiriasih"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

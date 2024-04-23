@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/constant/environment_constant.dart';
 import 'package:haimed_getx/app/mahas/components/mahas_themes.dart';
 import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:haimed_getx/app/mahas/mahas_service.dart';
@@ -13,6 +14,7 @@ void main() async {
 
   // Environment
   MahasConfig.currentEnv = await MahasService.currentEnv();
+  EnvironmentConstant().environment();
   MahasService.init();
   runApp(
     GetMaterialApp(

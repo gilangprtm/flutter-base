@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:haimed_getx/app/constant/environment_constant.dart';
 import 'package:haimed_getx/app/mahas/mahas_storage.dart';
 import 'package:haimed_getx/app/models/informasi_umum_model.dart';
 import 'package:haimed_getx/app/models/update_app_values_model.dart';
@@ -24,7 +25,7 @@ import 'mahas_colors.dart';
 import 'mahas_config.dart';
 import 'models/color_theme_model.dart';
 
-enum MahasEnvironmentType { cendana, rsbk, premagana }
+enum MahasEnvironmentType { cendana, rsbk, premagana, suwiti, giriasih }
 
 final authController = AuthController.instance;
 final remoteConfig = FirebaseRemoteConfig.instance;
@@ -38,6 +39,8 @@ class MahasService {
   static Future<void> init() async {
     // getstorange
     await GetStorage.init();
+
+    EnvironmentConstant().environment();
 
     //package info
     MahasConfig.packageInfo = await PackageInfo.fromPlatform();
@@ -62,6 +65,10 @@ class MahasService {
       return MahasEnvironmentType.rsbk;
     } else if (packageInfo.packageName == "com.sanata.haimed.premagana") {
       return MahasEnvironmentType.premagana;
+    } else if (packageInfo.packageName == "com.sanata.haimed.rssuwiti") {
+      return MahasEnvironmentType.suwiti;
+    } else if (packageInfo.packageName == "com.sanata.haimed.rsgiriasih") {
+      return MahasEnvironmentType.giriasih;
     } else {
       return MahasEnvironmentType.cendana;
     }
