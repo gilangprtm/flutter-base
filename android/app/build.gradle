@@ -26,12 +26,6 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
 
-// def keystoreProperties = new Properties()
-//     def keystorePropertiesFile = rootProject.file('key.properties')
-//     if (keystorePropertiesFile.exists()) {
-//         keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-//     }
-
 android {
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
@@ -94,23 +88,6 @@ android {
             storePassword "android"
         }
     }
-    // buildTypes {
-    //     cendana {
-    //         // signingConfig signingConfigs.cendana
-    //         //uncomment signingconfig above and comment signingconfig below for release per flavor
-    //         signingConfig signingConfigs.debug
-    //     }
-
-    //     premagana {
-    //         // signingConfig signingConfigs.premagana
-    //         //uncomment signingconfig above and comment signingconfig below for release per flavor
-    //         signingConfig signingConfigs.debug
-    //     }
-
-    //     debug {
-    //         signingConfig signingConfigs.debug
-    //     }
-    // }
 
     //flavor
     flavorDimensions "app"

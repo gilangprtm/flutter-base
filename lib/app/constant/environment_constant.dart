@@ -18,8 +18,8 @@ class EnvironmentConstant {
 
   static String localNotifImage =
       MahasConfig.currentEnv == MahasEnvironmentType.cendana
-          ? "@drawable/cendana/logodua"
+          ? "@drawable/logonotifcendana"
           : MahasConfig.currentEnv == MahasEnvironmentType.premagana
-              ? "@drawable/premagana/logodua"
-              : "@drawable/rsbk/logodua";
+              ? "@drawable/logonotifpremagana"
+              : "@drawable/logonotifbhayangkara";
 }
