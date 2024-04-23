@@ -1,12 +1,13 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:haimed_getx/app/constant/environment_constant.dart';
 
 class LocalNotificationService {
   static final _notificationsPlugin = FlutterLocalNotificationsPlugin();
 
   void initialize() async {
     var androidInitialization =
-        const AndroidInitializationSettings("@drawable/logodua");
+        AndroidInitializationSettings(EnvironmentConstant.localNotifImage);
     var iOSInitialization = const DarwinInitializationSettings();
     final InitializationSettings initializationSettings =
         InitializationSettings(
