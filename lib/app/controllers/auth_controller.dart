@@ -7,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../mahas/services/http_api.dart';
 import '../mahas/mahas_service.dart';
@@ -59,8 +60,10 @@ class AuthController extends GetxController {
     Get.offAllNamed(Routes.WELCOME);
   }
 
-  void _toHome() async {
-    Get.offAllNamed(Routes.home);
+  void _toHome() {
+    MahasConfig.currentEnv == MahasEnvironmentType.premagana
+        ? Get.offAllNamed(Routes.HOME_PREMAGANA)
+        : Get.offAllNamed(Routes.home);
   }
 
   Future<UserCredential?> _signInWithCredentialGoogle() async {

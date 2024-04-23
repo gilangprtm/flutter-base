@@ -6,14 +6,14 @@ class EnvironmentConstant {
       MahasConfig.currentEnv == MahasEnvironmentType.cendana
           ? "assets/images/cendana/logo-nobg.png"
           : MahasConfig.currentEnv == MahasEnvironmentType.premagana
-              ? "assets/images/rsbk/logo-nobg.png"
+              ? "assets/images/premagana/logo-nobg.png"
               : "assets/images/rsbk/logorsbk.png";
 
   static String imageSplash =
       MahasConfig.currentEnv == MahasEnvironmentType.cendana
           ? "assets/images/cendana/logo-nobg.png"
           : MahasConfig.currentEnv == MahasEnvironmentType.premagana
-              ? "assets/images/rsbk/logo-nobg.png"
+              ? "assets/images/premagana/logo-nobg.png"
               : "assets/images/rsbk/loadingrsbktiga.gif";
 
   static String localNotifImage =

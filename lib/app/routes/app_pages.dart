@@ -16,6 +16,8 @@ import '../modules/dokter_tab/bindings/dokter_tab_binding.dart';
 import '../modules/dokter_tab/views/dokter_tab_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home_premagana/bindings/home_premagana_binding.dart';
+import '../modules/home_premagana/views/home_premagana_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notifikasi/bindings/notifikasi_binding.dart';
@@ -211,6 +213,11 @@ class AppPages {
       name: _Paths.NOTIFIKASI_DETAIL,
       page: () => const NotifikasiDetailView(),
       binding: NotifikasiDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOME_PREMAGANA,
+      page: () => HomePremaganaView(),
+      binding: HomePremaganaBinding(),
     ),
   ];
 }

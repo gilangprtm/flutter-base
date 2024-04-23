@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
+import 'package:haimed_getx/app/mahas/mahas_service.dart';
+
 import '../mahas/services/mahas_format.dart';
 
 class DokterfavModel {
@@ -42,7 +45,9 @@ class DokterfavModel {
     model.subspesialisname = dynamicData['SubSpesialisName'];
     model.kategoriName = dynamicData['Kategori_Name'];
     model.dokteridhaimed = dynamicData['DokterIdHaiMed'];
-    model.photourl = dynamicData['PhotoUrl'];
+    model.photourl = MahasConfig.currentEnv == MahasEnvironmentType.rsbk
+        ? dynamicData['PhotoUrl']
+        : dynamicData['Foto'];
 
     return model;
   }
