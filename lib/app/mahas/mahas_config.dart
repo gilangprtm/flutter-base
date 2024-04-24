@@ -1,4 +1,4 @@
-import 'package:haimed_getx/app/mahas/mahas_service.dart';
+import 'package:haimed_getx/app/constant/environment_constant.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../models/faq_model.dart';

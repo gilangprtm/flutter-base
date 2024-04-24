@@ -241,8 +241,8 @@ class HomeController extends GetxController {
   }
 
   Future homeProcedure() async {
-    artikels.value = await MahasService().getListArtikelFirestore();
     await putUser();
+    artikels.value = await MahasService().getListArtikelFirestore();
     await getNotifikasi();
     await versionCheck();
   }

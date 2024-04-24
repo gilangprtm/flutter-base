@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:haimed_getx/app/constant/environment_constant.dart';
 import 'package:haimed_getx/app/mahas/mahas_config.dart';
-import 'package:haimed_getx/app/mahas/mahas_service.dart';
 
 import '../mahas/services/mahas_format.dart';
 

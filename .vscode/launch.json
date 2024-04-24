@@ -49,5 +49,14 @@
                 "rsbk"
             ]
         },
+        {
+            "name": "SIPRAJA Dev",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "rsbkdev"
+            ]
+        },
     ]
 }

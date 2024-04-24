@@ -13,8 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Environment
-  MahasConfig.currentEnv = await MahasService.currentEnv();
-  EnvironmentConstant().environment();
+  MahasConfig.currentEnv = await EnvironmentConstant.currentEnv();
+  EnvironmentConstant.environment();
   MahasService.init();
   runApp(
     GetMaterialApp(
