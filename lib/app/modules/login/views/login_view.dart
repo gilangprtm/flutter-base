@@ -38,7 +38,7 @@ class LoginView extends GetView<LoginController> {
                   ),
                   const SizedBox(height: 10),
                   LoginButton(
-                    onPressed: () => controller.googleLoginOnPress(),
+                    onPressed: controller.googleLoginOnPress,
                     type: LoginButtonType.google,
                   ),
                   const SizedBox(height: 10),
