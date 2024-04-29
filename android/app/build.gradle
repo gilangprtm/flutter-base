@@ -60,24 +60,24 @@ android {
 
     signingConfigs {
         cendana {
-            def keystorePropertiesFile = rootProject.file("app/src/cendana/key.properties")
             def keystoreProperties = new Properties()
+            def keystorePropertiesFile = rootProject.file("app/src/cendana/key.properties")
             keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storeFile keystoreProperties['storeFile'] ? rootProject.file("app/src/cendana/${keystoreProperties['storeFile']}") : null
             storePassword keystoreProperties['storePassword']
         }
 
         premagana {
-            def keystorePropertiesFile = rootProject.file("app/src/premagana/key.properties")
             def keystoreProperties = new Properties()
+            def keystorePropertiesFile = rootProject.file("app/src/premagana/key.properties")
             keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storeFile keystoreProperties['storeFile'] ? rootProject.file("app/src/premagana/${keystoreProperties['storeFile']}") : null
             storePassword keystoreProperties['storePassword']
         }
 
@@ -95,6 +95,7 @@ android {
         cendana {
             dimension "app"
             resValue "string", "app_name", "HaiMed RS Cendana"
+            namespace "com.sanata.haimed.cendana"
             applicationId "com.sanata.haimed.cendana"
             versionName flutterVersionName
             // signingConfig signingConfigs.cendana
@@ -105,6 +106,7 @@ android {
         rsbk {
             dimension "app"
             resValue "string", "app_name", "SIPRAJA RS Bhayangkara Denpasar"
+            namespace "com.haimed.rsbk"
             applicationId "com.haimed.rsbk"
             versionName flutterVersionName
             // signingConfig signingConfigs.rsbk
@@ -115,6 +117,7 @@ android {
         rsbkdev {
             dimension "app"
             resValue "string", "app_name", "Dev SIPRAJA"
+            namespace "com.sanata.haimed.rsbk.dev"
             applicationId "com.sanata.haimed.rsbk.dev"
             versionName flutterVersionName
             signingConfig signingConfigs.debug
@@ -123,6 +126,7 @@ android {
         suwiti {
             dimension "app"
             resValue "string", "app_name", "HaiMed RSD Suwiti"
+            namespace "com.sanata.haimed.rssuwiti"
             applicationId "com.sanata.haimed.rssuwiti"
             versionName flutterVersionName
             // signingConfig signingConfigs.suwiti
@@ -133,6 +137,7 @@ android {
         giriasih {
             dimension "app"
             resValue "string", "app_name", "HaiMed RSD Giri Asih"
+            namespace "com.sanata.haimed.rsgiriasih"
             applicationId "com.sanata.haimed.rsgiriasih"
             versionName flutterVersionName
             // signingConfig signingConfigs.giriasih
@@ -143,6 +148,7 @@ android {
         premagana {
             dimension "app"
             resValue "string", "app_name", "HaiMed RS Premagana"
+            namespace "com.sanata.haimed.premagana"
             applicationId "com.sanata.haimed.premagana"
             versionName flutterVersionName
             // signingConfig signingConfigs.premagana
