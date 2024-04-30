@@ -394,19 +394,21 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
                                       InputRadioComponent(
                                         controller: controller.tipePasienCon,
                                         label: "Pilih Tipe Pasien",
-                                        editable: controller.selectedPasien
-                                                    .value!.nrm ==
+                                        editable: controller
+                                                    .selectedPasien.value.nrm ==
                                                 null
                                             ? true
                                             : false,
                                       ),
                                       Visibility(
-                                        visible: controller.tipePasienCon.value,
+                                        visible:
+                                            controller.tipePasienCon.value ==
+                                                true,
                                         child: InputTextComponent(
                                           label: "NRM",
                                           controller: controller.nrmCon,
                                           editable: controller.selectedPasien
-                                                      .value!.nrm ==
+                                                      .value.nrm ==
                                                   null
                                               ? true
                                               : false,

@@ -31,9 +31,9 @@ class DokterKonfirmasiTabController extends GetxController {
   RxString sectionID = "".obs;
   RxString waktuID = "".obs;
   RxString namaSection = "".obs;
-  var pasienList = RxList<PasienModel>();
+  RxList<PasienModel> pasienList = RxList<PasienModel>();
   var jadwalPraktekModel = JadwalpraktekModel().obs;
-  late Rx<PasienModel?> selectedPasien;
+  Rx<PasienModel> selectedPasien = PasienModel().obs;
 
   @override
   void onInit() async {
@@ -52,8 +52,8 @@ class DokterKonfirmasiTabController extends GetxController {
 
   void pasienonChanged(PasienModel? val) {
     selectedPasien.value = val!;
-    if (selectedPasien.value!.nrm != null) {
-      nrmCon.value = selectedPasien.value!.nrm;
+    if (selectedPasien.value.nrm != null) {
+      nrmCon.value = selectedPasien.value.nrm;
       tipePasienCon.value = true;
     } else {
       tipePasienCon.value = false;
@@ -117,25 +117,29 @@ class DokterKonfirmasiTabController extends GetxController {
           "/api/PasienHaiMed?userId=${auth.currentUser!.uid}");
       if (r.success) {
         final datas = json.decode(r.body);
-        final data = datas['Data'];
-        pasienList.clear();
-        for (var e in data) {
-          pasienList.add(PasienModel.fromDynamic(e));
-        }
-        namaPasienCon.items = pasienList
-            .map<DropdownItem>(
-                (e) => DropdownItem.init(e.nama, e.pasienidhaimed))
-            .toList();
-        selectedPasien = pasienList.firstWhereOrNull((e) => e.nama != null).obs;
+        final List data = datas['Data'];
+        if (data.isNotEmpty) {
+          pasienList.clear();
+          for (var e in data) {
+            pasienList.add(PasienModel.fromDynamic(e));
+          }
+          namaPasienCon.items = pasienList
+              .map<DropdownItem>(
+                  (e) => DropdownItem.init(e.nama, e.pasienidhaimed))
+              .toList();
+          selectedPasien.value =
+              pasienList.firstWhereOrNull((e) => e.nama != null) ??
+                  PasienModel();
 
-        if (selectedPasien.value!.nrm != null) {
-          nrmCon.value = selectedPasien.value!.nrm;
-          tipePasienCon.value = true;
-        } else {
-          tipePasienCon.value = false;
-          nrmCon.value = null;
+          if (selectedPasien.value.nrm != null) {
+            nrmCon.value = selectedPasien.value.nrm;
+            tipePasienCon.value = true;
+          } else {
+            tipePasienCon.value = false;
+            nrmCon.value = null;
+          }
+          update();
         }
-        update();
       } else {
         bool error = MahasService.isInternetCausedError(r.message.toString());
         Helper.errorToast(message: !error ? r.message.toString() : null);
@@ -152,13 +156,13 @@ class DokterKonfirmasiTabController extends GetxController {
     }
     await EasyLoading.show();
 
-    if (noHPCon.value != null && selectedPasien.value != null) {
+    if (noHPCon.value != null) {
       try {
         var res = await HttpApi.post('/api/Reservasi', body: {
-          "Alamat": selectedPasien.value!.alamat ?? "",
+          "Alamat": selectedPasien.value.alamat ?? "",
           "Batal": false,
           "NilaiBayar": 0.0,
-          "Nama": selectedPasien.value!.nama ?? "",
+          "Nama": selectedPasien.value.nama ?? "",
           "UntukTanggal": jadwalPraktekModel.value.tanggal!.toString(),
           "MobileKeteranganPasienBaru": tipePasienCon.value,
           "NRM": nrmCon.value ?? "",
@@ -167,14 +171,14 @@ class DokterKonfirmasiTabController extends GetxController {
           "NamaSection": namaSection.value,
           "WaktuID": waktuID.value,
           "MobileKeteranganNRM": nrmCon.value ?? "",
-          "NIK": selectedPasien.value!.nik ?? "",
+          "NIK": selectedPasien.value.nik ?? "",
           "MobileNotifikasiAktif": true,
-          "MobileTglLahirPasien": selectedPasien.value!.tanggallahir.toString(),
-          "TanggalLahir": selectedPasien.value!.tanggallahir.toString(),
+          "MobileTglLahirPasien": selectedPasien.value.tanggallahir.toString(),
+          "TanggalLahir": selectedPasien.value.tanggallahir.toString(),
           "NoUrut": 0,
           "Tanggal": jadwalPraktekModel.value.tanggal!.toString(),
           "HaiMedUserId": auth.currentUser!.uid,
-          "HaiMedRelasiId": selectedPasien.value!.pasienidhaimed ?? "",
+          "HaiMedRelasiId": selectedPasien.value.pasienidhaimed ?? "",
           "Phone": auth.currentUser!.phoneNumber!,
           "Memo": ""
         });
@@ -187,23 +191,26 @@ class DokterKonfirmasiTabController extends GetxController {
             Helper.dialogWarning(
                 "Tidak dapat melakukan reservasi lebih dari sekali");
           } else {
-            List<dynamic> data = json.decode(res.message!)['Errors'];
-            if (data.isNotEmpty) {
-              for (var e in data) {
-                Helper.errorToast(message: e);
-              }
+            bool error =
+                MahasService.isInternetCausedError(res.message.toString());
+            if (error) {
+              Helper.errorToast();
             } else {
-              bool error =
-                  MahasService.isInternetCausedError(res.message.toString());
-              Helper.errorToast(
-                  message: !error ? res.message.toString() : null);
+              List<dynamic> data = json.decode(res.message!)['Errors'];
+              if (data.isNotEmpty) {
+                for (var e in data) {
+                  Helper.errorToast(message: e);
+                }
+              } else {
+                Helper.errorToast(message: res.message.toString());
+              }
             }
           }
         }
       } catch (e) {
         Helper.errorToast(message: e.toString());
       }
-    } else if (selectedPasien.value == null) {
+    } else if (selectedPasien.value.nama == null) {
       Helper.dialogWarning("Nama Pasien harus diisi!");
     } else {
       telpOnTap();
