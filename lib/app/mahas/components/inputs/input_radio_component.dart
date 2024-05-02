@@ -42,6 +42,7 @@ class InputRadioController {
     if (!editable) return;
     setState(() {
       _value = v;
+      _errorMessage = null;
       if (onChanged != null) {
         onChanged!(v);
       }

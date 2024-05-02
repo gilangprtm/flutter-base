@@ -182,7 +182,10 @@ class _InputTextState extends State<InputTextComponent> {
 
     var textFormField = TextFormField(
       maxLines: widget.controller.type == InputTextType.paragraf ? 4 : 1,
-      onChanged: widget.controller.onChanged,
+      onChanged: (value) {
+        widget.controller.isValid;
+        widget.controller.onChanged;
+      },
       onSaved: widget.controller.onSaved,
       onTap: widget.controller.onTap,
       onFieldSubmitted: widget.controller.onFieldSubmitted,

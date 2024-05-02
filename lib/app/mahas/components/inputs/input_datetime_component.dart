@@ -68,6 +68,7 @@ class InputDatetimeController {
       if (picked != null && _date != picked) {
         setState(() {
           _date = picked;
+          _errorMessage = null;
         });
       }
     } else {
@@ -78,6 +79,7 @@ class InputDatetimeController {
       if (picked != null && _time != picked) {
         setState(() {
           _time = picked;
+          _errorMessage = null;
         });
       }
     }
