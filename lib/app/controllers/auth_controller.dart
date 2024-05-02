@@ -101,11 +101,9 @@ class AuthController extends GetxController {
     if (EasyLoading.isShow) return;
     await EasyLoading.show();
     try {
-      var r = await _signInWithCredentialGoogle();
+      await _signInWithCredentialGoogle();
       box.write('apple_login', null);
-      if (r == null) {
-        await EasyLoading.dismiss();
-      }
+      await EasyLoading.dismiss();
     } on FirebaseAuthException catch (e) {
       Helper.errorToast(
         message: e.message,

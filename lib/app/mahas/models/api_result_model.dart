@@ -11,6 +11,8 @@ class ApiResultModel {
       success = false;
       if (statusCode == 500) {
         message = "Internal Server Error";
+      } else if (statusCode == 408) {
+        message = body.toString();
       } else if (body is String) {
         message = body;
         if (message!.indexOf('<!DOCTYPE html>') == 0) {

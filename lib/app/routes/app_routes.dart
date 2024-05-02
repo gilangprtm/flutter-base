@@ -29,7 +29,6 @@ abstract class Routes {
   static const DOKTER_KONFIRMASI_TAB = _Paths.DOKTER_KONFIRMASI_TAB;
   static const TAMBAH_PASIEN = _Paths.TAMBAH_PASIEN;
   static const RESERVASI = _Paths.RESERVASI;
-  static const RESERVASI_SETUP = _Paths.RESERVASI_SETUP;
   static const DETAIL_RESERVASI = _Paths.DETAIL_RESERVASI;
   static const PHONE_LOGIN = _Paths.PHONE_LOGIN;
   static const PROFILE_SETUP = _Paths.PROFILE_SETUP;
@@ -63,7 +62,6 @@ abstract class _Paths {
   static const DOKTER_KONFIRMASI_TAB = '/dokter-konfirmasi-tab';
   static const TAMBAH_PASIEN = '/tambah-pasien';
   static const RESERVASI = '/reservasi';
-  static const RESERVASI_SETUP = '/reservasi-setup';
   static const DETAIL_RESERVASI = '/detail-reservasi';
   static const PHONE_LOGIN = '/phone-login';
   static const PROFILE_SETUP = '/profile-setup';

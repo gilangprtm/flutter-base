@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'dart:convert';
 
 import 'package:get/get.dart';
@@ -10,7 +8,6 @@ import '../../../mahas/components/inputs/input_datetime_component.dart';
 import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
-import '../../../mahas/services/helper.dart';
 import '../../../models/pasien_model.dart';
 import '../../pasien/controllers/pasien_controller.dart';
 
@@ -29,8 +26,7 @@ class PasienSetupController extends GetxController {
     ],
   );
   final alamatCon = InputTextController();
-  var pasienIdHaimed;
-  var jenisKelamin;
+  String? pasienIdHaimed;
   late PasienController pasienList;
   RxString getData = ''.obs;
 
@@ -50,7 +46,6 @@ class PasienSetupController extends GetxController {
       bodyApi: (id) => {
         "PasienIdHaiMed": pasienIdHaimed,
         "UserIdHaiMed": MahasConfig.profile!.userIdHaimed,
-        // "NRM": "string",
         "Nama": namaCon.value,
         "Alamat": alamatCon.value,
         "NIK": nikCon.value,
@@ -58,21 +53,16 @@ class PasienSetupController extends GetxController {
         "TempatLahir": tempatLahirCon.value,
         "DibuatTanggal": MahasFormat.dateToString(DateTime.now()),
         "AkunPemilik": false,
-        "JenisKelamin": jenisKelamin,
+        "JenisKelamin": radioCon.value == "Laki-Laki" ? "M" : "F",
       },
       itemKey: (e) => e['id'],
       itemIdAfterSubmit: (e) => json.decode(e)['PasienIdHaiMed'],
       onBeforeSubmit: () {
-        if (radioCon.value == "Laki-Laki") {
-          jenisKelamin = "M";
-        } else {
-          jenisKelamin = "F";
-        }
         if (!namaCon.isValid) return false;
-        if (!dariTglCon.isValid) return false;
-        if (!radioCon.isValid) return false;
         if (!nikCon.isValid) return false;
         if (!tempatLahirCon.isValid) return false;
+        if (!dariTglCon.isValid) return false;
+        if (!radioCon.isValid) return false;
         if (!alamatCon.isValid) return false;
 
         return true;
@@ -95,18 +85,5 @@ class PasienSetupController extends GetxController {
       },
     );
     super.onInit();
-  }
-
-  Future<bool> backOnPressed() async {
-    var r = await Helper.dialogQuestion(
-      message: 'Anda yakin ingin kembali ?',
-      textConfirm: 'Ya',
-    );
-    if (r == true && getData.value == '') {
-      await pasienList.listCon.refresh().then((value) => Get.back());
-    } else {
-      Get.back();
-    }
-    return false;
   }
 }

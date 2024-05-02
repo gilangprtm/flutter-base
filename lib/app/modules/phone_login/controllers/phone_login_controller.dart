@@ -22,8 +22,8 @@ class PhoneLoginController extends GetxController {
   RxString fromProfile = ''.obs;
   RxInt count = 0.obs;
   var auth = FirebaseAuth.instance;
-  late DokterKonfirmasiTabController? konfirmasi;
-  late ProfileSetupController? profile;
+  late DokterKonfirmasiTabController konfirmasi;
+  late ProfileSetupController profile;
 
   @override
   void onInit() async {
@@ -225,7 +225,8 @@ class PhoneLoginController extends GetxController {
           verificationId: verId.value, smsCode: otp);
       if (fromProfile.value != '') {
         await auth.currentUser!.updatePhoneNumber(authCredential);
-        profile!.telpCon.value = auth.currentUser!.phoneNumber;
+        profile.telpCon.value = auth.currentUser!.phoneNumber;
+        konfirmasi.noHPCon.value = auth.currentUser!.phoneNumber;
         Get.back();
         Get.back();
       } else {
@@ -253,7 +254,7 @@ class PhoneLoginController extends GetxController {
               },
             );
             if (res.success) {
-              konfirmasi!.noHPCon.value = phoneCon.value;
+              konfirmasi.noHPCon.value = phoneCon.value;
               Get.back();
               Get.back();
             } else {
@@ -266,7 +267,7 @@ class PhoneLoginController extends GetxController {
             Helper.errorToast(message: e.toString());
           }
         } else {
-          konfirmasi!.noHPCon.value = phoneCon.value;
+          konfirmasi.noHPCon.value = phoneCon.value;
           Get.back();
           Get.back();
         }

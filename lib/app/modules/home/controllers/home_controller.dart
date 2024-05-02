@@ -5,7 +5,6 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haimed_getx/app/models/profile_model.dart';
@@ -176,11 +175,6 @@ class HomeController extends GetxController {
   }
 
   Future putUser() async {
-    if (EasyLoading.isShow) {
-      EasyLoading.dismiss();
-    }
-    await EasyLoading.show();
-
     var r = await HttpApi.put('/api/User', body: {
       "UserIdHaimed": auth.currentUser!.uid.toString(),
       "Email": auth.currentUser!.email.toString(),
@@ -193,7 +187,6 @@ class HomeController extends GetxController {
       bool error = MahasService.isInternetCausedError(r.message.toString());
       Helper.errorToast(message: !error ? r.message.toString() : null);
     }
-    EasyLoading.dismiss();
   }
 
   Future<void> versionCheck() async {
@@ -241,9 +234,9 @@ class HomeController extends GetxController {
   }
 
   Future homeProcedure() async {
-    await putUser();
     artikels.value = await MahasService().getListArtikelFirestore();
-    await getNotifikasi();
     await versionCheck();
+    await putUser();
+    await getNotifikasi();
   }
 }

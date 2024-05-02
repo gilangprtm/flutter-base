@@ -38,8 +38,6 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/reservasi/bindings/reservasi_binding.dart';
 import '../modules/reservasi/views/reservasi_view.dart';
-import '../modules/reservasi_setup/bindings/reservasi_setup_binding.dart';
-import '../modules/reservasi_setup/views/reservasi_setup_view.dart';
 import '../modules/spesialisasi_detail_tab/bindings/spesialisasi_detail_tab_binding.dart';
 import '../modules/spesialisasi_detail_tab/views/spesialisasi_detail_tab_view.dart';
 import '../modules/spesialisasi_tab/bindings/spesialisasi_tab_binding.dart';
@@ -188,11 +186,6 @@ class AppPages {
       name: _Paths.RESERVASI,
       page: () => ReservasiView(),
       binding: ReservasiBinding(),
-    ),
-    GetPage(
-      name: _Paths.RESERVASI_SETUP,
-      page: () => ReservasiSetupView(),
-      binding: ReservasiSetupBinding(),
     ),
     GetPage(
       name: _Paths.DETAIL_RESERVASI,

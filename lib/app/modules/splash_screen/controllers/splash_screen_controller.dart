@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import '../../../mahas/mahas_service.dart';
 
 class SplashScreenController extends GetxController {
-  static SplashScreenController instance = Get.find();
+  static SplashScreenController instance =
+      Get.isRegistered<SplashScreenController>()
+          ? Get.find<SplashScreenController>()
+          : Get.put(SplashScreenController());
 
   RxBool isError = false.obs;
   void refreshData() async {

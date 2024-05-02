@@ -1,5 +1,5 @@
 import 'dart:convert';
-// import 'dart:developer';
+
 import '../mahas_config.dart';
 import '../mahas_service.dart';
 import '../models/api_result_model.dart';
@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 class HttpApi {
   static String? _apiToken;
   static DateTime _apiTokenExpired = DateTime.now();
+  static const Duration _timeoutSecond = Duration(seconds: 15);
 
   static void clearToken() {
     _apiToken = null;
@@ -45,17 +46,29 @@ class HttpApi {
     return ApiResultModel.error("$ex");
   }
 
+  static http.Response _errorTimeout() {
+    return http.Response(
+      'Error Request Timeout\nCek koneksi internet Anda dan coba beberapa saat lagi',
+      408,
+    );
+  }
+
   static Future<ApiResultModel> get(String url) async {
     try {
       // final token = await _token();
       // log(token!);
       final urlX = Uri.parse(getUrl(url));
-      final r = await http.get(
-        urlX,
-        // headers: {
-        //   'Authorization': token != null ? 'Bearer $token' : '',
-        // },
-      );
+      final r = await http
+          .get(
+            urlX,
+            // headers: {
+            //   'Authorization': token != null ? 'Bearer $token' : '',
+            // },
+          )
+          .timeout(
+            _timeoutSecond,
+            onTimeout: () => _errorTimeout(),
+          );
       return _getResult(r);
     } catch (ex) {
       return _getErrorResult(ex);
@@ -66,14 +79,19 @@ class HttpApi {
     try {
       // final token = await _token();
       final urlX = Uri.parse(getUrl(url));
-      var r = await http.post(
-        urlX,
-        headers: {
-          'Content-type': 'application/json',
-          // 'Authorization': token != null ? 'Bearer $token' : '',
-        },
-        body: json.encode(body),
-      );
+      var r = await http
+          .post(
+            urlX,
+            headers: {
+              'Content-type': 'application/json',
+              // 'Authorization': token != null ? 'Bearer $token' : '',
+            },
+            body: json.encode(body),
+          )
+          .timeout(
+            _timeoutSecond,
+            onTimeout: () => _errorTimeout(),
+          );
       return _getResult(r);
     } catch (ex) {
       return _getErrorResult(ex);
@@ -84,14 +102,19 @@ class HttpApi {
     try {
       // final token = await _token();
       final urlX = Uri.parse(getUrl(url));
-      var r = await http.put(
-        urlX,
-        headers: {
-          'Content-type': 'application/json',
-          // 'Authorization': token != null ? 'Bearer $token' : '',
-        },
-        body: json.encode(body),
-      );
+      var r = await http
+          .put(
+            urlX,
+            headers: {
+              'Content-type': 'application/json',
+              // 'Authorization': token != null ? 'Bearer $token' : '',
+            },
+            body: json.encode(body),
+          )
+          .timeout(
+            _timeoutSecond,
+            onTimeout: () => _errorTimeout(),
+          );
       return _getResult(r);
     } catch (ex) {
       return _getErrorResult(ex);
@@ -102,14 +125,19 @@ class HttpApi {
     try {
       // final token = await _token();
       final urlX = Uri.parse(getUrl(url));
-      var r = await http.patch(
-        urlX,
-        headers: {
-          'Content-type': 'application/json',
-          // 'Authorization': token != null ? 'Bearer $token' : '',
-        },
-        body: json.encode(body),
-      );
+      var r = await http
+          .patch(
+            urlX,
+            headers: {
+              'Content-type': 'application/json',
+              // 'Authorization': token != null ? 'Bearer $token' : '',
+            },
+            body: json.encode(body),
+          )
+          .timeout(
+            _timeoutSecond,
+            onTimeout: () => _errorTimeout(),
+          );
       return _getResult(r);
     } catch (ex) {
       return _getErrorResult(ex);
@@ -120,14 +148,19 @@ class HttpApi {
     try {
       // final token = await _token();
       final urlX = Uri.parse(getUrl(url));
-      var r = await http.delete(
-        urlX,
-        headers: {
-          'Content-type': 'application/json',
-          // 'Authorization': token != null ? 'Bearer $token' : '',
-        },
-        body: json.encode(body),
-      );
+      var r = await http
+          .delete(
+            urlX,
+            headers: {
+              'Content-type': 'application/json',
+              // 'Authorization': token != null ? 'Bearer $token' : '',
+            },
+            body: json.encode(body),
+          )
+          .timeout(
+            _timeoutSecond,
+            onTimeout: () => _errorTimeout(),
+          );
       return _getResult(r);
     } catch (ex) {
       return _getErrorResult(ex);

@@ -107,11 +107,11 @@ class SetupPageController<T> extends ChangeNotifier {
         });
       } else {
         bool error = MahasService.isInternetCausedError(r.message.toString());
-        Helper.dialogWarning(
-          error
-              ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
-              : r.message,
-        );
+        if (error) {
+          Helper.errorToast();
+        } else {
+          Helper.errorToast(message: r.message.toString());
+        }
       }
     } else {
       setState(() {
@@ -158,11 +158,11 @@ class SetupPageController<T> extends ChangeNotifier {
           _back();
         } else {
           bool error = MahasService.isInternetCausedError(r.message.toString());
-          Helper.dialogWarning(
-            error
-                ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
-                : r.message,
-          );
+          if (error) {
+            Helper.errorToast();
+          } else {
+            Helper.errorToast(message: r.message.toString());
+          }
         }
       }
     }
@@ -206,11 +206,11 @@ class SetupPageController<T> extends ChangeNotifier {
           }
         } else {
           bool error = MahasService.isInternetCausedError(r.message.toString());
-          Helper.dialogWarning(
-            error
-                ? "Pastikan internetmu lancar, cek ulang jaringan di tempatmu"
-                : r.message,
-          );
+          if (error) {
+            Helper.errorToast();
+          } else {
+            Helper.errorToast(message: r.message.toString());
+          }
 
           setState(() {
             editable = true;

@@ -127,9 +127,7 @@ class DokterKonfirmasiTabController extends GetxController {
               .map<DropdownItem>(
                   (e) => DropdownItem.init(e.nama, e.pasienidhaimed))
               .toList();
-          selectedPasien.value =
-              pasienList.firstWhereOrNull((e) => e.nama != null) ??
-                  PasienModel();
+          selectedPasien.value = pasienList.first;
 
           if (selectedPasien.value.nrm != null) {
             nrmCon.value = selectedPasien.value.nrm;

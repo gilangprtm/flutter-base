@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:get/get.dart';
+import 'package:haimed_getx/app/mahas/components/others/list_component.dart';
 
 import '../../../../mahas/components/inputs/input_text_component.dart';
 import '../../../../mahas/components/mahas_themes.dart';
@@ -18,35 +17,15 @@ class UlasanUlasanController extends GetxController {
   final ratingCon = InputTextController(type: InputTextType.paragraf);
   var models = RxList<ReviewModel>();
   var model = Rxn<SummaryModel>();
-  RxBool isLoading = false.obs;
 
-  Future<void> reviewPasien() async {
-    if (EasyLoading.isShow) {
-      EasyLoading.dismiss();
-    }
-    // await EasyLoading.show();
-    isLoading.value = true;
-    var r = await HttpApi.get('/api/ReviewFaskes');
-    if (r.success) {
-      final datas = json.decode(r.body);
-      final data = datas['Data'];
-      models.clear();
-      for (var e in data) {
-        models.add(ReviewModel.fromDynamic(e));
-      }
-    } else {
-      bool error = MahasService.isInternetCausedError(r.message.toString());
-      Helper.errorToast(message: !error ? r.message.toString() : null);
-    }
-    isLoading.value = false;
-    EasyLoading.dismiss();
-  }
+  final ListComponentController<ReviewModel> ulasanList =
+      ListComponentController(
+    urlApi: (index, filter) => '/api/ReviewFaskes?pageSize=15&pageIndex=$index',
+    fromDynamic: ReviewModel.fromDynamic,
+    allowSearch: false,
+  );
 
   Future<void> summary() async {
-    if (EasyLoading.isShow) {
-      EasyLoading.dismiss();
-    }
-    // await EasyLoading.show();
     var r = await HttpApi.get('/api/ReviewFaskes/Summary');
     if (r.success) {
       var data = r.body;
@@ -55,7 +34,6 @@ class UlasanUlasanController extends GetxController {
       bool error = MahasService.isInternetCausedError(r.message.toString());
       Helper.errorToast(message: !error ? r.message.toString() : null);
     }
-    EasyLoading.dismiss();
   }
 
   List<int> countStars() {
@@ -98,7 +76,7 @@ class UlasanUlasanController extends GetxController {
 
   void tambahUlasanOnTap() async {
     ratingCon.value = null;
-    await dialogRating(controller: ratingCon);
+    await dialogRating(controller: ratingCon, isRefreshList: true);
   }
 
   Future<bool?> dialogRating(
@@ -106,6 +84,7 @@ class UlasanUlasanController extends GetxController {
       String? textCancel,
       Color? color,
       Function()? backOnPressed,
+      bool isRefreshList = false,
       required InputTextController controller}) async {
     RxDouble ratingStars = 0.0.obs;
     return await Get.dialog<bool?>(
@@ -182,10 +161,12 @@ class UlasanUlasanController extends GetxController {
             ),
             onPressed: () async {
               await postRating(controller.value, ratingStars.value.toInt());
-              await summary();
-              await reviewPasien();
-              update();
               Get.back(result: true);
+              if (isRefreshList) {
+                await summary();
+                ulasanList.refresh();
+              }
+              update();
             },
           ),
         ],
@@ -217,7 +198,6 @@ class UlasanUlasanController extends GetxController {
   void onInit() async {
     super.onInit();
     await summary();
-    await reviewPasien();
     countStars();
   }
 }

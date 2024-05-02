@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haimed_getx/app/models/profile_model.dart';
@@ -128,10 +126,6 @@ class HomePremaganaController extends GetxController {
 
   //home procedure start here
   Future getImageSlider() async {
-    if (!EasyLoading.isShow) {
-      await EasyLoading.show();
-    }
-
     try {
       var r = await HttpApi.get('/api/FotoSlider');
       if (r.success) {
@@ -203,7 +197,6 @@ class HomePremaganaController extends GetxController {
     } catch (e) {
       Helper.errorToast(message: e.toString());
     }
-    await EasyLoading.dismiss();
   }
   //home procedure end here
 
@@ -227,12 +220,6 @@ class HomePremaganaController extends GetxController {
   }
 
   Future homeProcedure() async {
-    late final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    token = await messaging.getToken();
-    if (MahasConfig.urlApi == "") {
-      await EasyLoading.show();
-      MahasConfig.urlApi = remoteConfig.getString('api');
-    }
     await getImageSlider();
     await putUser();
     await getNotifikasi();
