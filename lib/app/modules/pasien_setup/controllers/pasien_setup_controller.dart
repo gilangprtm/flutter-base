@@ -9,7 +9,6 @@ import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
 import '../../../models/pasien_model.dart';
-import '../../pasien/controllers/pasien_controller.dart';
 
 class PasienSetupController extends GetxController {
   late SetupPageController formCon;
@@ -27,15 +26,11 @@ class PasienSetupController extends GetxController {
   );
   final alamatCon = InputTextController();
   String? pasienIdHaimed;
-  late PasienController pasienList;
-  RxString getData = ''.obs;
+  RxString editParam = ''.obs;
 
   @override
   void onInit() {
-    pasienList = Get.isRegistered<PasienController>()
-        ? Get.find<PasienController>()
-        : Get.put(PasienController());
-    getData.value = Get.parameters['getData'] ?? '';
+    editParam.value = Get.parameters['editable'] ?? "";
     formCon = SetupPageController(
       urlApiGet: (id) => '/api/PasienHaiMed/$id',
       urlApiPost: () => '/api/PasienHaiMed',
@@ -84,6 +79,7 @@ class PasienSetupController extends GetxController {
         }
       },
     );
+    formCon.editable = editParam.value.isNotEmpty;
     super.onInit();
   }
 }

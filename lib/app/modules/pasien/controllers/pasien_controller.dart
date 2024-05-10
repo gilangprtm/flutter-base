@@ -76,6 +76,7 @@ class PasienController extends GetxController {
       Routes.PASIEN_SETUP,
       parameters: {
         'id': id.toString(),
+        'editable': true.toString(),
       },
     )!
         .then((value) => {
@@ -86,7 +87,6 @@ class PasienController extends GetxController {
   @override
   void onReady() {
     coachMaker();
-    listCon.refresh();
     super.onReady();
   }
 

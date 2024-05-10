@@ -78,10 +78,9 @@ class DokterKonfirmasiTabController extends GetxController {
   }
 
   void goToTambahPasien() {
-    Get.toNamed(Routes.PASIEN_SETUP, parameters: {"getData": true.toString()})!
-        .then((value) => {
-              getDataPasien(),
-            });
+    Get.toNamed(Routes.PASIEN_SETUP)!.then((value) => {
+          getDataPasien(),
+        });
   }
 
   Future<JadwalpraktekModel> getDataDokter() async {
