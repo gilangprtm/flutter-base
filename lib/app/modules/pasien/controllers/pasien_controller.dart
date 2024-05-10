@@ -34,7 +34,7 @@ class PasienController extends GetxController {
               box.write("cm_pasien", true);
               onNext();
             },
-            child:  Text(
+            child: Text(
               "Lanjut",
               style: TextStyle(
                 color: MahasColors.primary,
@@ -86,6 +86,7 @@ class PasienController extends GetxController {
   @override
   void onReady() {
     coachMaker();
+    listCon.refresh();
     super.onReady();
   }
 
@@ -100,8 +101,7 @@ class PasienController extends GetxController {
 
   void coachMaker() async {
     var result = await box.read("cm_pasien");
-    if (result == true) {
-    } else {
+    if (result != true) {
       cMaker.show();
     }
   }

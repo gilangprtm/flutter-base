@@ -40,7 +40,9 @@ class PasienView extends GetView<PasienController> {
         itemBuilder: (PasienModel e) {
           return InkWell(
             onTap: () {
-              controller.itemOnTab(e.pasienidhaimed!);
+              e.pasienidhaimed != null
+                  ? controller.itemOnTab(e.pasienidhaimed!)
+                  : null;
             },
             child: Container(
               padding: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -59,7 +61,7 @@ class PasienView extends GetView<PasienController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    e.nama!,
+                                    e.nama ?? "-",
                                     style: MahasThemes.h2,
                                   ),
                                 ],
@@ -68,7 +70,9 @@ class PasienView extends GetView<PasienController> {
                           ),
                           TextButton.icon(
                             onPressed: () {
-                              controller.toPasienSetup(e.pasienidhaimed!);
+                              e.pasienidhaimed != null
+                                  ? controller.toPasienSetup(e.pasienidhaimed!)
+                                  : null;
                             },
                             icon: Icon(
                               Icons.person,
@@ -104,7 +108,7 @@ class PasienView extends GetView<PasienController> {
                                       Row(
                                         children: [
                                           Text(" : "),
-                                          Text(e.nik!),
+                                          Text(e.nik ?? "-"),
                                         ],
                                       ),
                                     ],
@@ -134,7 +138,9 @@ class PasienView extends GetView<PasienController> {
                                   MaterialStatePropertyAll(MahasColors.primary),
                             ),
                             onPressed: () {
-                              controller.toReservasi(e.pasienidhaimed!);
+                              e.pasienidhaimed != null
+                                  ? controller.toReservasi(e.pasienidhaimed!)
+                                  : null;
                             },
                             child: Row(
                               children: [
