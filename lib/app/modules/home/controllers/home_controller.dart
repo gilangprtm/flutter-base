@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haimed_getx/app/models/profile_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../mahas/mahas_config.dart';
 import '../../../mahas/mahas_service.dart';
@@ -21,7 +20,6 @@ class HomeController extends GetxController {
   RxInt current = 0.obs;
   RxBool notifikasi = false.obs;
   final CarouselController imageController = CarouselController();
-  String? token;
   static final storage = GetStorage();
 
   RxList<ArtikelFirestoreModel> artikels = <ArtikelFirestoreModel>[].obs;
@@ -174,21 +172,6 @@ class HomeController extends GetxController {
     );
   }
 
-  Future putUser() async {
-    var r = await HttpApi.put('/api/User', body: {
-      "UserIdHaimed": auth.currentUser!.uid.toString(),
-      "Email": auth.currentUser!.email.toString(),
-      "Nama": auth.currentUser!.displayName.toString(),
-      "Fcm": token.toString(),
-    });
-    if (r.success) {
-      MahasConfig.profile = ProfileModel.fromJson(r.body);
-    } else {
-      bool error = MahasService.isInternetCausedError(r.message.toString());
-      Helper.errorToast(message: !error ? r.message.toString() : null);
-    }
-  }
-
   Future<void> versionCheck() async {
     final updateLater = storage.read('update_later');
     final now = DateTime.now();
@@ -236,7 +219,6 @@ class HomeController extends GetxController {
   Future homeProcedure() async {
     artikels.value = await MahasService().getListArtikelFirestore();
     await versionCheck();
-    await putUser();
     await getNotifikasi();
   }
 }

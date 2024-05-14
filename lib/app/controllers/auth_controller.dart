@@ -9,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:haimed_getx/app/constant/environment_constant.dart';
 import 'package:haimed_getx/app/mahas/mahas_config.dart';
+import 'package:haimed_getx/app/models/profile_model.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../mahas/services/helper.dart';
 import '../mahas/services/http_api.dart';
@@ -57,10 +58,25 @@ class AuthController extends GetxController {
     Get.offAllNamed(Routes.WELCOME);
   }
 
-  void _toHome() {
-    MahasConfig.currentEnv == MahasEnvironmentType.premagana
-        ? Get.offAllNamed(Routes.HOME_PREMAGANA)
-        : Get.offAllNamed(Routes.home);
+  void _toHome() async {
+    var r = await HttpApi.put(
+      '/api/User',
+      body: {
+        "UserIdHaimed": auth.currentUser!.uid.toString(),
+        "Email": auth.currentUser!.email.toString(),
+        "Nama": auth.currentUser!.displayName.toString(),
+        "Fcm": token.toString(),
+      },
+    );
+    if (r.success) {
+      MahasConfig.profile = ProfileModel.fromJson(r.body);
+      MahasConfig.currentEnv == MahasEnvironmentType.premagana
+          ? Get.offAllNamed(Routes.HOME_PREMAGANA)
+          : Get.offAllNamed(Routes.home);
+    } else {
+      bool error = MahasService.isInternetCausedError(r.message.toString());
+      Helper.errorToast(message: !error ? r.message.toString() : null);
+    }
   }
 
   Future<UserCredential?> _signInWithCredentialGoogle() async {
