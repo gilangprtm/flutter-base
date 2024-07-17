@@ -28,8 +28,6 @@ import '../modules/pasien/bindings/pasien_binding.dart';
 import '../modules/pasien/views/pasien_view.dart';
 import '../modules/pasien_setup/bindings/pasien_setup_binding.dart';
 import '../modules/pasien_setup/views/pasien_setup_view.dart';
-import '../modules/phone_login/bindings/phone_login_binding.dart';
-import '../modules/phone_login/views/phone_login_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_setup/bindings/profile_setup_binding.dart';
@@ -191,11 +189,6 @@ class AppPages {
       name: _Paths.DETAIL_RESERVASI,
       page: () => const DetailReservasiView(),
       binding: DetailReservasiBinding(),
-    ),
-    GetPage(
-      name: _Paths.PHONE_LOGIN,
-      page: () => const PhoneLoginView(),
-      binding: PhoneLoginBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE_SETUP,

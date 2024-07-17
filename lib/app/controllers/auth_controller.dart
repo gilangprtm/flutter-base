@@ -59,23 +59,33 @@ class AuthController extends GetxController {
   }
 
   void _toHome() async {
-    var r = await HttpApi.put(
-      '/api/User',
-      body: {
-        "UserIdHaimed": auth.currentUser!.uid.toString(),
-        "Email": auth.currentUser!.email.toString(),
-        "Nama": auth.currentUser!.displayName.toString(),
-        "Fcm": token.toString(),
-      },
+    var get = await HttpApi.get(
+      '/api/User?userIdHaimed=${auth.currentUser?.uid}',
     );
-    if (r.success) {
-      MahasConfig.profile = ProfileModel.fromJson(r.body);
-      MahasConfig.currentEnv == MahasEnvironmentType.premagana
-          ? Get.offAllNamed(Routes.HOME_PREMAGANA)
-          : Get.offAllNamed(Routes.home);
+    if (get.success) {
+      var model = ProfileModel.fromJson(get.body);
+      MahasConfig.profile = model;
+      var r = await HttpApi.put(
+        '/api/User',
+        body: {
+          "UserIdHaimed": auth.currentUser!.uid.toString(),
+          "Email": auth.currentUser!.email.toString(),
+          "Nama": auth.currentUser!.displayName.toString(),
+          "Telepon": model.telepon,
+          "Fcm": token.toString(),
+        },
+      );
+      if (r.success) {
+        MahasConfig.currentEnv == MahasEnvironmentType.premagana
+            ? Get.offAllNamed(Routes.HOME_PREMAGANA)
+            : Get.offAllNamed(Routes.home);
+      } else {
+        bool error = MahasService.isInternetCausedError(r.message.toString());
+        Helper.errorToast(message: !error ? r.message.toString() : null);
+      }
     } else {
-      bool error = MahasService.isInternetCausedError(r.message.toString());
-      Helper.errorToast(message: !error ? r.message.toString() : null);
+      bool error = MahasService.isInternetCausedError(get.message.toString());
+      Helper.errorToast(message: !error ? get.message.toString() : null);
     }
   }
 

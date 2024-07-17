@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/inputs/input_text_component.dart';
 import 'package:haimed_getx/app/mahas/services/mahas_format.dart';
 import 'package:haimed_getx/app/models/pasien_model.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/mahas_themes.dart';
@@ -425,10 +427,60 @@ class DokterKonfirmasiTabView extends GetView<DokterKonfirmasiTabController> {
                               SizedBox(
                                 height: 2,
                               ),
-                              InputTextComponent(
-                                placeHolder: "Telepon",
-                                controller: controller.noHPCon,
-                                required: true,
+                              InternationalPhoneNumberInput(
+                                isEnabled: true,
+                                onInputChanged: (PhoneNumber number) async {
+                                  try {
+                                    if (number.phoneNumber != null &&
+                                        number.phoneNumber!.isNotEmpty) {
+                                      controller.phoneNumber.value =
+                                          await PhoneNumber
+                                              .getRegionInfoFromPhoneNumber(
+                                                  number.phoneNumber!);
+                                      controller.validatorText.value = "";
+                                    }
+                                  } on PlatformException catch (e) {
+                                    controller.validatorText.value =
+                                        e.message.toString();
+                                  } catch (e) {
+                                    controller.validatorText.value =
+                                        e.toString();
+                                  }
+                                },
+                                textFieldController: controller.telpCon,
+                                initialValue: controller.phoneNumber.value,
+                                selectorConfig: const SelectorConfig(
+                                  selectorType:
+                                      PhoneInputSelectorType.BOTTOM_SHEET,
+                                ),
+                                key: controller.formKey,
+                                ignoreBlank: false,
+                                autoValidateMode: AutovalidateMode.always,
+                                selectorTextStyle: MahasThemes.h1,
+                                hintText: "contoh: 8123456789",
+                                formatInput: true,
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                        signed: true, decimal: true),
+                                inputBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    MahasThemes.borderRadius,
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value?.isEmpty ?? false) {
+                                    controller.phoneIsValid.value = false;
+                                    return controller.validatorText.value;
+                                  } else if (controller.validatorText.value !=
+                                      "") {
+                                    controller.phoneIsValid.value = false;
+                                    return controller.validatorText.value;
+                                  }
+                                  controller.phoneIsValid.value = true;
+                                  return null;
+                                },
+                                onInputValidated: (value) =>
+                                    controller.phoneIsValid.value = value,
                               ),
                             ],
                           ),
