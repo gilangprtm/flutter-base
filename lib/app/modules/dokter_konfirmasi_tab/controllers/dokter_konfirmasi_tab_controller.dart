@@ -9,6 +9,7 @@ import 'package:haimed_getx/app/mahas/components/inputs/input_text_component.dar
 import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:haimed_getx/app/models/jadwal_praktek_model.dart';
 import 'package:haimed_getx/app/models/pasien_model.dart';
+import 'package:haimed_getx/app/models/profile_model.dart';
 import 'package:haimed_getx/app/routes/app_pages.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
@@ -154,7 +155,7 @@ class DokterKonfirmasiTabController extends GetxController {
 
     if (phoneIsValid.value) {
       try {
-        await HttpApi.put(
+        var user = await HttpApi.put(
           '/api/User?user=${auth.currentUser!.uid}',
           body: {
             "UserIdHaimed": auth.currentUser!.uid,
@@ -164,6 +165,9 @@ class DokterKonfirmasiTabController extends GetxController {
             "Telepon": phoneNumber.value.phoneNumber,
           },
         );
+        if (user.success) {
+          MahasConfig.profile = ProfileModel.fromJson(user.body);
+        }
         var res = await HttpApi.post('/api/Reservasi', body: {
           "Alamat": selectedPasien.value.alamat ?? "",
           "Batal": false,
@@ -185,7 +189,7 @@ class DokterKonfirmasiTabController extends GetxController {
           "Tanggal": jadwalPraktekModel.value.tanggal!.toString(),
           "HaiMedUserId": auth.currentUser!.uid,
           "HaiMedRelasiId": selectedPasien.value.pasienidhaimed ?? "",
-          "Phone": auth.currentUser!.phoneNumber!,
+          "Phone": MahasConfig.profile?.telepon,
           "Memo": ""
         });
 
