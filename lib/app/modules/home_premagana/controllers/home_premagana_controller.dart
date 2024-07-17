@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haimed_getx/app/models/profile_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../mahas/mahas_colors.dart';
 import '../../../mahas/mahas_config.dart';
@@ -144,21 +143,6 @@ class HomePremaganaController extends GetxController {
     }
   }
 
-  Future putUser() async {
-    var r = await HttpApi.put('/api/User', body: {
-      "UserIdHaimed": auth.currentUser!.uid.toString(),
-      "Email": auth.currentUser!.email.toString(),
-      "Nama": auth.currentUser!.displayName.toString(),
-      "Fcm": token.toString(),
-    });
-    if (r.success) {
-      MahasConfig.profile = ProfileModel.fromJson(r.body);
-    } else {
-      bool error = MahasService.isInternetCausedError(r.message.toString());
-      Helper.errorToast(message: !error ? r.message.toString() : null);
-    }
-  }
-
   Future getNotifikasi() async {
     try {
       var r =
@@ -221,7 +205,6 @@ class HomePremaganaController extends GetxController {
 
   Future homeProcedure() async {
     await getImageSlider();
-    await putUser();
     await getNotifikasi();
     await versionCheck();
   }

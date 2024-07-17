@@ -1,13 +1,16 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:haimed_getx/app/mahas/components/inputs/input_dropdown_component.dart';
 import 'package:haimed_getx/app/mahas/components/inputs/input_radio_component.dart';
 import 'package:haimed_getx/app/mahas/components/inputs/input_text_component.dart';
+import 'package:haimed_getx/app/mahas/mahas_config.dart';
 import 'package:haimed_getx/app/models/jadwal_praktek_model.dart';
 import 'package:haimed_getx/app/models/pasien_model.dart';
 import 'package:haimed_getx/app/routes/app_pages.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../../mahas/mahas_service.dart';
 import '../../../mahas/services/helper.dart';
@@ -23,8 +26,13 @@ class DokterKonfirmasiTabController extends GetxController {
   );
   final InputTextController nrmCon =
       InputTextController(type: InputTextType.nrm);
-  final InputTextController noHPCon =
-      InputTextController(type: InputTextType.number);
+  final telpCon = TextEditingController();
+  Rx<PhoneNumber> phoneNumber = PhoneNumber(isoCode: "ID").obs;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  RxBool phoneIsValid = false.obs;
+  RxString validatorText = "The field is required".obs;
+  // final InputTextController noHPCon =
+  //     InputTextController(type: InputTextType.number);
 
   RxString dokterID = "".obs;
   RxString tanggal = "".obs;
@@ -46,7 +54,13 @@ class DokterKonfirmasiTabController extends GetxController {
       nrmCon.value = null;
       update();
     };
-    getPhone();
+    if (MahasConfig.profile != null &&
+        MahasConfig.profile!.telepon != null &&
+        MahasConfig.profile!.telepon!.isNotEmpty) {
+      PhoneNumber number = await PhoneNumber.getRegionInfoFromPhoneNumber(
+          MahasConfig.profile!.telepon!);
+      phoneNumber.value = number;
+    }
     super.onInit();
   }
 
@@ -60,21 +74,6 @@ class DokterKonfirmasiTabController extends GetxController {
       nrmCon.value = null;
     }
     update();
-  }
-
-  void getPhone() {
-    if (auth.currentUser!.phoneNumber != null) {
-      noHPCon.value = auth.currentUser!.phoneNumber;
-      noHPCon.onChanged = (value) => telpOnTap();
-    } else {
-      noHPCon.onTap = () => telpOnTap();
-    }
-  }
-
-  void telpOnTap() {
-    Get.toNamed(Routes.PHONE_LOGIN)!.then((value) => {
-          getPhone(),
-        });
   }
 
   void goToTambahPasien() {
@@ -153,8 +152,18 @@ class DokterKonfirmasiTabController extends GetxController {
     }
     await EasyLoading.show();
 
-    if (noHPCon.value != null) {
+    if (phoneIsValid.value) {
       try {
+        await HttpApi.put(
+          '/api/User?user=${auth.currentUser!.uid}',
+          body: {
+            "UserIdHaimed": auth.currentUser!.uid,
+            "Email": auth.currentUser!.email,
+            "Nama": auth.currentUser!.displayName,
+            "UrlGambar": auth.currentUser?.photoURL,
+            "Telepon": phoneNumber.value.phoneNumber,
+          },
+        );
         var res = await HttpApi.post('/api/Reservasi', body: {
           "Alamat": selectedPasien.value.alamat ?? "",
           "Batal": false,
@@ -209,8 +218,6 @@ class DokterKonfirmasiTabController extends GetxController {
       }
     } else if (selectedPasien.value.nama == null) {
       Helper.dialogWarning("Nama Pasien harus diisi!");
-    } else {
-      telpOnTap();
     }
 
     EasyLoading.dismiss();
