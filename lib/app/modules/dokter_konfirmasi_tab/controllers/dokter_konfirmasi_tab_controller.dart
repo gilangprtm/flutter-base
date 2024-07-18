@@ -155,19 +155,22 @@ class DokterKonfirmasiTabController extends GetxController {
 
     if (phoneIsValid.value) {
       try {
-        var user = await HttpApi.put(
-          '/api/User?user=${auth.currentUser!.uid}',
-          body: {
-            "UserIdHaimed": auth.currentUser!.uid,
-            "Email": auth.currentUser!.email,
-            "Nama": auth.currentUser!.displayName,
-            "UrlGambar": auth.currentUser?.photoURL,
-            "Telepon": phoneNumber.value.phoneNumber,
-          },
-        );
-        if (user.success) {
-          MahasConfig.profile = ProfileModel.fromJson(user.body);
+        if (phoneNumber.value.phoneNumber != MahasConfig.profile?.telepon) {
+          var user = await HttpApi.put(
+            '/api/User?user=${auth.currentUser!.uid}',
+            body: {
+              "UserIdHaimed": auth.currentUser!.uid,
+              "Email": auth.currentUser!.email,
+              "Nama": auth.currentUser!.displayName,
+              "UrlGambar": auth.currentUser?.photoURL,
+              "Telepon": phoneNumber.value.phoneNumber,
+            },
+          );
+          if (user.success) {
+            MahasConfig.profile = ProfileModel.fromJson(user.body);
+          }
         }
+
         var res = await HttpApi.post('/api/Reservasi', body: {
           "Alamat": selectedPasien.value.alamat ?? "",
           "Batal": false,
