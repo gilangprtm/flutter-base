@@ -79,7 +79,7 @@ class HomePremaganaView extends GetView<HomePremaganaController> {
                             ),
                             Container(
                               child: Text(
-                                auth.currentUser!.displayName!,
+                                auth.currentUser?.displayName ?? "",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,

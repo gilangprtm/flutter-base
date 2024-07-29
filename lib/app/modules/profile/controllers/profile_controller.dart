@@ -8,7 +8,7 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
-    profilePic.value = auth.currentUser!.photoURL!;
+    profilePic.value = auth.currentUser?.photoURL ?? "";
     super.onInit();
   }
 
