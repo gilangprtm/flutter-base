@@ -49,6 +49,16 @@ class LoginView extends GetView<LoginController> {
                       type: LoginButtonType.apple,
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  Obx(
+                    () => Visibility(
+                      visible: controller.demo.isTrue,
+                      child: TextButton(
+                        onPressed: controller.demoOnPress,
+                        child: const Text("Demo"),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 30),

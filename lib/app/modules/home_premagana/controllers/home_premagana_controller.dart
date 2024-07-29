@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -207,6 +208,7 @@ class HomePremaganaController extends GetxController {
     await getImageSlider();
     await getNotifikasi();
     await versionCheck();
+    if (EasyLoading.isShow) EasyLoading.dismiss();
   }
 
   Future<void> versionCheck() async {

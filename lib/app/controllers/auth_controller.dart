@@ -63,19 +63,25 @@ class AuthController extends GetxController {
       '/api/User?userIdHaimed=${auth.currentUser?.uid}',
     );
     if (get.success) {
-      var model = ProfileModel.fromJson(get.body);
-      MahasConfig.profile = model;
+      if (get.body.toString() != "null") {
+        var model = ProfileModel.fromJson(get.body);
+        MahasConfig.profile = model;
+      }
       var r = await HttpApi.put(
         '/api/User',
         body: {
           "UserIdHaimed": auth.currentUser!.uid.toString(),
           "Email": auth.currentUser!.email.toString(),
           "Nama": auth.currentUser!.displayName.toString(),
-          "Telepon": model.telepon,
+          "Telepon": MahasConfig.profile?.telepon,
           "Fcm": token.toString(),
         },
       );
       if (r.success) {
+        if (get.body.toString() == "null") {
+          var model = ProfileModel.fromJson(r.body);
+          MahasConfig.profile = model;
+        }
         MahasConfig.currentEnv == MahasEnvironmentType.premagana
             ? Get.offAllNamed(Routes.HOME_PREMAGANA)
             : Get.offAllNamed(Routes.home);
