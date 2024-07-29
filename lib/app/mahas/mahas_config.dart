@@ -23,6 +23,7 @@ class MahasConfig {
     'user was not linked',
     'unexpected end of stream',
     'network_error',
+    'error request timeout',
     'SocketException'
   ];
 }
