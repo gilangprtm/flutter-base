@@ -19,7 +19,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       theme: MahasThemes.light,
-      title: "Application",
+      title: "Haimed",
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
