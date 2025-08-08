@@ -19,7 +19,7 @@ import '../../../routes/app_pages.dart';
 class HomeController extends GetxController {
   RxInt current = 0.obs;
   RxBool notifikasi = false.obs;
-  final CarouselController imageController = CarouselController();
+  final CarouselSliderController imageController = CarouselSliderController();
   static final storage = GetStorage();
 
   RxList<ArtikelFirestoreModel> artikels = <ArtikelFirestoreModel>[].obs;

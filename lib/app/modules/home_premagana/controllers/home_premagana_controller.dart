@@ -21,7 +21,7 @@ import '../../../routes/app_pages.dart';
 class HomePremaganaController extends GetxController {
   RxInt current = 0.obs;
   RxBool notifikasi = false.obs;
-  final CarouselController imageController = CarouselController();
+  final CarouselSliderController imageController = CarouselSliderController();
   String? token;
   static final storage = GetStorage();
 

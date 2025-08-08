@@ -48,6 +48,12 @@ class DokterTabView extends GetView<DokterTabController> {
                             ),
                           );
                         },
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          "assets/images/Doctor.png",
+                          width: 60,
+                          height: 60,
+                        ),
                       )
                     : Image.asset(
                         "assets/images/Doctor.png",

@@ -30,7 +30,6 @@ class HttpApi {
       return url;
     } else {
       return MahasConfig.urlApi + url;
-      // return 'https://apps.sanatasystem.net/haimed-api-rsup$url';
     }
   }
 

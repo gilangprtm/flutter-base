@@ -49,6 +49,12 @@ class SpesialisasiTabView extends GetView<SpesialisasiTabController> {
                             ),
                           );
                         },
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          "assets/images/ic_poli_default.PNG",
+                          width: 50,
+                          height: 50,
+                        ),
                       )
                     : Image.asset(
                         "assets/images/ic_poli_default.PNG",
